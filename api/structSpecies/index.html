@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Species - The Heterogeneous Exascale PIC (HEXAPIC)</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Species";
+        var mkdocs_page_input_path = "api/structSpecies.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> The Heterogeneous Exascale PIC (HEXAPIC)
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Main</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" >Files</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../files/">-- All --</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../collisions_8cpp/">collisions.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../diagnostics_8cpp/">diagnostics.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../domain__decomposition_8cpp/">domain_decomposition.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../field__solver__petsc_8cpp/">field_solver_petsc.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../main_8cpp/">main.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../particles_8cpp/">particles.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../plasma__wall_8cpp/">plasma_wall.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../read__input__file_8cpp/">read_input_file.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../volumetric__source_8cpp/">volumetric_source.cpp</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Classes</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../annotated/">-- All --</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structBoundary/">Boundary</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structCell/">Cell</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structCollision/">Collision</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structGrid/">Grid</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structNeighbours/">Neighbours</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structParticle/">Particle</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSecondaryEmission/">SecondaryEmission</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSource/">Source</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSourceSpecie/">SourceSpecie</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Species</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#public-attributes">Public Attributes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#public-functions">Public Functions</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#public-attributes-documentation">Public Attributes Documentation</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-t_store">variable T_store</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-charge">variable charge</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-chom">variable chom</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-inject">variable inject</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-load">variable load</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-mass">variable mass</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-n">variable n</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-n_store">variable n_store</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-name">variable name</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-sb">variable sb</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-source">variable source</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-subcycle">variable subcycle</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-tb">variable tb</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-v_store">variable v_store</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#public-functions-documentation">Public Functions Documentation</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#function-correct_inject">function correct_inject</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSpecies__inject/">Species_inject</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSpecies__load/">Species_load</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../functions/">All Functions</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">The Heterogeneous Exascale PIC (HEXAPIC)</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">API</li>
+          <li class="breadcrumb-item">Classes</li>
+      <li class="breadcrumb-item active">Species</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/LeCAD-PEG/HEXAPIC.git/edit/master/docs/api/structSpecies.md">Edit on HEXAPIC</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="struct-species">Struct Species<a class="headerlink" href="#struct-species" title="Permanent link">&para;</a></h1>
+<p><a href="../annotated/"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="./"><strong>Species</strong></a></p>
+<h2 id="public-attributes">Public Attributes<a class="headerlink" href="#public-attributes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">std::vector&lt; PetscScalar &gt;</td>
+<td style="text-align: left;"><a href="#variable-t_store"><strong>T_store</strong></a>  <br><em>temperature diagnostic storage</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#variable-charge"><strong>charge</strong></a>  <br><em>specie charge/elementary charge</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-chom"><strong>chom</strong></a>  <br><em>specie mass and charge/mass ratio</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::vector&lt; <a href="../structSpecies__inject/"><strong>Species_inject</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#variable-inject"><strong>inject</strong></a>  <br><em>particle injection at boundary</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::vector&lt; <a href="../structSpecies__load/"><strong>Species_load</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#variable-load"><strong>load</strong></a>  <br><em>allows multiple loads with same species</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-mass"><strong>mass</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">unsigned int</td>
+<td style="text-align: left;"><a href="#variable-n"><strong>n</strong></a>  <br><em>number of particles of a specie</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::vector&lt; PetscScalar &gt;</td>
+<td style="text-align: left;"><a href="#variable-n_store"><strong>n_store</strong></a>  <br><em>particle density diagnostic storage</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::string</td>
+<td style="text-align: left;"><a href="#variable-name"><strong>name</strong></a>  <br><em>specie name, e.g. electron</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-sb"><strong>sb</strong></a>  <br><em>specie coefficients for Boris mover</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::vector&lt; <a href="../structSourceSpecie/"><strong>SourceSpecie</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#variable-source"><strong>source</strong></a>  <br><em>volumetric specie sources</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">unsigned int</td>
+<td style="text-align: left;"><a href="#variable-subcycle"><strong>subcycle</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-tb"><strong>tb</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::vector&lt; PetscScalar &gt;</td>
+<td style="text-align: left;"><a href="#variable-v_store"><strong>v_store</strong></a>  <br><em>fluid velocity diagnostic storage</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-functions">Public Functions<a class="headerlink" href="#public-functions" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-correct_inject"><strong>correct_inject</strong></a> (int Nx, int Ny, int Nx_old, int Ny_old) <br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-attributes-documentation">Public Attributes Documentation<a class="headerlink" href="#public-attributes-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="variable-t_store">variable T_store<a class="headerlink" href="#variable-t_store" title="Permanent link">&para;</a></h3>
+<p><em>temperature diagnostic storage</em> </p>
+<div class="codehilite"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="w"> </span><span class="n">PetscScalar</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">Species</span><span class="o">::</span><span class="n">T_store</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-charge">variable charge<a class="headerlink" href="#variable-charge" title="Permanent link">&para;</a></h3>
+<p><em>specie charge/elementary charge</em> </p>
+<div class="codehilite"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">Species</span><span class="o">::</span><span class="n">charge</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-chom">variable chom<a class="headerlink" href="#variable-chom" title="Permanent link">&para;</a></h3>
+<p><em>specie mass and charge/mass ratio</em> </p>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Species</span><span class="o">::</span><span class="n">chom</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-inject">variable inject<a class="headerlink" href="#variable-inject" title="Permanent link">&para;</a></h3>
+<p><em>particle injection at boundary</em> </p>
+<div class="codehilite"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Species_inject</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Species</span><span class="o">::</span><span class="n">inject</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-load">variable load<a class="headerlink" href="#variable-load" title="Permanent link">&para;</a></h3>
+<p><em>allows multiple loads with same species</em> </p>
+<div class="codehilite"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Species_load</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Species</span><span class="o">::</span><span class="n">load</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-mass">variable mass<a class="headerlink" href="#variable-mass" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Species</span><span class="o">::</span><span class="n">mass</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-n">variable n<a class="headerlink" href="#variable-n" title="Permanent link">&para;</a></h3>
+<p><em>number of particles of a specie</em> </p>
+<div class="codehilite"><pre><span></span><code><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Species</span><span class="o">::</span><span class="n">n</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-n_store">variable n_store<a class="headerlink" href="#variable-n_store" title="Permanent link">&para;</a></h3>
+<p><em>particle density diagnostic storage</em> </p>
+<div class="codehilite"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="w"> </span><span class="n">PetscScalar</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">Species</span><span class="o">::</span><span class="n">n_store</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-name">variable name<a class="headerlink" href="#variable-name" title="Permanent link">&para;</a></h3>
+<p><em>specie name, e.g. electron</em> </p>
+<div class="codehilite"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">Species</span><span class="o">::</span><span class="n">name</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-sb">variable sb<a class="headerlink" href="#variable-sb" title="Permanent link">&para;</a></h3>
+<p><em>specie coefficients for Boris mover</em> </p>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Species</span><span class="o">::</span><span class="n">sb</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-source">variable source<a class="headerlink" href="#variable-source" title="Permanent link">&para;</a></h3>
+<p><em>volumetric specie sources</em> </p>
+<div class="codehilite"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SourceSpecie</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Species</span><span class="o">::</span><span class="n">source</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-subcycle">variable subcycle<a class="headerlink" href="#variable-subcycle" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Species</span><span class="o">::</span><span class="n">subcycle</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-tb">variable tb<a class="headerlink" href="#variable-tb" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Species</span><span class="o">::</span><span class="n">tb</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-v_store">variable v_store<a class="headerlink" href="#variable-v_store" title="Permanent link">&para;</a></h3>
+<p><em>fluid velocity diagnostic storage</em> </p>
+<div class="codehilite"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="w"> </span><span class="n">PetscScalar</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">Species</span><span class="o">::</span><span class="n">v_store</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+<h2 id="public-functions-documentation">Public Functions Documentation<a class="headerlink" href="#public-functions-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="function-correct_inject">function correct_inject<a class="headerlink" href="#function-correct_inject" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Species</span><span class="o">::</span><span class="n">correct_inject</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">Nx</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">Ny</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">Nx_old</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">Ny_old</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<hr />
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../structSourceSpecie/" class="btn btn-neutral float-left" title="SourceSpecie"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../structSpecies__inject/" class="btn btn-neutral float-right" title="Species_inject">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 LeCAD-PEG</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/LeCAD-PEG/HEXAPIC.git" class="fa fa-code-fork" style="color: #fcfcfc"> HEXAPIC</a>
+        </span>
+    
+    
+      <span><a href="../structSourceSpecie/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../structSpecies__inject/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

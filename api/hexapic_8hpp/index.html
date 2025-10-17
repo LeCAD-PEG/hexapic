@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>File hexapic.hpp - The Heterogeneous Exascale PIC (HEXAPIC)</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "File hexapic.hpp";
+        var mkdocs_page_input_path = "api/hexapic_8hpp.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> The Heterogeneous Exascale PIC (HEXAPIC)
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Main</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Files</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../files/">-- All --</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../collisions_8cpp/">collisions.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../diagnostics_8cpp/">diagnostics.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../domain__decomposition_8cpp/">domain_decomposition.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../field__solver__petsc_8cpp/">field_solver_petsc.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../main_8cpp/">main.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../particles_8cpp/">particles.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../plasma__wall_8cpp/">plasma_wall.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../read__input__file_8cpp/">read_input_file.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../volumetric__source_8cpp/">volumetric_source.cpp</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Classes</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../annotated/">-- All --</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structBoundary/">Boundary</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structCell/">Cell</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structCollision/">Collision</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structGrid/">Grid</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structNeighbours/">Neighbours</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structParticle/">Particle</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSecondaryEmission/">SecondaryEmission</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSource/">Source</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSourceSpecie/">SourceSpecie</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSpecies/">Species</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSpecies__inject/">Species_inject</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSpecies__load/">Species_load</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../functions/">All Functions</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">The Heterogeneous Exascale PIC (HEXAPIC)</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">File hexapic.hpp</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/LeCAD-PEG/HEXAPIC.git/edit/master/docs/api/hexapic_8hpp.md">Edit on HEXAPIC</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="file-hexapichpp">File hexapic.hpp<a class="headerlink" href="#file-hexapichpp" title="Permanent link">&para;</a></h1>
+<p><a href="../files/"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="../dir_b8175b39202167732592fd9c59b14660/"><strong>hexapic</strong></a> <strong>&gt;</strong> <a href="../dir_4d88c249dac475c11ca7037572002e86/"><strong>source</strong></a> <strong>&gt;</strong> <a href="./"><strong>hexapic.hpp</strong></a></p>
+<p><em>Core data structures, types, and global parameters for the HEXAPIC Particle-in-Cell (PIC) code.</em> <a href="#detailed-description">More...</a></p>
+<ul>
+<li><code>#include &lt;mpi.h&gt;</code></li>
+<li><code>#include &lt;math.h&gt;</code></li>
+<li><code>#include &lt;stdio.h&gt;</code></li>
+<li><code>#include &lt;unistd.h&gt;</code></li>
+<li><code>#include &lt;stdlib.h&gt;</code></li>
+<li><code>#include &lt;string.h&gt;</code></li>
+<li><code>#include &lt;limits.h&gt;</code></li>
+<li><code>#include &lt;time.h&gt;</code></li>
+<li><code>#include &lt;iostream&gt;</code></li>
+<li><code>#include &lt;vector&gt;</code></li>
+<li><code>#include &lt;set&gt;</code></li>
+<li><code>#include &lt;fstream&gt;</code></li>
+<li><code>#include &lt;sstream&gt;</code></li>
+<li><code>#include &lt;petsc.h&gt;</code></li>
+<li><code>#include &lt;iomanip&gt;</code></li>
+<li><code>#include &lt;openPMD/openPMD.hpp&gt;</code></li>
+</ul>
+<h2 id="namespaces">Namespaces<a class="headerlink" href="#namespaces" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">namespace</td>
+<td style="text-align: left;"><a href="../namespaceopenPMD/"><strong>openPMD</strong></a> <br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="../structBoundary/"><strong>Boundary</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="../structCell/"><strong>Cell</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="../structCollision/"><strong>Collision</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="../structGrid/"><strong>Grid</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="../structNeighbours/"><strong>Neighbours</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="../structParticle/"><strong>Particle</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="../structSecondaryEmission/"><strong>SecondaryEmission</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="../structSource/"><strong>Source</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="../structSourceSpecie/"><strong>SourceSpecie</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="../structSpecies/"><strong>Species</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="../structSpecies__inject/"><strong>Species_inject</strong></a> <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="../structSpecies__load/"><strong>Species_load</strong></a> <br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-types">Public Types<a class="headerlink" href="#public-types" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef void(*</td>
+<td style="text-align: left;"><a href="#typedef-reactionfunction"><strong>reactionFunction</strong></a>  <br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-attributes">Public Attributes<a class="headerlink" href="#public-attributes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">Mat</td>
+<td style="text-align: left;"><a href="#variable-a"><strong>A</strong></a>  <br><em>Matrix.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-bb"><strong>Bb</strong></a>  <br><em>normalised basis for B</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-bf"><strong>Bf</strong></a>  <br><em>external magnetic field</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::vector&lt; std::vector&lt; std::string &gt; &gt;</td>
+<td style="text-align: left;"><a href="#variable-mcc_init_data"><strong>MCC_init_data</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::vector&lt; std::vector&lt; std::string &gt; &gt;</td>
+<td style="text-align: left;"><a href="#variable-psi_init_data"><strong>PSI_init_data</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-sconst"><strong>Sconst</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar *</td>
+<td style="text-align: left;"><a href="#variable-v_global"><strong>V_global</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar *</td>
+<td style="text-align: left;"><a href="#variable-v_local"><strong>V_local</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">Vec</td>
+<td style="text-align: left;"><a href="#variable-b"><strong>b</strong></a>  <br><em>Solution and source term.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscInt</td>
+<td style="text-align: left;"><a href="#variable-boris"><strong>boris</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::vector&lt; <a href="../structCell/"><strong>Cell</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#variable-cells"><strong>cells</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::vector&lt; std::vector&lt; PetscScalar &gt; &gt;</td>
+<td style="text-align: left;"><a href="#variable-chunks_float"><strong>chunks_float</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::vector&lt; <a href="../structCollision/"><strong>Collision</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#variable-collisions"><strong>collisions</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">VecScatter</td>
+<td style="text-align: left;"><a href="#variable-ctx"><strong>ctx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-dv"><strong>dV</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscInt</td>
+<td style="text-align: left;"><a href="#variable-davg"><strong>davg</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">bool</td>
+<td style="text-align: left;"><a href="#variable-digital_smoothing"><strong>digital_smoothing</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscInt</td>
+<td style="text-align: left;"><a href="#variable-dsteps"><strong>dsteps</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-dt"><strong>dt</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-dx"><strong>dx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-dx2_inv"><strong>dx2_inv</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-dy"><strong>dy</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-dy2_inv"><strong>dy2_inv</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">double</td>
+<td style="text-align: left;"><a href="#variable-et"><strong>et</strong></a>  <br><em>elapsed time for profiling</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">FILE *</td>
+<td style="text-align: left;"><a href="#variable-f"><strong>f</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="../structGrid/"><strong>Grid</strong></a></td>
+<td style="text-align: left;"><a href="#variable-grid"><strong>grid</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-hdt"><strong>hdt</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscErrorCode</td>
+<td style="text-align: left;"><a href="#variable-ierr"><strong>ierr</strong></a>  <br><em>Error catcher.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KSP</td>
+<td style="text-align: left;"><a href="#variable-ksp"><strong>ksp</strong></a>  <br><em>Krylov subspace solver context.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::vector&lt; MeshRecordComponent &gt;</td>
+<td style="text-align: left;"><a href="#variable-meshes"><strong>meshes</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#variable-nmpi"><strong>nmpi</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PC</td>
+<td style="text-align: left;"><a href="#variable-pc"><strong>pc</strong></a>  <br><em>Preconditioner context.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::vector&lt; PetscScalar &gt;</td>
+<td style="text-align: left;"><a href="#variable-rho"><strong>rho</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::vector&lt; PetscInt &gt;</td>
+<td style="text-align: left;"><a href="#variable-rho_index"><strong>rho_index</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#variable-rmpi"><strong>rmpi</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">Series</td>
+<td style="text-align: left;"><a href="#variable-series"><strong>series</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::vector&lt; <a href="../structSource/"><strong>Source</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#variable-sources"><strong>sources</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::vector&lt; <a href="../structSpecies/"><strong>Species</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#variable-species"><strong>species</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::vector&lt; PetscScalar &gt;</td>
+<td style="text-align: left;"><a href="#variable-t_store"><strong>t_store</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::vector&lt; PetscScalar &gt;</td>
+<td style="text-align: left;"><a href="#variable-trajx"><strong>trajx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::vector&lt; PetscScalar &gt;</td>
+<td style="text-align: left;"><a href="#variable-trajy"><strong>trajy</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::vector&lt; PetscScalar &gt;</td>
+<td style="text-align: left;"><a href="#variable-trajz"><strong>trajz</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscInt</td>
+<td style="text-align: left;"><a href="#variable-tstep"><strong>tstep</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">Vec</td>
+<td style="text-align: left;"><a href="#variable-x"><strong>x</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">Vec</td>
+<td style="text-align: left;"><a href="#variable-x_array"><strong>x_array</strong></a>  <br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-functions">Public Functions<a class="headerlink" href="#public-functions" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-mcc"><strong>MCC</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-psi_init"><strong>PSI_init</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-add_received_particles"><strong>add_received_particles</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-cells_init"><strong>cells_init</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-collisions_init"><strong>collisions_init</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-create_output"><strong>create_output</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-decompose_domain"><strong>decompose_domain</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-field_solver_petsc"><strong>field_solver_petsc</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-field_source_update"><strong>field_source_update</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-grid2part"><strong>grid2part</strong></a> (PetscScalar, PetscScalar, PetscScalar *, PetscScalar *) <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-grid_init"><strong>grid_init</strong></a> (int, char **) <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-initial_particle_load"><strong>initial_particle_load</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-inject_particle"><strong>inject_particle</strong></a> (int, PetscScalar, PetscScalar) <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-inject_particles"><strong>inject_particles</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#function-normvel_maxbol"><strong>normvel_MaxBol</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#function-normvel_vfv"><strong>normvel_vFv</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-num_param_init"><strong>num_param_init</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-part2grid"><strong>part2grid</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-particle_boundaries"><strong>particle_boundaries</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-particle_boundaries_dd"><strong>particle_boundaries_dd</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-particle_mover_boris"><strong>particle_mover_boris</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-particle_wall_interaction"><strong>particle_wall_interaction</strong></a> (int, int, int, int) <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-particles_init"><strong>particles_init</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-petsc_cleanup"><strong>petsc_cleanup</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-petsc_init"><strong>petsc_init</strong></a> (int, char **) <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-petsc_plot_finalize"><strong>petsc_plot_finalize</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-petsc_plot_init"><strong>petsc_plot_init</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-petsc_plot_update"><strong>petsc_plot_update</strong></a> (int) <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-plot_profiling"><strong>plot_profiling</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-read_input_file"><strong>read_input_file</strong></a> (char **) <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-remove_particle"><strong>remove_particle</strong></a> (int, int, int) <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-save_output"><strong>save_output</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-send_receive_particles"><strong>send_receive_particles</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-source"><strong>source</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-source_heating"><strong>source_heating</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-source_init"><strong>source_init</strong></a> () <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#function-specie_index"><strong>specie_index</strong></a> (std::string) <br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="macros">Macros<a class="headerlink" href="#macros" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a href="./#define-eps0"><strong>EPS0</strong></a>  <code>8.8542e-12</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a href="./#define-external"><strong>EXTERNAL</strong></a>  <code>extern</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a href="./#define-false"><strong>FALSE</strong></a>  <code>0</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a href="./#define-pi"><strong>PI</strong></a>  <code>3.141592653589793</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a href="./#define-real"><strong>REAL</strong></a>  <code>PetscScalar</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a href="./#define-true"><strong>TRUE</strong></a>  <code>1</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a href="./#define-twopi"><strong>TWOPI</strong></a>  <code>6.28318530717959</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a href="./#define-comm"><strong>comm</strong></a>  <code>MPI\_COMM\_WORLD</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a href="./#define-frand"><strong>frand</strong></a> () <code>((REAL) rand() / (RAND\_MAX+1.0))</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a href="./#define-np2c_global"><strong>np2c_global</strong></a>  <code>2e6</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a href="./#define-plot_3d"><strong>plot_3D</strong></a>  <code>FALSE</code><br></td>
+</tr>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a href="./#define-q_e"><strong>q_e</strong></a>  <code>1.602e-19</code><br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailed-description">Detailed Description<a class="headerlink" href="#detailed-description" title="Permanent link">&para;</a></h2>
+<p><strong>Copyright:</strong></p>
+<p>Copyright (c) 2025 </p>
+<h2 id="public-types-documentation">Public Types Documentation<a class="headerlink" href="#public-types-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="typedef-reactionfunction">typedef reactionFunction<a class="headerlink" href="#typedef-reactionfunction" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">reactionFunction</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="n">PetscScalar</span><span class="p">);</span>
+</code></pre></div>
+
+<hr>
+<h2 id="public-attributes-documentation">Public Attributes Documentation<a class="headerlink" href="#public-attributes-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="variable-a">variable A<a class="headerlink" href="#variable-a" title="Permanent link">&para;</a></h3>
+<p><em>Matrix.</em> </p>
+<div class="codehilite"><pre><span></span><code><span class="n">Mat</span><span class="w"> </span><span class="n">A</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-bb">variable Bb<a class="headerlink" href="#variable-bb" title="Permanent link">&para;</a></h3>
+<p><em>normalised basis for B</em> </p>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Bb</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">3</span><span class="p">];</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-bf">variable Bf<a class="headerlink" href="#variable-bf" title="Permanent link">&para;</a></h3>
+<p><em>external magnetic field</em> </p>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Bf</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-mcc_init_data">variable MCC_init_data<a class="headerlink" href="#variable-mcc_init_data" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">MCC_init_data</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-psi_init_data">variable PSI_init_data<a class="headerlink" href="#variable-psi_init_data" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">PSI_init_data</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-sconst">variable Sconst<a class="headerlink" href="#variable-sconst" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Sconst</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-v_global">variable V_global<a class="headerlink" href="#variable-v_global" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscScalar</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">V_global</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-v_local">variable V_local<a class="headerlink" href="#variable-v_local" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscScalar</span><span class="o">*</span><span class="w"> </span><span class="n">V_local</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-b">variable b<a class="headerlink" href="#variable-b" title="Permanent link">&para;</a></h3>
+<p><em>Solution and source term.</em> </p>
+<div class="codehilite"><pre><span></span><code><span class="n">Vec</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-boris">variable boris<a class="headerlink" href="#variable-boris" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscInt</span><span class="w"> </span><span class="n">boris</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-cells">variable cells<a class="headerlink" href="#variable-cells" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Cell</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cells</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-chunks_float">variable chunks_float<a class="headerlink" href="#variable-chunks_float" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="w"> </span><span class="n">PetscScalar</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">chunks_float</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-collisions">variable collisions<a class="headerlink" href="#variable-collisions" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Collision</span><span class="o">&gt;</span><span class="w"> </span><span class="n">collisions</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-ctx">variable ctx<a class="headerlink" href="#variable-ctx" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">VecScatter</span><span class="w"> </span><span class="n">ctx</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-dv">variable dV<a class="headerlink" href="#variable-dv" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscScalar</span><span class="w"> </span><span class="n">dV</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-davg">variable davg<a class="headerlink" href="#variable-davg" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscInt</span><span class="w"> </span><span class="n">davg</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-digital_smoothing">variable digital_smoothing<a class="headerlink" href="#variable-digital_smoothing" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">bool</span><span class="w"> </span><span class="n">digital_smoothing</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-dsteps">variable dsteps<a class="headerlink" href="#variable-dsteps" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscInt</span><span class="w"> </span><span class="n">dsteps</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-dt">variable dt<a class="headerlink" href="#variable-dt" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscScalar</span><span class="w"> </span><span class="n">dt</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-dx">variable dx<a class="headerlink" href="#variable-dx" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscScalar</span><span class="w"> </span><span class="n">dx</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-dx2_inv">variable dx2_inv<a class="headerlink" href="#variable-dx2_inv" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscScalar</span><span class="w"> </span><span class="n">dx2_inv</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-dy">variable dy<a class="headerlink" href="#variable-dy" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscScalar</span><span class="w"> </span><span class="n">dy</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-dy2_inv">variable dy2_inv<a class="headerlink" href="#variable-dy2_inv" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscScalar</span><span class="w"> </span><span class="n">dy2_inv</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-et">variable et<a class="headerlink" href="#variable-et" title="Permanent link">&para;</a></h3>
+<p><em>elapsed time for profiling</em> </p>
+<div class="codehilite"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">et</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-f">variable f<a class="headerlink" href="#variable-f" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">FILE</span><span class="o">*</span><span class="w"> </span><span class="n">f</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-grid">variable grid<a class="headerlink" href="#variable-grid" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">Grid</span><span class="w"> </span><span class="n">grid</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-hdt">variable hdt<a class="headerlink" href="#variable-hdt" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscScalar</span><span class="w"> </span><span class="n">hdt</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-ierr">variable ierr<a class="headerlink" href="#variable-ierr" title="Permanent link">&para;</a></h3>
+<p><em>Error catcher.</em> </p>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscErrorCode</span><span class="w"> </span><span class="n">ierr</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-ksp">variable ksp<a class="headerlink" href="#variable-ksp" title="Permanent link">&para;</a></h3>
+<p><em>Krylov subspace solver context.</em> </p>
+<div class="codehilite"><pre><span></span><code><span class="n">KSP</span><span class="w"> </span><span class="n">ksp</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-meshes">variable meshes<a class="headerlink" href="#variable-meshes" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MeshRecordComponent</span><span class="o">&gt;</span><span class="w"> </span><span class="n">meshes</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-nmpi">variable nmpi<a class="headerlink" href="#variable-nmpi" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">nmpi</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-pc">variable pc<a class="headerlink" href="#variable-pc" title="Permanent link">&para;</a></h3>
+<p><em>Preconditioner context.</em> </p>
+<div class="codehilite"><pre><span></span><code><span class="n">PC</span><span class="w"> </span><span class="n">pc</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-rho">variable rho<a class="headerlink" href="#variable-rho" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PetscScalar</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rho</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-rho_index">variable rho_index<a class="headerlink" href="#variable-rho_index" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PetscInt</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rho_index</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-rmpi">variable rmpi<a class="headerlink" href="#variable-rmpi" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">rmpi</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-series">variable series<a class="headerlink" href="#variable-series" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">Series</span><span class="w"> </span><span class="n">series</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-sources">variable sources<a class="headerlink" href="#variable-sources" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Source</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sources</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-species">variable species<a class="headerlink" href="#variable-species" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Species</span><span class="o">&gt;</span><span class="w"> </span><span class="n">species</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-t_store">variable t_store<a class="headerlink" href="#variable-t_store" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="w"> </span><span class="n">PetscScalar</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">t_store</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-trajx">variable trajx<a class="headerlink" href="#variable-trajx" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="w"> </span><span class="n">PetscScalar</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">trajx</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-trajy">variable trajy<a class="headerlink" href="#variable-trajy" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="w"> </span><span class="n">PetscScalar</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">trajy</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-trajz">variable trajz<a class="headerlink" href="#variable-trajz" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="w"> </span><span class="n">PetscScalar</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">trajz</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-tstep">variable tstep<a class="headerlink" href="#variable-tstep" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscInt</span><span class="w"> </span><span class="n">tstep</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-x">variable x<a class="headerlink" href="#variable-x" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">Vec</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="variable-x_array">variable x_array<a class="headerlink" href="#variable-x_array" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">Vec</span><span class="w"> </span><span class="n">x_array</span><span class="p">;</span>
+</code></pre></div>
+
+<hr>
+<h2 id="public-functions-documentation">Public Functions Documentation<a class="headerlink" href="#public-functions-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="function-mcc">function MCC<a class="headerlink" href="#function-mcc" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">MCC</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-psi_init">function PSI_init<a class="headerlink" href="#function-psi_init" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">PSI_init</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-add_received_particles">function add_received_particles<a class="headerlink" href="#function-add_received_particles" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">add_received_particles</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-cells_init">function cells_init<a class="headerlink" href="#function-cells_init" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">cells_init</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-collisions_init">function collisions_init<a class="headerlink" href="#function-collisions_init" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">collisions_init</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-create_output">function create_output<a class="headerlink" href="#function-create_output" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">create_output</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-decompose_domain">function decompose_domain<a class="headerlink" href="#function-decompose_domain" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">decompose_domain</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-field_solver_petsc">function field_solver_petsc<a class="headerlink" href="#function-field_solver_petsc" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">field_solver_petsc</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-field_source_update">function field_source_update<a class="headerlink" href="#function-field_source_update" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">field_source_update</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-grid2part">function grid2part<a class="headerlink" href="#function-grid2part" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">grid2part</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">PetscScalar</span><span class="p">,</span>
+<span class="w">    </span><span class="n">PetscScalar</span><span class="p">,</span>
+<span class="w">    </span><span class="n">PetscScalar</span><span class="w"> </span><span class="o">*</span><span class="p">,</span>
+<span class="w">    </span><span class="n">PetscScalar</span><span class="w"> </span><span class="o">*</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-grid_init">function grid_init<a class="headerlink" href="#function-grid_init" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">grid_init</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">int</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-initial_particle_load">function initial_particle_load<a class="headerlink" href="#function-initial_particle_load" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">initial_particle_load</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-inject_particle">function inject_particle<a class="headerlink" href="#function-inject_particle" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">inject_particle</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">int</span><span class="p">,</span>
+<span class="w">    </span><span class="n">PetscScalar</span><span class="p">,</span>
+<span class="w">    </span><span class="n">PetscScalar</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-inject_particles">function inject_particles<a class="headerlink" href="#function-inject_particles" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">inject_particles</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-normvel_maxbol">function normvel_MaxBol<a class="headerlink" href="#function-normvel_maxbol" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscScalar</span><span class="w"> </span><span class="n">normvel_MaxBol</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-normvel_vfv">function normvel_vFv<a class="headerlink" href="#function-normvel_vfv" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">PetscScalar</span><span class="w"> </span><span class="n">normvel_vFv</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-num_param_init">function num_param_init<a class="headerlink" href="#function-num_param_init" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">num_param_init</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-part2grid">function part2grid<a class="headerlink" href="#function-part2grid" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">part2grid</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-particle_boundaries">function particle_boundaries<a class="headerlink" href="#function-particle_boundaries" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">particle_boundaries</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-particle_boundaries_dd">function particle_boundaries_dd<a class="headerlink" href="#function-particle_boundaries_dd" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">particle_boundaries_dd</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-particle_mover_boris">function particle_mover_boris<a class="headerlink" href="#function-particle_mover_boris" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">particle_mover_boris</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-particle_wall_interaction">function particle_wall_interaction<a class="headerlink" href="#function-particle_wall_interaction" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">particle_wall_interaction</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">int</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">int</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">int</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">int</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-particles_init">function particles_init<a class="headerlink" href="#function-particles_init" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">particles_init</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-petsc_cleanup">function petsc_cleanup<a class="headerlink" href="#function-petsc_cleanup" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">petsc_cleanup</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-petsc_init">function petsc_init<a class="headerlink" href="#function-petsc_init" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">petsc_init</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">int</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-petsc_plot_finalize">function petsc_plot_finalize<a class="headerlink" href="#function-petsc_plot_finalize" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">petsc_plot_finalize</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-petsc_plot_init">function petsc_plot_init<a class="headerlink" href="#function-petsc_plot_init" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">petsc_plot_init</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-petsc_plot_update">function petsc_plot_update<a class="headerlink" href="#function-petsc_plot_update" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">petsc_plot_update</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">int</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-plot_profiling">function plot_profiling<a class="headerlink" href="#function-plot_profiling" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">plot_profiling</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-read_input_file">function read_input_file<a class="headerlink" href="#function-read_input_file" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">read_input_file</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-remove_particle">function remove_particle<a class="headerlink" href="#function-remove_particle" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">remove_particle</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">int</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">int</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">int</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-save_output">function save_output<a class="headerlink" href="#function-save_output" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">save_output</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-send_receive_particles">function send_receive_particles<a class="headerlink" href="#function-send_receive_particles" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">send_receive_particles</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-source">function source<a class="headerlink" href="#function-source" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-source_heating">function source_heating<a class="headerlink" href="#function-source_heating" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">source_heating</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-source_init">function source_init<a class="headerlink" href="#function-source_init" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">source_init</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="function-specie_index">function specie_index<a class="headerlink" href="#function-specie_index" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">specie_index</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div>
+
+<hr>
+<h2 id="macro-definition-documentation">Macro Definition Documentation<a class="headerlink" href="#macro-definition-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="define-eps0">define EPS0<a class="headerlink" href="#define-eps0" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="cp">#define EPS0 `8.8542e-12`</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="define-external">define EXTERNAL<a class="headerlink" href="#define-external" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="cp">#define EXTERNAL `extern`</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="define-false">define FALSE<a class="headerlink" href="#define-false" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="cp">#define FALSE `0`</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="define-pi">define PI<a class="headerlink" href="#define-pi" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="cp">#define PI `3.141592653589793`</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="define-real">define REAL<a class="headerlink" href="#define-real" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="cp">#define REAL `PetscScalar`</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="define-true">define TRUE<a class="headerlink" href="#define-true" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="cp">#define TRUE `1`</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="define-twopi">define TWOPI<a class="headerlink" href="#define-twopi" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="cp">#define TWOPI `6.28318530717959`</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="define-comm">define comm<a class="headerlink" href="#define-comm" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="cp">#define comm `MPI_COMM_WORLD`</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="define-frand">define frand<a class="headerlink" href="#define-frand" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="cp">#define frand (</span>
+
+<span class="p">)</span><span class="w"> </span><span class="err">`</span><span class="p">((</span><span class="n">REAL</span><span class="p">)</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">RAND_MAX</span><span class="o">+</span><span class="mf">1.0</span><span class="p">))</span><span class="err">`</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="define-np2c_global">define np2c_global<a class="headerlink" href="#define-np2c_global" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="cp">#define np2c_global `2e6`</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="define-plot_3d">define plot_3D<a class="headerlink" href="#define-plot_3d" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="cp">#define plot_3D `FALSE`</span>
+</code></pre></div>
+
+<hr>
+
+<h3 id="define-q_e">define q_e<a class="headerlink" href="#define-q_e" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="cp">#define q_e `1.602e-19`</span>
+</code></pre></div>
+
+<hr>
+
+<hr />
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 LeCAD-PEG</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/LeCAD-PEG/HEXAPIC.git" class="fa fa-code-fork" style="color: #fcfcfc"> HEXAPIC</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

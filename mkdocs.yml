@@ -1,0 +1,179 @@
+site_name: The Heterogeneous Exascale PIC (HEXAPIC)
+nav:
+    - Main : 'index.md'
+    - API:
+        - Files:
+            - -- All --: 'api/files.md'
+            - collisions.cpp: 'api/collisions_8cpp.md'
+            - diagnostics.cpp: 'api/diagnostics_8cpp.md'
+            - domain_decomposition.cpp: 'api/domain__decomposition_8cpp.md'
+            - field_solver_petsc.cpp: 'api/field__solver__petsc_8cpp.md'
+            - main.cpp: 'api/main_8cpp.md'
+            - particles.cpp: 'api/particles_8cpp.md'
+            - plasma_wall.cpp: 'api/plasma__wall_8cpp.md'
+            - read_input_file.cpp: 'api/read__input__file_8cpp.md'
+            - volumetric_source.cpp: 'api/volumetric__source_8cpp.md'
+        - Classes:
+            - -- All --: 'api/annotated.md'
+            - Boundary: 'api/structBoundary.md'
+            - Cell: 'api/structCell.md'
+            - Collision: 'api/structCollision.md'
+            - Grid: 'api/structGrid.md'
+            - Neighbours: 'api/structNeighbours.md'
+            - Particle: 'api/structParticle.md'
+            - SecondaryEmission: 'api/structSecondaryEmission.md'
+            - Source: 'api/structSource.md'
+            - SourceSpecie: 'api/structSourceSpecie.md'
+            - Species: 'api/structSpecies.md'
+            - Species_inject: 'api/structSpecies__inject.md'
+            - Species_load: 'api/structSpecies__load.md'
+        - All Functions: 'api/functions.md'
+        
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - tables
+
+theme:
+  name: readthedocs
+  #logo: 'figures/plasma.jpg'
+  features:
+    - navigation.footer
+    - navigation.instant
+    - navigation.tracking
+    - content.action.edit
+    - content.action.view
+    - navigation.tabs
+    - navigation.top
+    - navigation.indexes
+    - header.autohide
+    - toc.follow
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+
+  #palette:
+    #- primary: black
+  language: en
+  palette:
+      primary: blue
+      accent:  light blue
+
+
+  # palette:
+  #   # Palette toggle for light mode
+  #   - scheme: default
+  #     toggle:
+  #       icon: material/brightness-7
+  #       name: Switch to dark mode
+
+  #   # Palette toggle for dark mode
+  #   - scheme: slate
+  #     toggle:
+  #       icon: material/brightness-4
+  #       name: Switch to light mode
+
+  features:
+#    - navigation.instant
+    - navigation.tabs
+    - navigation.footer
+
+  icon:
+    admonition:
+      note: octicons/tag-16
+      abstract: octicons/checklist-16
+      info: octicons/info-16
+      tip: octicons/squirrel-16
+      success: octicons/check-16
+      question: octicons/question-16
+      warning: octicons/alert-16
+      failure: octicons/x-circle-16
+      danger: octicons/zap-16
+      bug: octicons/bug-16
+      example: octicons/beaker-16
+      quote: octicons/quote-16
+    repo: fontawesome/brands/git-alt
+  #   edit: material/pencil
+  #   view: material/eye
+
+# Extensions
+markdown_extensions:
+  - meta
+  - attr_list
+  - md_in_html
+  - footnotes
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+  # - pymdownx.arithmatex
+  # - pymdownx.betterem:
+  #     smart_enable: all
+  # - pymdownx.caret
+  # - pymdownx.critic
+  # - pymdownx.emoji:
+  #     emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  # - pymdownx.inlinehilite
+  # - pymdownx.magiclink
+  # - pymdownx.mark
+  # - pymdownx.smartsymbols:
+  #     fractions: false
+  # - pymdownx.superfences
+  # - pymdownx.details
+  # - pymdownx.tasklist:
+  #     custom_checkbox: true
+  # - pymdownx.tilde
+  # - pymdownx.snippets
+  # - pymdownx.tabbed:
+  #     alternate_style: true
+  # # code blocks with syntax highlighting, graphs
+  # - pymdownx.superfences:
+  #       custom_fences:
+  #       - name: mermaid
+  #         class: mermaid
+  #         format: !!python/name:pymdownx.superfences.fence_code_format
+  # # clickable details
+  # - pymdownx.details
+  # # tabbed contents
+  # - pymdownx.tabbed
+  # - toc:
+  #     permalink: true
+  # - pymdownx.keys
+  # - pymdownx.highlight:
+  #     linenums_style: pymdownx.inline
+  # - pymdownx.highlight:
+  #     anchor_linenums: true
+  #     line_spans: __span
+  #     pygments_lang_class: true
+  # - pymdownx.inlinehilite
+  # - pymdownx.snippets
+  # - pymdownx.superfences
+  # - pymdownx.arithmatex:
+  #     generic: true
+
+
+plugins:
+  - search:
+#      prebuild_index: false
+  # - minify:
+  #     minify_html: true
+  # - glightbox
+
+
+copyright: Copyright &copy; 2025 LeCAD-PEG
+
+repo_name: HEXAPIC
+repo_url: https://github.com/LeCAD-PEG/HEXAPIC.git
+

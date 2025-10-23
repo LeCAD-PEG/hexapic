@@ -1,0 +1,62 @@
+# -------- Project --------
+PROJECT_NAME           = HEXAPIC
+# PROJECT_NUMBER        = 0.1.0
+
+# -------- Input --------
+# Adjust this to your code root(s)
+INPUT                  = ../../hexapic-mpi/source
+RECURSIVE              = YES
+
+FILE_PATTERNS          = *.h *.hpp *.c *.cc *.cpp
+EXCLUDE_PATTERNS       = */build/* */.venv/*
+
+# If you have external include dirs:
+# INCLUDE_PATH         = ./include ./third_party/include
+
+# -------- Extraction --------
+EXTRACT_ALL            = YES          # set YES to index everything (even undocumented)
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+HIDE_UNDOC_MEMBERS     = NO
+HIDE_UNDOC_CLASSES     = NO
+HIDE_IN_BODY_DOCS      = NO
+
+# Warnings
+WARN_IF_UNDOCUMENTED   = YES
+WARNINGS               = YES
+WARN_LOGFILE           = ../doxygen/warnings.txt
+
+# -------- Preprocessing / Macros --------
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = NO          # switch to YES + PREDEFINED if needed
+# PREDEFINED           = NDEBUG;MY_API(X)=
+
+# -------- Markdown / Comment style --------
+MARKDOWN_SUPPORT       = YES
+JAVADOC_AUTOBRIEF      = YES
+
+# -------- Diagrams (Graphviz) --------
+HAVE_DOT               = YES
+DOT_IMAGE_FORMAT       = svg
+CALL_GRAPH             = NO
+CALLER_GRAPH           = NO
+CLASS_GRAPH            = YES
+COLLABORATION_GRAPH    = YES
+INCLUDE_GRAPH          = YES
+INCLUDED_BY_GRAPH      = YES
+# Limit size/complexity if needed:
+DOT_GRAPH_MAX_NODES    = 80
+
+# -------- Output (XML only) --------
+GENERATE_HTML          = NO
+GENERATE_LATEX         = NO
+GENERATE_XML           = YES
+OUTPUT_DIRECTORY       = doxygen
+XML_OUTPUT             = xml
+
+# -------- Paths cleanup --------
+STRIP_FROM_PATH        = $(INPUT)
+# Or explicitly:
+# STRIP_FROM_PATH      = ./src

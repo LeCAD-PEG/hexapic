@@ -1,0 +1,40 @@
+{
+  "$schema": "https://raw.githubusercontent.com/matusnovak/doxybook2/master/schema/doxybook2.schema.json",
+  "baseUrl": "",
+  "linkSuffix": ".md",          
+  "linkLowercase": true,      
+  "language": "en",
+  "order": "alpha",
+  "useRelativeLinks": true,
+  "useFolders": false,
+  "generateSummary": true,
+  "hideUndocumented": false,
+  "summary": {
+    "enabled": true,
+    "file": "SUMMARY.md",
+    "linkTitle": "API Summary"
+  },
+  "sections": {
+    "mainPage": true,
+    "modules": true,
+    "namespaces": true,
+    "classes": true,
+    "files": true,
+    "pages": true,
+    "examples": false
+  },
+  "output": {
+    "dir": ".",
+    "index": "index.md",
+    "images": "images"
+  },
+  "templates": {
+    "dir": "templates"
+  },
+  "frontMatter": {
+    "enable": true,
+    "title": "{{ name }}",
+    "description": "API reference for {{ name }}",
+    "weight": 0
+  }
+}

@@ -1,33 +1,11 @@
-site_name: The Heterogeneous Exascale PIC (HEXAPIC)
+site_name: HEXAPIC
+site_url: https://lecad-peg.github.io/hexapic/
+
+docs_dir: ../docs        # where Markdown lives
+site_dir: ../site        # where the built HTML goes
+
 nav:
-    - Main : 'index.md'
-    - API:
-        - Files:
-            - -- All --: 'api/files.md'
-            - collisions.cpp: 'api/collisions_8cpp.md'
-            - diagnostics.cpp: 'api/diagnostics_8cpp.md'
-            - domain_decomposition.cpp: 'api/domain__decomposition_8cpp.md'
-            - field_solver_petsc.cpp: 'api/field__solver__petsc_8cpp.md'
-            - main.cpp: 'api/main_8cpp.md'
-            - particles.cpp: 'api/particles_8cpp.md'
-            - plasma_wall.cpp: 'api/plasma__wall_8cpp.md'
-            - read_input_file.cpp: 'api/read__input__file_8cpp.md'
-            - volumetric_source.cpp: 'api/volumetric__source_8cpp.md'
-        - Classes:
-            - -- All --: 'api/annotated.md'
-            - Boundary: 'api/structBoundary.md'
-            - Cell: 'api/structCell.md'
-            - Collision: 'api/structCollision.md'
-            - Grid: 'api/structGrid.md'
-            - Neighbours: 'api/structNeighbours.md'
-            - Particle: 'api/structParticle.md'
-            - SecondaryEmission: 'api/structSecondaryEmission.md'
-            - Source: 'api/structSource.md'
-            - SourceSpecie: 'api/structSourceSpecie.md'
-            - Species: 'api/structSpecies.md'
-            - Species_inject: 'api/structSpecies__inject.md'
-            - Species_load: 'api/structSpecies__load.md'
-        - All Functions: 'api/functions.md'
+    - Overview : 'index.md'
         
 markdown_extensions:
   - attr_list

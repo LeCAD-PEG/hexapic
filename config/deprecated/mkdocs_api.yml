@@ -5,7 +5,7 @@ plugins:
       projects:
         api:
           # list real directories separated by spaces
-          src-dirs: /home/costeas/hexapic/source
+          src-dirs: /home/costeas/hexapic-mpi/source
           full-doc: true
           template-dir: docs/api/templates
           doxy-cfg:
@@ -13,12 +13,12 @@ plugins:
             FILE_PATTERNS: "*.h *.hpp *.c *.cc *.cpp"
             EXCLUDE_PATTERNS: "*/build/* */.venv/*"
             MARKDOWN_SUPPORT: YES
-            JAVADOC_AUTOBRIEF: YES
-            EXTRACT_ALL: NO
+            JAVADOC_AUTOBRIEF: NO
+            EXTRACT_ALL: YES
             WARN_IF_UNDOCUMENTED: YES
-            HAVE_DOT: YES
+            HAVE_DOT: NO
             DOT_IMAGE_FORMAT: svg
-            ENABLE_PREPROCESSING: YES
-            MACRO_EXPANSION: YES
+            ENABLE_PREPROCESSING: NO
+            MACRO_EXPANSION: NO
             EXPAND_ONLY_PREDEF: NO
   

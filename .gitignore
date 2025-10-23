@@ -1,2 +1,6 @@
 # HTML pages
 site
+# XML files
+doxygen
+# backup files
+*.bkp

@@ -19,12 +19,23 @@
 	- XOOPIC-like input file
 	- Particle and heat sources: planar, volumetric
 	- Multi-species
-	- Monte-Carlo Collisions
+	- Monte-Carlo Collisions: elastic, excitation, ionization, charge-exchange
 	- Plasma-surface interactions:
 		- ion-recycling (into neutrals)
 		- secondary-electron emmission
 		- particle-impact erosion and impurity injection
 	- 3D visualisation
+
+<p align="center">
+  <img src="images/V.png" alt="space potential" width="28%">
+  <img src="images/n.png" alt="electron density" width="27%">
+  <img src="images/T.png" alt="electron temperature" width="30%">
+</p>
+
+<p align="center">
+  &nbsp; Space potential [V] &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Electron density [m<sup>−3</sup>] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; Electron temperature [eV]
+</p>
+
 
 - **Workflow**:
 

@@ -7,22 +7,6 @@ site_dir: ../site        # where the built HTML goes
 nav:
     - Overview : 'index.md'
         
-markdown_extensions:
-  - attr_list
-  - md_in_html
-  - pymdownx.superfences
-  - pymdownx.tabbed:
-      alternate_style: true
-
-  - pymdownx.highlight:
-      anchor_linenums: true
-      line_spans: __span
-      pygments_lang_class: true
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - pymdownx.superfences
-  - tables
-
 theme:
   name: readthedocs
   #logo: 'figures/plasma.jpg'
@@ -41,8 +25,6 @@ theme:
     - content.code.select
     - content.code.annotate
 
-  #palette:
-    #- primary: black
   language: en
   palette:
       primary: blue
@@ -93,62 +75,59 @@ markdown_extensions:
   - footnotes
   - admonition
   - codehilite:
-      guess_lang: false
+      guess_lang: true
   - toc:
       permalink: true
-  # - pymdownx.arithmatex
-  # - pymdownx.betterem:
-  #     smart_enable: all
-  # - pymdownx.caret
-  # - pymdownx.critic
-  # - pymdownx.emoji:
-  #     emoji_generator: !!python/name:pymdownx.emoji.to_svg
-  # - pymdownx.inlinehilite
-  # - pymdownx.magiclink
-  # - pymdownx.mark
-  # - pymdownx.smartsymbols:
-  #     fractions: false
-  # - pymdownx.superfences
-  # - pymdownx.details
-  # - pymdownx.tasklist:
-  #     custom_checkbox: true
-  # - pymdownx.tilde
-  # - pymdownx.snippets
-  # - pymdownx.tabbed:
-  #     alternate_style: true
-  # # code blocks with syntax highlighting, graphs
-  # - pymdownx.superfences:
-  #       custom_fences:
-  #       - name: mermaid
-  #         class: mermaid
-  #         format: !!python/name:pymdownx.superfences.fence_code_format
-  # # clickable details
-  # - pymdownx.details
-  # # tabbed contents
-  # - pymdownx.tabbed
-  # - toc:
-  #     permalink: true
-  # - pymdownx.keys
-  # - pymdownx.highlight:
-  #     linenums_style: pymdownx.inline
-  # - pymdownx.highlight:
-  #     anchor_linenums: true
-  #     line_spans: __span
-  #     pygments_lang_class: true
-  # - pymdownx.inlinehilite
-  # - pymdownx.snippets
-  # - pymdownx.superfences
-  # - pymdownx.arithmatex:
-  #     generic: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols:
+      fractions: false
+  - pymdownx.details
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  # code blocks with syntax highlighting, graphs
+ # - pymdownx.superfences:
+ #      custom_fences:
+ #        - name: mermaid
+ #          class: mermaid
+ #          format: !!python/name:pymdownx.superfences.fence_code_format
+  # clickable details
+  - pymdownx.details
+  # tabbed contents
+  - pymdownx.tabbed
+  - toc:
+      permalink: true
+  - pymdownx.keys
+  - pymdownx.highlight:
+      linenums_style: pymdownx.inline
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+  - plantuml_markdown:
+      server: http://www.plantuml.com/plantuml 
+      format: svg
 
 
 plugins:
-  - search:
-#      prebuild_index: false
-  # - minify:
-  #     minify_html: true
-  # - glightbox
-
+  - search
 
 copyright: Copyright &copy; 2025 LeCAD-PEG
 

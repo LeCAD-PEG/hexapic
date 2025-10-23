@@ -1,6 +1,6 @@
 # Overview
 
-**H** eterogenous **EXA** scale **P** article- **I** n- **C** ell
+**H**&#8203;eterogenous **EXA**&#8203;scale **P**&#8203;article-&#8203;**I**&#8203;n-&#8203;**C**&#8203;ell
 
 - **Language**: C++
 

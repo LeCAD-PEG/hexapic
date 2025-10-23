@@ -50,7 +50,7 @@ split again
 	else (no)
 	endif 
 end split
-repeat while (Have particles and/or steps?) is (Yes) not (No)
+repeat while (particles and/or steps?) is (Yes) not (No)
 :free; <<task>>
 stop
 @enduml

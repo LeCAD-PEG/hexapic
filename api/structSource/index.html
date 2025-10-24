@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://lecad-peg.github.io/hexapic/api/structSource/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Source - HEXAPIC</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Source";
+        var mkdocs_page_input_path = "api/structSource.md";
+        var mkdocs_page_url = "/hexapic/api/structSource/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> HEXAPIC
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Overview</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" >Files</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../files/">-- All --</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../collisions_8cpp/">collisions.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../diagnostics_8cpp/">diagnostics.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../domain__decomposition_8cpp/">domain_decomposition.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../field__solver__petsc_8cpp/">field_solver_petsc.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../main_8cpp/">main.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../particles_8cpp/">particles.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../plasma__wall_8cpp/">plasma_wall.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../read__input__file_8cpp/">read_input_file.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../volumetric__source_8cpp/">volumetric_source.cpp</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Classes</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../annotated/">-- All --</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structBoundary/">Boundary</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structCell/">Cell</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structCollision/">Collision</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structGrid/">Grid</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structNeighbours/">Neighbours</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structParticle/">Particle</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSecondaryEmission/">SecondaryEmission</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Source</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#public-attributes">Public Attributes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#public-attributes-documentation">Public Attributes Documentation</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-fx0">variable Fx0</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-fx1">variable Fx1</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-fxcell">variable Fxcell</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-fy0">variable Fy0</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-fy1">variable Fy1</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-fycell">variable Fycell</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-lx">variable Lx</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-ly">variable Ly</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-tpar">variable Tpar</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-tper">variable Tper</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-active">variable active</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-cx">variable cx</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-cy">variable cy</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-heat_freq">variable heat_freq</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-index">variable index</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-j1">variable j1</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-j2">variable j2</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-k1">variable k1</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-k2">variable k2</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-lx_1">variable lx</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-ly_1">variable ly</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-n_heat">variable n_heat</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-n_inj">variable n_inj</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-n_inj_step">variable n_inj_step</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-shape_x">variable shape_x</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-shape_y">variable shape_y</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-t0">variable t0</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-t1">variable t1</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-t2">variable t2</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-t3">variable t3</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-t_dep">variable t_dep</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSourceSpecie/">SourceSpecie</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSpecies/">Species</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSpecies__inject/">Species_inject</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSpecies__load/">Species_load</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../functions/">All Functions</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">HEXAPIC</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">API</li>
+          <li class="breadcrumb-item">Classes</li>
+      <li class="breadcrumb-item active">Source</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/LeCAD-PEG/HEXAPIC.git/edit/master/docs/api/structSource.md">Edit on HEXAPIC</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="struct-source">Struct Source<a class="headerlink" href="#struct-source" title="Permanent link">&para;</a></h1>
+<p><a href="../annotated/"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="./"><strong>Source</strong></a></p>
+<h2 id="public-attributes">Public Attributes<a class="headerlink" href="#public-attributes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-fx0"><strong>Fx0</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-fx1"><strong>Fx1</strong></a>  <br><em>from cumulative distribution part on this rank</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::set&lt; std::pair&lt; PetscScalar, int &gt; &gt;</td>
+<td style="text-align: left;"><a href="#variable-fxcell"><strong>Fxcell</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-fy0"><strong>Fy0</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-fy1"><strong>Fy1</strong></a>  <br><em>same for y</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">std::set&lt; std::pair&lt; PetscScalar, int &gt; &gt;</td>
+<td style="text-align: left;"><a href="#variable-fycell"><strong>Fycell</strong></a>  <br><em>for normal distribution</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscInt</td>
+<td style="text-align: left;"><a href="#variable-lx"><strong>Lx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscInt</td>
+<td style="text-align: left;"><a href="#variable-ly"><strong>Ly</strong></a>  <br><em>x, y full length (global)</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-tpar"><strong>Tpar</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-tper"><strong>Tper</strong></a>  <br><em>temperature parallel and perpendicular to B [eV]</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#variable-active"><strong>active</strong></a>  <br><em>if 0 not active</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-cx"><strong>cx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-cy"><strong>cy</strong></a>  <br><em>center position of global source (in local coordinates)</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-heat_freq"><strong>heat_freq</strong></a>  <br><em>frequency of collisions of a particle inside region</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#variable-index"><strong>index</strong></a>  <br><em>source index</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscInt</td>
+<td style="text-align: left;"><a href="#variable-j1"><strong>j1</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscInt</td>
+<td style="text-align: left;"><a href="#variable-j2"><strong>j2</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscInt</td>
+<td style="text-align: left;"><a href="#variable-k1"><strong>k1</strong></a>  <br><em>bottom left corner</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscInt</td>
+<td style="text-align: left;"><a href="#variable-k2"><strong>k2</strong></a>  <br><em>top right corner</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscInt</td>
+<td style="text-align: left;"><a href="#variable-lx"><strong>lx</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscInt</td>
+<td style="text-align: left;"><a href="#variable-ly"><strong>ly</strong></a>  <br><em>x, y local length</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-n_heat"><strong>n_heat</strong></a>  <br><em>number of heat collisions of a particle in timestep</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-n_inj"><strong>n_inj</strong></a>  <br><em>[s^-1 m^-3] /nc2p when injecting</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-n_inj_step"><strong>n_inj_step</strong></a>  <br><em>injected computed particles per timestep</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#variable-shape_x"><strong>shape_x</strong></a>  <br><em>0-uniform, 1-cos, 2-normal, details in implementation</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#variable-shape_y"><strong>shape_y</strong></a>  <br><em>0-uniform, 1-cos, 2-normal</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-t0"><strong>t0</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-t1"><strong>t1</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-t2"><strong>t2</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">PetscScalar</td>
+<td style="text-align: left;"><a href="#variable-t3"><strong>t3</strong></a>  <br><em>[t0, t1] source 0-&gt;1, [t2, t3] source 1-&gt;0 (linear)</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#variable-t_dep"><strong>t_dep</strong></a>  <br><em>time-dependend (source and heating)</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-attributes-documentation">Public Attributes Documentation<a class="headerlink" href="#public-attributes-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="variable-fx0">variable Fx0<a class="headerlink" href="#variable-fx0" title="Permanent link">&para;</a></h3>
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">Fx0</span><span class="p">;</span>
+</span></code></pre></div>
+<hr>
+
+<h3 id="variable-fx1">variable Fx1<a class="headerlink" href="#variable-fx1" title="Permanent link">&para;</a></h3>
+<p><em>from cumulative distribution part on this rank</em> 
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">Fx1</span><span class="p">;</span>
+</span></code></pre></div></p>
+<hr>
+
+<h3 id="variable-fxcell">variable Fxcell<a class="headerlink" href="#variable-fxcell" title="Permanent link">&para;</a></h3>
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="w"> </span><span class="n">PetscScalar</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">Fxcell</span><span class="p">;</span>
+</span></code></pre></div>
+<hr>
+
+<h3 id="variable-fy0">variable Fy0<a class="headerlink" href="#variable-fy0" title="Permanent link">&para;</a></h3>
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">Fy0</span><span class="p">;</span>
+</span></code></pre></div>
+<hr>
+
+<h3 id="variable-fy1">variable Fy1<a class="headerlink" href="#variable-fy1" title="Permanent link">&para;</a></h3>
+<p><em>same for y</em> 
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">Fy1</span><span class="p">;</span>
+</span></code></pre></div></p>
+<hr>
+
+<h3 id="variable-fycell">variable Fycell<a class="headerlink" href="#variable-fycell" title="Permanent link">&para;</a></h3>
+<p><em>for normal distribution</em> 
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="w"> </span><span class="n">PetscScalar</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">Fycell</span><span class="p">;</span>
+</span></code></pre></div></p>
+<hr>
+
+<h3 id="variable-lx">variable Lx<a class="headerlink" href="#variable-lx" title="Permanent link">&para;</a></h3>
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">PetscInt</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">Lx</span><span class="p">;</span>
+</span></code></pre></div>
+<hr>
+
+<h3 id="variable-ly">variable Ly<a class="headerlink" href="#variable-ly" title="Permanent link">&para;</a></h3>
+<p><em>x, y full length (global)</em> 
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">PetscInt</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">Ly</span><span class="p">;</span>
+</span></code></pre></div></p>
+<hr>
+
+<h3 id="variable-tpar">variable Tpar<a class="headerlink" href="#variable-tpar" title="Permanent link">&para;</a></h3>
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">Tpar</span><span class="p">;</span>
+</span></code></pre></div>
+<hr>
+
+<h3 id="variable-tper">variable Tper<a class="headerlink" href="#variable-tper" title="Permanent link">&para;</a></h3>
+<p><em>temperature parallel and perpendicular to B [eV]</em> 
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">Tper</span><span class="p">;</span>
+</span></code></pre></div></p>
+<hr>
+
+<h3 id="variable-active">variable active<a class="headerlink" href="#variable-active" title="Permanent link">&para;</a></h3>
+<p><em>if 0 not active</em> 
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">active</span><span class="p">;</span>
+</span></code></pre></div></p>
+<hr>
+
+<h3 id="variable-cx">variable cx<a class="headerlink" href="#variable-cx" title="Permanent link">&para;</a></h3>
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">cx</span><span class="p">;</span>
+</span></code></pre></div>
+<hr>
+
+<h3 id="variable-cy">variable cy<a class="headerlink" href="#variable-cy" title="Permanent link">&para;</a></h3>
+<p><em>center position of global source (in local coordinates)</em> 
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">cy</span><span class="p">;</span>
+</span></code></pre></div></p>
+<hr>
+
+<h3 id="variable-heat_freq">variable heat_freq<a class="headerlink" href="#variable-heat_freq" title="Permanent link">&para;</a></h3>
+<p><em>frequency of collisions of a particle inside region</em> 
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">heat_freq</span><span class="p">;</span>
+</span></code></pre></div></p>
+<hr>
+
+<h3 id="variable-index">variable index<a class="headerlink" href="#variable-index" title="Permanent link">&para;</a></h3>
+<p><em>source index</em> 
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">index</span><span class="p">;</span>
+</span></code></pre></div></p>
+<hr>
+
+<h3 id="variable-j1">variable j1<a class="headerlink" href="#variable-j1" title="Permanent link">&para;</a></h3>
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">PetscInt</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">j1</span><span class="p">;</span>
+</span></code></pre></div>
+<hr>
+
+<h3 id="variable-j2">variable j2<a class="headerlink" href="#variable-j2" title="Permanent link">&para;</a></h3>
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">PetscInt</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">j2</span><span class="p">;</span>
+</span></code></pre></div>
+<hr>
+
+<h3 id="variable-k1">variable k1<a class="headerlink" href="#variable-k1" title="Permanent link">&para;</a></h3>
+<p><em>bottom left corner</em> 
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">PetscInt</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">k1</span><span class="p">;</span>
+</span></code></pre></div></p>
+<hr>
+
+<h3 id="variable-k2">variable k2<a class="headerlink" href="#variable-k2" title="Permanent link">&para;</a></h3>
+<p><em>top right corner</em> 
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">PetscInt</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">k2</span><span class="p">;</span>
+</span></code></pre></div></p>
+<hr>
+
+<h3 id="variable-lx_1">variable lx<a class="headerlink" href="#variable-lx_1" title="Permanent link">&para;</a></h3>
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">PetscInt</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">lx</span><span class="p">;</span>
+</span></code></pre></div>
+<hr>
+
+<h3 id="variable-ly_1">variable ly<a class="headerlink" href="#variable-ly_1" title="Permanent link">&para;</a></h3>
+<p><em>x, y local length</em> 
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">PetscInt</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">ly</span><span class="p">;</span>
+</span></code></pre></div></p>
+<hr>
+
+<h3 id="variable-n_heat">variable n_heat<a class="headerlink" href="#variable-n_heat" title="Permanent link">&para;</a></h3>
+<p><em>number of heat collisions of a particle in timestep</em> 
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">n_heat</span><span class="p">;</span>
+</span></code></pre></div></p>
+<hr>
+
+<h3 id="variable-n_inj">variable n_inj<a class="headerlink" href="#variable-n_inj" title="Permanent link">&para;</a></h3>
+<p><em>[s^-1 m^-3] /nc2p when injecting</em> 
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">n_inj</span><span class="p">;</span>
+</span></code></pre></div></p>
+<hr>
+
+<h3 id="variable-n_inj_step">variable n_inj_step<a class="headerlink" href="#variable-n_inj_step" title="Permanent link">&para;</a></h3>
+<p><em>injected computed particles per timestep</em> 
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">n_inj_step</span><span class="p">;</span>
+</span></code></pre></div></p>
+<hr>
+
+<h3 id="variable-shape_x">variable shape_x<a class="headerlink" href="#variable-shape_x" title="Permanent link">&para;</a></h3>
+<p><em>0-uniform, 1-cos, 2-normal, details in implementation</em> 
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">shape_x</span><span class="p">;</span>
+</span></code></pre></div></p>
+<hr>
+
+<h3 id="variable-shape_y">variable shape_y<a class="headerlink" href="#variable-shape_y" title="Permanent link">&para;</a></h3>
+<p><em>0-uniform, 1-cos, 2-normal</em> 
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">shape_y</span><span class="p">;</span>
+</span></code></pre></div></p>
+<hr>
+
+<h3 id="variable-t0">variable t0<a class="headerlink" href="#variable-t0" title="Permanent link">&para;</a></h3>
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">t0</span><span class="p">;</span>
+</span></code></pre></div>
+<hr>
+
+<h3 id="variable-t1">variable t1<a class="headerlink" href="#variable-t1" title="Permanent link">&para;</a></h3>
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">t1</span><span class="p">;</span>
+</span></code></pre></div>
+<hr>
+
+<h3 id="variable-t2">variable t2<a class="headerlink" href="#variable-t2" title="Permanent link">&para;</a></h3>
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">t2</span><span class="p">;</span>
+</span></code></pre></div>
+<hr>
+
+<h3 id="variable-t3">variable t3<a class="headerlink" href="#variable-t3" title="Permanent link">&para;</a></h3>
+<p><em>[t0, t1] source 0-&gt;1, [t2, t3] source 1-&gt;0 (linear)</em> 
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="n">PetscScalar</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">t3</span><span class="p">;</span>
+</span></code></pre></div></p>
+<hr>
+
+<h3 id="variable-t_dep">variable t_dep<a class="headerlink" href="#variable-t_dep" title="Permanent link">&para;</a></h3>
+<p><em>time-dependend (source and heating)</em> 
+<div class="language-C++ highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">Source</span><span class="o">::</span><span class="n">t_dep</span><span class="p">;</span>
+</span></code></pre></div></p>
+<hr>
+
+<hr />
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../structSecondaryEmission/" class="btn btn-neutral float-left" title="SecondaryEmission"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../structSourceSpecie/" class="btn btn-neutral float-right" title="SourceSpecie">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 LeCAD-PEG</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/LeCAD-PEG/HEXAPIC.git" class="fa fa-code-fork" style="color: #fcfcfc"> HEXAPIC</a>
+        </span>
+    
+    
+      <span><a href="../structSecondaryEmission/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../structSourceSpecie/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

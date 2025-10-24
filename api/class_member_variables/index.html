@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://lecad-peg.github.io/hexapic/api/class_member_variables/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Class Member Variables - HEXAPIC</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Class Member Variables";
+        var mkdocs_page_input_path = "api/class_member_variables.md";
+        var mkdocs_page_url = "/hexapic/api/class_member_variables/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> HEXAPIC
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Overview</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Files</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../files/">-- All --</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../collisions_8cpp/">collisions.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../diagnostics_8cpp/">diagnostics.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../domain__decomposition_8cpp/">domain_decomposition.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../field__solver__petsc_8cpp/">field_solver_petsc.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../main_8cpp/">main.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../particles_8cpp/">particles.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../plasma__wall_8cpp/">plasma_wall.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../read__input__file_8cpp/">read_input_file.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../volumetric__source_8cpp/">volumetric_source.cpp</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Classes</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../annotated/">-- All --</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structBoundary/">Boundary</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structCell/">Cell</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structCollision/">Collision</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structGrid/">Grid</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structNeighbours/">Neighbours</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structParticle/">Particle</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSecondaryEmission/">SecondaryEmission</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSource/">Source</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSourceSpecie/">SourceSpecie</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSpecies/">Species</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSpecies__inject/">Species_inject</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../structSpecies__load/">Species_load</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../functions/">All Functions</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">HEXAPIC</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Class Member Variables</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/LeCAD-PEG/HEXAPIC.git/edit/master/docs/api/class_member_variables.md">Edit on HEXAPIC</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="class-member-variables">Class Member Variables<a class="headerlink" href="#class-member-variables" title="Permanent link">&para;</a></h1>
+<h2 id="a">a<a class="headerlink" href="#a" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>all</strong> (<a href="../structNeighbours/"><strong>Neighbours</strong></a>)</li>
+<li><strong>active</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+</ul>
+<h2 id="b">b<a class="headerlink" href="#b" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>boundaries</strong> (<a href="../structGrid/"><strong>Grid</strong></a>)</li>
+</ul>
+<h2 id="c">c<a class="headerlink" href="#c" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>C</strong> (<a href="../structBoundary/"><strong>Boundary</strong></a>)</li>
+<li><strong>corners</strong> (<a href="../structNeighbours/"><strong>Neighbours</strong></a>)</li>
+<li><strong>cx</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>cy</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>charge</strong> (<a href="../structSpecies/"><strong>Species</strong></a>)</li>
+<li><strong>chom</strong> (<a href="../structSpecies/"><strong>Species</strong></a>)</li>
+</ul>
+<h2 id="d">d<a class="headerlink" href="#d" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>dx</strong> (<a href="../structGrid/"><strong>Grid</strong></a>)</li>
+<li><strong>dy</strong> (<a href="../structGrid/"><strong>Grid</strong></a>)</li>
+<li><strong>density</strong> (<a href="../structSpecies__load/"><strong>Species_load</strong></a>)</li>
+</ul>
+<h2 id="e">e<a class="headerlink" href="#e" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>E_min</strong> (<a href="../structCollision/"><strong>Collision</strong></a>)</li>
+<li><strong>E0</strong> (<a href="../structSecondaryEmission/"><strong>SecondaryEmission</strong></a>)</li>
+<li><strong>Ep</strong> (<a href="../structSecondaryEmission/"><strong>SecondaryEmission</strong></a>)</li>
+<li><strong>Ew</strong> (<a href="../structSecondaryEmission/"><strong>SecondaryEmission</strong></a>)</li>
+</ul>
+<h2 id="f">f<a class="headerlink" href="#f" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Fx0</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>Fx1</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>Fxcell</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>Fy0</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>Fy1</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>Fycell</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>f</strong> (<a href="../structSpecies__inject/"><strong>Species_inject</strong></a>)</li>
+</ul>
+<h2 id="g">g<a class="headerlink" href="#g" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>gamma0</strong> (<a href="../structSecondaryEmission/"><strong>SecondaryEmission</strong></a>)</li>
+</ul>
+<h2 id="h">h<a class="headerlink" href="#h" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>heat_freq</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>heat_frac</strong> (<a href="../structSourceSpecie/"><strong>SourceSpecie</strong></a>)</li>
+</ul>
+<h2 id="i">i<a class="headerlink" href="#i" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>inj_type</strong> (<a href="../structSecondaryEmission/"><strong>SecondaryEmission</strong></a>)</li>
+<li><strong>index</strong> (<a href="../structSource/"><strong>Source</strong></a>, <a href="../structSourceSpecie/"><strong>SourceSpecie</strong></a>)</li>
+<li><strong>inject</strong> (<a href="../structSpecies/"><strong>Species</strong></a>)</li>
+<li><strong>I</strong> (<a href="../structSpecies__inject/"><strong>Species_inject</strong></a>)</li>
+</ul>
+<h2 id="j">j<a class="headerlink" href="#j" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>j1</strong> (<a href="../structBoundary/"><strong>Boundary</strong></a>, <a href="../structSource/"><strong>Source</strong></a>, <a href="../structSpecies__inject/"><strong>Species_inject</strong></a>)</li>
+<li><strong>j2</strong> (<a href="../structBoundary/"><strong>Boundary</strong></a>, <a href="../structSource/"><strong>Source</strong></a>, <a href="../structSpecies__inject/"><strong>Species_inject</strong></a>)</li>
+</ul>
+<h2 id="k">k<a class="headerlink" href="#k" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>k1</strong> (<a href="../structBoundary/"><strong>Boundary</strong></a>, <a href="../structSource/"><strong>Source</strong></a>, <a href="../structSpecies__inject/"><strong>Species_inject</strong></a>)</li>
+<li><strong>k2</strong> (<a href="../structBoundary/"><strong>Boundary</strong></a>, <a href="../structSource/"><strong>Source</strong></a>, <a href="../structSpecies__inject/"><strong>Species_inject</strong></a>)</li>
+</ul>
+<h2 id="l">l<a class="headerlink" href="#l" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Lx</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>Ly</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>lx</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>ly</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>load</strong> (<a href="../structSpecies/"><strong>Species</strong></a>)</li>
+</ul>
+<h2 id="m">m<a class="headerlink" href="#m" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>max_recv_size</strong> (<a href="../structNeighbours/"><strong>Neighbours</strong></a>)</li>
+<li><strong>mass</strong> (<a href="../structSpecies/"><strong>Species</strong></a>)</li>
+<li><strong>method</strong> (<a href="../structSpecies__load/"><strong>Species_load</strong></a>)</li>
+</ul>
+<h2 id="n">n<a class="headerlink" href="#n" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>name</strong> (<a href="../structBoundary/"><strong>Boundary</strong></a>, <a href="../structSpecies/"><strong>Species</strong></a>)</li>
+<li><strong>n0x</strong> (<a href="../structCell/"><strong>Cell</strong></a>)</li>
+<li><strong>n0y</strong> (<a href="../structCell/"><strong>Cell</strong></a>)</li>
+<li><strong>neighbours</strong> (<a href="../structCell/"><strong>Cell</strong></a>, <a href="../structGrid/"><strong>Grid</strong></a>)</li>
+<li><strong>n_reactions</strong> (<a href="../structCollision/"><strong>Collision</strong></a>)</li>
+<li><strong>N0x</strong> (<a href="../structGrid/"><strong>Grid</strong></a>)</li>
+<li><strong>N0y</strong> (<a href="../structGrid/"><strong>Grid</strong></a>)</li>
+<li><strong>Ncx</strong> (<a href="../structGrid/"><strong>Grid</strong></a>)</li>
+<li><strong>Ncy</strong> (<a href="../structGrid/"><strong>Grid</strong></a>)</li>
+<li><strong>Nx</strong> (<a href="../structGrid/"><strong>Grid</strong></a>)</li>
+<li><strong>Nxg</strong> (<a href="../structGrid/"><strong>Grid</strong></a>)</li>
+<li><strong>Ny</strong> (<a href="../structGrid/"><strong>Grid</strong></a>)</li>
+<li><strong>Nyg</strong> (<a href="../structGrid/"><strong>Grid</strong></a>)</li>
+<li><strong>n_heat</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>n_inj</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>n_inj_step</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>n</strong> (<a href="../structSpecies/"><strong>Species</strong></a>)</li>
+<li><strong>n_store</strong> (<a href="../structSpecies/"><strong>Species</strong></a>)</li>
+<li><strong>normal</strong> (<a href="../structSpecies__inject/"><strong>Species_inject</strong></a>)</li>
+<li><strong>np2c</strong> (<a href="../structSpecies__inject/"><strong>Species_inject</strong></a>, <a href="../structSpecies__load/"><strong>Species_load</strong></a>)</li>
+</ul>
+<h2 id="p">p<a class="headerlink" href="#p" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>part</strong> (<a href="../structCell/"><strong>Cell</strong></a>)</li>
+<li><strong>processCollision</strong> (<a href="../structCollision/"><strong>Collision</strong></a>)</li>
+<li><strong>p2n</strong> (<a href="../structGrid/"><strong>Grid</strong></a>)</li>
+</ul>
+<h2 id="q">q<a class="headerlink" href="#q" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>QuseFlag</strong> (<a href="../structBoundary/"><strong>Boundary</strong></a>)</li>
+</ul>
+<h2 id="r">r<a class="headerlink" href="#r" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>reflection</strong> (<a href="../structBoundary/"><strong>Boundary</strong></a>)</li>
+<li><strong>reaction_names</strong> (<a href="../structCollision/"><strong>Collision</strong></a>)</li>
+<li><strong>recv_data</strong> (<a href="../structNeighbours/"><strong>Neighbours</strong></a>)</li>
+<li><strong>rxmax</strong> (<a href="../structNeighbours/"><strong>Neighbours</strong></a>)</li>
+<li><strong>rxmin</strong> (<a href="../structNeighbours/"><strong>Neighbours</strong></a>)</li>
+<li><strong>rymax</strong> (<a href="../structNeighbours/"><strong>Neighbours</strong></a>)</li>
+<li><strong>rymin</strong> (<a href="../structNeighbours/"><strong>Neighbours</strong></a>)</li>
+</ul>
+<h2 id="s">s<a class="headerlink" href="#s" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>sp_sec</strong> (<a href="../structBoundary/"><strong>Boundary</strong></a>)</li>
+<li><strong>sigma</strong> (<a href="../structCollision/"><strong>Collision</strong></a>)</li>
+<li><strong>sigma_v_max</strong> (<a href="../structCollision/"><strong>Collision</strong></a>)</li>
+<li><strong>sp</strong> (<a href="../structCollision/"><strong>Collision</strong></a>)</li>
+<li><strong>sp_out</strong> (<a href="../structCollision/"><strong>Collision</strong></a>)</li>
+<li><strong>send_data</strong> (<a href="../structNeighbours/"><strong>Neighbours</strong></a>)</li>
+<li><strong>send_data_3d</strong> (<a href="../structNeighbours/"><strong>Neighbours</strong></a>)</li>
+<li><strong>shift_xy</strong> (<a href="../structNeighbours/"><strong>Neighbours</strong></a>)</li>
+<li><strong>sec_type</strong> (<a href="../structSecondaryEmission/"><strong>SecondaryEmission</strong></a>)</li>
+<li><strong>sp1</strong> (<a href="../structSecondaryEmission/"><strong>SecondaryEmission</strong></a>)</li>
+<li><strong>sp2</strong> (<a href="../structSecondaryEmission/"><strong>SecondaryEmission</strong></a>)</li>
+<li><strong>shape_x</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>shape_y</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>source_frac</strong> (<a href="../structSourceSpecie/"><strong>SourceSpecie</strong></a>)</li>
+<li><strong>sb</strong> (<a href="../structSpecies/"><strong>Species</strong></a>)</li>
+<li><strong>source</strong> (<a href="../structSpecies/"><strong>Species</strong></a>)</li>
+<li><strong>subcycle</strong> (<a href="../structSpecies/"><strong>Species</strong></a>)</li>
+</ul>
+<h2 id="t">t<a class="headerlink" href="#t" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>T0</strong> (<a href="../structSecondaryEmission/"><strong>SecondaryEmission</strong></a>)</li>
+<li><strong>Tpar</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>Tper</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>t0</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>t1</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>t2</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>t3</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>t_dep</strong> (<a href="../structSource/"><strong>Source</strong></a>)</li>
+<li><strong>T_store</strong> (<a href="../structSpecies/"><strong>Species</strong></a>)</li>
+<li><strong>tb</strong> (<a href="../structSpecies/"><strong>Species</strong></a>)</li>
+</ul>
+<h2 id="v">v<a class="headerlink" href="#v" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>V_store</strong> (<a href="../structGrid/"><strong>Grid</strong></a>)</li>
+<li><strong>vx</strong> (<a href="../structParticle/"><strong>Particle</strong></a>)</li>
+<li><strong>vy</strong> (<a href="../structParticle/"><strong>Particle</strong></a>)</li>
+<li><strong>vz</strong> (<a href="../structParticle/"><strong>Particle</strong></a>)</li>
+<li><strong>vtpar</strong> (<a href="../structSourceSpecie/"><strong>SourceSpecie</strong></a>)</li>
+<li><strong>vtper</strong> (<a href="../structSourceSpecie/"><strong>SourceSpecie</strong></a>)</li>
+<li><strong>v_store</strong> (<a href="../structSpecies/"><strong>Species</strong></a>)</li>
+<li><strong>v1drift</strong> (<a href="../structSpecies__inject/"><strong>Species_inject</strong></a>, <a href="../structSpecies__load/"><strong>Species_load</strong></a>)</li>
+<li><strong>v1thermal</strong> (<a href="../structSpecies__inject/"><strong>Species_inject</strong></a>, <a href="../structSpecies__load/"><strong>Species_load</strong></a>)</li>
+<li><strong>v2drift</strong> (<a href="../structSpecies__inject/"><strong>Species_inject</strong></a>, <a href="../structSpecies__load/"><strong>Species_load</strong></a>)</li>
+<li><strong>v2thermal</strong> (<a href="../structSpecies__inject/"><strong>Species_inject</strong></a>, <a href="../structSpecies__load/"><strong>Species_load</strong></a>)</li>
+<li><strong>v3drift</strong> (<a href="../structSpecies__inject/"><strong>Species_inject</strong></a>, <a href="../structSpecies__load/"><strong>Species_load</strong></a>)</li>
+<li><strong>v3thermal</strong> (<a href="../structSpecies__inject/"><strong>Species_inject</strong></a>, <a href="../structSpecies__load/"><strong>Species_load</strong></a>)</li>
+</ul>
+<h2 id="x">x<a class="headerlink" href="#x" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>x1f</strong> (<a href="../structGrid/"><strong>Grid</strong></a>, <a href="../structSpecies__load/"><strong>Species_load</strong></a>)</li>
+<li><strong>x1s</strong> (<a href="../structGrid/"><strong>Grid</strong></a>, <a href="../structSpecies__load/"><strong>Species_load</strong></a>)</li>
+<li><strong>x2f</strong> (<a href="../structGrid/"><strong>Grid</strong></a>, <a href="../structSpecies__load/"><strong>Species_load</strong></a>)</li>
+<li><strong>x2s</strong> (<a href="../structGrid/"><strong>Grid</strong></a>, <a href="../structSpecies__load/"><strong>Species_load</strong></a>)</li>
+<li><strong>x</strong> (<a href="../structParticle/"><strong>Particle</strong></a>)</li>
+</ul>
+<h2 id="y">y<a class="headerlink" href="#y" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>y</strong> (<a href="../structParticle/"><strong>Particle</strong></a>)</li>
+</ul>
+<h2 id="z">z<a class="headerlink" href="#z" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>z</strong> (<a href="../structParticle/"><strong>Particle</strong></a>)</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 LeCAD-PEG</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/LeCAD-PEG/HEXAPIC.git" class="fa fa-code-fork" style="color: #fcfcfc"> HEXAPIC</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

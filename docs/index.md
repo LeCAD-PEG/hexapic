@@ -77,3 +77,5 @@ repeat while (particles and/or steps?) is (yes) not (no)
 stop
 @enduml
 ```
+
+- **License**: [EUPL] (https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12)

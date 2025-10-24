@@ -78,4 +78,4 @@ stop
 @enduml
 ```
 
-- **License**: [EUPL] (https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12)
+- **License**: [EUPL-1.2](https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12)

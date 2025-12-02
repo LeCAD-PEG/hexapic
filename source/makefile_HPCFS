@@ -1,0 +1,32 @@
+## HEXAPIC makefile ##
+
+CC = mpic++
+
+HYPRE_PREFIX = $(HOME)/hypre/install
+
+# Production flags
+CFLAGS = -O2 \
+         -I$(HYPRE_PREFIX)/include \
+         -std=gnu++20 `pkg-config --cflags openPMD`
+
+LDFLAGS = -L$(HYPRE_PREFIX)/lib -lHYPRE \
+          -Wl,-rpath,$(HYPRE_PREFIX)/lib \
+          `pkg-config --libs openPMD` \
+          -lm
+
+C_OBJECTS = field_solver_hypre.o plasma_wall.o collisions.o domain_decomposition.o\
+			particles.o read_input_file.o volumetric_source.o diagnostics.o main.o
+			
+EXE = HEXAPIC
+
+all: $(EXE)
+
+$(EXE): $(C_OBJECTS) 
+	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
+
+.cpp.o:
+	$(CC) $(CFLAGS) -c $<
+
+clean:
+	rm -f $(EXE) $(C_OBJECTS)
+

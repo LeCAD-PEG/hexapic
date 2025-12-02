@@ -1,0 +1,431 @@
+HEXAPIC 
+{	 Uniformly distributed electron-proton plasma between two biased plates with wall injection. MCC + PSI. 
+}
+Region 
+{
+Species
+{
+	 name = electron
+	 m = 9.1093837139e-31
+	 q = -1.602176634e-19
+	 source0 = 0.5
+	 heat0 = 0.5
+	 subcycle = 1
+}
+Species
+{
+	 name = H+
+	 m = 1.67262192595e-27
+	 q = 1.602176634e-19
+	 source0 = 0.5
+	 heat0 = 0.5
+	 subcycle = 11
+}
+Species
+{
+	 name = H
+	 m = 1.673557695220333e-27
+	 q = 0.0
+	 source1 = 1.0
+	 heat1 = 1.0
+	 subcycle = 11
+}
+Grid
+{
+	 J = 100
+	 x1s = 0.0
+	 x1f = 0.001
+	 n1 = 1.0 
+	 K = 100
+	 x2s = 0.0
+	 x2f = 0.001
+	 n2 = 1.0 
+	 Geometry = 1
+}
+Control
+{
+	 dt = 1e-12
+	 B01 = 0.1
+	 B02 = 0.0
+	 ElectrostaticFlag = 1 
+}
+Dielectric
+{
+	 QuseFlag = 0
+	 reflection = 0
+	 j1 = 0 
+	 j2 = 0 
+	 k1 = 0 
+	 k2 = 100
+	 normal = 1 
+}
+Dielectric
+{
+	 QuseFlag = 0
+	 reflection = 0
+	 j1 = 100
+	 j2 = 100
+	 k1 = 0 
+	 k2 = 100
+	 normal = -1 
+}
+Equipotential
+{
+	 C = -10
+	 reflection = 0.0
+	 j1 = 0 
+	 j2 = 100
+	 k1 = 0 
+	 k2 = 0 
+	 normal = 1 
+}
+Equipotential
+{
+	 C = 10
+	 reflection = 0.0
+	 j1 = 0 
+	 j2 = 100
+	 k1 = 100
+	 k2 = 100
+	 normal = -1 
+}
+Load
+{
+	 speciesName = electron
+	 x1MinMKS = 0.0
+	 x1MaxMKS = 0.001
+	 x2MinMKS = 0.0
+	 x2MaxMKS = 0.001
+	 density = 1e+18
+	 np2c = 1.0e+06
+	 v1thermal = 937768.6304142398
+	 v2thermal = 937768.6304142398
+	 v3thermal = 937768.6304142398
+	 v1drift = 0.0
+	 v2drift = 0.0
+	 v3drift = 0.0
+	 LoadMethodFlag = 0
+}
+EmitPort
+{
+	 speciesName = electron
+	 I = 250.0
+	 j1 = 0
+	 j2 = 0
+	 k1 = 25
+	 k2 = 75
+	 normal = 1
+	 np2c = 1.0e+06
+	 v1thermal = 937768.6304142398
+	 v2thermal = 937768.6304142398
+	 v3thermal = 937768.6304142398
+	 v1drift = 0.0
+	 v2drift = 0.0
+	 v3drift = 0.0
+}
+Load
+{
+	 speciesName = H+
+	 x1MinMKS = 0.0
+	 x1MaxMKS = 0.001
+	 x2MinMKS = 0.0
+	 x2MaxMKS = 0.001
+	 density = 1e+18
+	 np2c = 1.0e+06
+	 v1thermal = 21884.735711222314
+	 v2thermal = 21884.735711222314
+	 v3thermal = 21884.735711222314
+	 v1drift = 0.0
+	 v2drift = 0.0
+	 v3drift = 0.0
+	 LoadMethodFlag = 0
+}
+EmitPort
+{
+	 speciesName = H+
+	 I = 250.0
+	 j1 = 0
+	 j2 = 0
+	 k1 = 25
+	 k2 = 75
+	 normal = 1
+	 np2c = 1.0e+06
+	 v1thermal = 21884.735711222314
+	 v2thermal = 21884.735711222314
+	 v3thermal = 21884.735711222314
+	 v1drift = 0.0
+	 v2drift = 0.0
+	 v3drift = 0.0
+}
+Load
+{
+	 speciesName = H
+	 x1MinMKS = 0.0
+	 x1MaxMKS = 0.001
+	 x2MinMKS = 0.0
+	 x2MaxMKS = 0.001
+	 density = 0.0
+	 np2c = 1.0e+06
+	 v1thermal = 9784.41472005171
+	 v2thermal = 9784.41472005171
+	 v3thermal = 9784.41472005171
+	 v1drift = 0.0
+	 v2drift = 0.0
+	 v3drift = 0.0
+	 LoadMethodFlag = 0
+}
+EmitPort
+{
+	 speciesName = H
+	 I = 0.0
+	 j1 = 0
+	 j2 = 0
+	 k1 = 25
+	 k2 = 75
+	 normal = 1
+	 np2c = 1.0e+06
+	 v1thermal = 9784.41472005171
+	 v2thermal = 9784.41472005171
+	 v3thermal = 9784.41472005171
+	 v1drift = 0.0
+	 v2drift = 0.0
+	 v3drift = 0.0
+}
+Source
+{
+	 index = 0
+	 n_inj = 0.0
+	 shape_x = 0
+	 shape_y = 1
+	 j1 = 30
+	 j2 = 50
+	 k1 = 30
+	 k2 = 50
+	 Tpar = 7.0
+	 Tper = 6.0
+	 heat_freq = 0.000e+00
+	 t_dep = 1
+	 t0 = 0.0
+	 t1 = 1e-11
+	 t2 = 3e-11
+	 t3 = 4e-11
+}
+Source
+{
+	 index = 1
+	 n_inj = 0.0
+	 shape_x = 2
+	 shape_y = 2
+	 j1 = 20
+	 j2 = 50
+	 k1 = 20
+	 k2 = 60
+	 Tpar = 5.0
+	 Tper = 5.0
+	 heat_freq = 0.000e+00
+	 t_dep = 0
+MCC
+{
+	 collName = Elastic
+	 specie1Name = electron
+	 specie2Name = H
+	 reactionIdx = 1
+	 collXSectionFile = eH_el.txt
+}
+MCC
+{
+	 collName = Exciation
+	 specie1Name = electron
+	 specie2Name = H
+	 reactionIdx = 2
+	 collXSectionFile = eH_exc.txt
+}
+MCC
+{
+	 collName = Ionisation
+	 specie1Name = electron
+	 specie2Name = H
+	 reactionIdx = 3
+	 collXSectionFile = eH_ion.txt
+}
+MCC
+{
+	 collName = Charge_excange
+	 specie1Name = H+
+	 specie2Name = H
+	 reactionIdx = 5
+	 collXSectionFile = HH+_cx.txt
+}
+MCC
+{
+	 collName = Elastic
+	 specie1Name = H+
+	 specie2Name = H
+	 reactionIdx = 1
+	 collXSectionFile = HH+_el.txt
+}
+MCC
+{
+	 collName = Elastic
+	 specie1Name = H
+	 specie2Name = H
+	 reactionIdx = 1
+	 collXSectionFile = HH_el.txt
+}
+PSI
+{
+	 boundary = xmin
+	 specie = electron
+	 secondary1 = electron
+	 sec_type = 0
+	 inj_type = 0
+	 Ew = 4.0
+	 E0 = 4.0
+	 gamma0 = 1.0
+	 T0 = 4.0
+	 Ep = 5.0
+}
+PSI
+{
+	 boundary = xmax
+	 specie = electron
+	 secondary1 = electron
+	 sec_type = 0
+	 inj_type = 0
+	 Ew = 4.0
+	 E0 = 4.0
+	 gamma0 = 1.0
+	 T0 = 4.0
+	 Ep = 5.0
+}
+PSI
+{
+	 boundary = ymin
+	 specie = electron
+	 secondary1 = electron
+	 sec_type = 0
+	 inj_type = 0
+	 Ew = 4.0
+	 E0 = 4.0
+	 gamma0 = 1.0
+	 T0 = 4.0
+	 Ep = 5.0
+}
+PSI
+{
+	 boundary = ymax
+	 specie = electron
+	 secondary1 = electron
+	 sec_type = 0
+	 inj_type = 0
+	 Ew = 4.0
+	 E0 = 4.0
+	 gamma0 = 1.0
+	 T0 = 4.0
+	 Ep = 5.0
+}
+PSI
+{
+	 boundary = xmin
+	 specie = H+
+	 secondary1 = electron
+	 sec_type = 1
+	 inj_type = 0
+	 Ew = 4.0
+	 E0 = 10000.0
+	 gamma0 = 1.0
+	 T0 = 4.0
+	 Ep = 5.0
+}
+PSI
+{
+	 boundary = xmin
+	 specie = H+
+	 secondary1 = H
+	 sec_type = 3
+	 inj_type = 1
+	 Ew = 4.0
+	 E0 = 4.0
+	 gamma0 = 1.0
+	 T0 = 4.0
+	 Ep = 5.0
+}
+PSI
+{
+	 boundary = xmax
+	 specie = H+
+	 secondary1 = electron
+	 sec_type = 1
+	 inj_type = 0
+	 Ew = 4.0
+	 E0 = 10000.0
+	 gamma0 = 1.0
+	 T0 = 4.0
+	 Ep = 5.0
+}
+PSI
+{
+	 boundary = xmax
+	 specie = H+
+	 secondary1 = H
+	 sec_type = 3
+	 inj_type = 1
+	 Ew = 4.0
+	 E0 = 4.0
+	 gamma0 = 1.0
+	 T0 = 4.0
+	 Ep = 5.0
+}
+PSI
+{
+	 boundary = ymin
+	 specie = H+
+	 secondary1 = electron
+	 sec_type = 1
+	 inj_type = 0
+	 Ew = 4.0
+	 E0 = 10000.0
+	 gamma0 = 1.0
+	 T0 = 4.0
+	 Ep = 5.0
+}
+PSI
+{
+	 boundary = ymin
+	 specie = H+
+	 secondary1 = H
+	 sec_type = 3
+	 inj_type = 1
+	 Ew = 4.0
+	 E0 = 4.0
+	 gamma0 = 1.0
+	 T0 = 4.0
+	 Ep = 5.0
+}
+PSI
+{
+	 boundary = ymax
+	 specie = H+
+	 secondary1 = electron
+	 sec_type = 1
+	 inj_type = 0
+	 Ew = 4.0
+	 E0 = 10000.0
+	 gamma0 = 1.0
+	 T0 = 4.0
+	 Ep = 5.0
+}
+PSI
+{
+	 boundary = ymax
+	 specie = H+
+	 secondary1 = H
+	 sec_type = 3
+	 inj_type = 1
+	 Ew = 4.0
+	 E0 = 4.0
+	 gamma0 = 1.0
+	 T0 = 4.0
+	 Ep = 5.0
+}
+}

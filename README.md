@@ -2,11 +2,14 @@
 
 ## Any page except for the API pages
 
-1. **If first time**, clone this repository into your local machine: `git clone git@github.com:LeCAD-PEG/HEXAPIC.git hexapic`. This will create a directory named *hexapic* in the current path.
+1. **If first time**, clone this branch into your local machine: 
+```git clone --single-branch --branch documentation git@github.com:LeCAD-PEG/HEXAPIC.git hexapic-doc
+```
+ This will create a directory named *hexapic-doc* in the current path.
 
 2. **If already have clone** then only update your local branch:
 ```
-cd hexapic
+cd hexapic-doc
 git pull
 ```
 If you have made changes before the pull, stash your changes, pull and pop the stash:

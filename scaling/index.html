@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://lecad-peg.github.io/hexapic/usage/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://lecad-peg.github.io/hexapic/scaling/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Usage - HEXAPIC</title>
+    <title>Scaling - HEXAPIC</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Usage";
-        var mkdocs_page_input_path = "usage.md";
-        var mkdocs_page_url = "/hexapic/usage/";
+        var mkdocs_page_name = "Scaling";
+        var mkdocs_page_input_path = "scaling.md";
+        var mkdocs_page_url = "/hexapic/scaling/";
       </script>
     
     <!--[if lt IE 9]>
@@ -43,22 +43,22 @@
                 <li class="toctree-l1"><a class="reference internal" href="..">Overview</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Usage</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#build-executable">Build executable</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#create-hexapic-input-file">Create HEXAPIC input file</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#run-the-simulation">Run the simulation</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#visualise-code-output">Visualise code output</a>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../usage/">Usage</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../scaling/">Scaling</a>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Scaling</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#vega-hpc">VEGA HPC</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#strong-scaling">Strong scaling</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#weak-scaling">Weak scaling</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">API</span></p>
@@ -134,9 +134,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Usage</li>
+      <li class="breadcrumb-item active">Scaling</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/LeCAD-PEG/HEXAPIC.git/edit/master/docs/usage.md">Edit on HEXAPIC</a>
+          <a href="https://github.com/LeCAD-PEG/HEXAPIC.git/edit/master/docs/scaling.md">Edit on HEXAPIC</a>
     </li>
   </ul>
   <hr/>
@@ -144,86 +144,46 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h1>
-<h2 id="build-executable">Build executable<a class="headerlink" href="#build-executable" title="Permanent link">&para;</a></h2>
-<ol>
-<li>
-<p>Navigate to <code>source/</code> directory.</p>
-</li>
-<li>
-<p>Source (execute in the current shell):</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># OpenPMD install directory</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$HOME</span>/openpmd/lib:<span class="nv">$LD_LIBRARY_PATH</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">PKG_CONFIG_PATH</span><span class="o">=</span><span class="nv">$HOME</span>/openpmd/lib/pkgconfig:<span class="nv">$PKG_CONFIG_PATH</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># change path to your python MAJOR.MINOR version</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">export</span><span class="w"> </span><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="nv">$HOME</span>/openpmd/lib/python3.13/site-packages:<span class="nv">$PYTHONPATH</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># HYPRE install directory</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/hypre/install/lib:</span><span class="si">${</span><span class="nv">LD_LIBRARY_PATH</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>make<span class="w"> </span>clean<span class="w"> </span><span class="c1"># optional</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>make
-</span></code></pre></div>
-</li>
-</ol>
-<h2 id="create-hexapic-input-file">Create HEXAPIC input file<a class="headerlink" href="#create-hexapic-input-file" title="Permanent link">&para;</a></h2>
-<ol>
-<li>
-<p>Navigate to <code>picmi</code> directory.</p>
-</li>
-<li>
-<p>Modify <code>create_input_file.py</code> according to your simulation needs.</p>
-</li>
-<li>
-<p>Run:
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python<span class="w"> </span>create_input_file.py<span class="sb">`</span>
-</span></code></pre></div>
-    to create <code>input_file.inp</code>.</p>
-</li>
-</ol>
-<h2 id="run-the-simulation">Run the simulation<a class="headerlink" href="#run-the-simulation" title="Permanent link">&para;</a></h2>
-<ol>
-<li>
-<p>Copy the previously created input file into the directory where you want to run the simulation, e.g. <code>test/</code>.</p>
-</li>
-<li>
-<p>Run the HEXAPIC executable:
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>mpiexec<span class="w"> </span>--bind-to<span class="w"> </span>core<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><span class="w"> </span>source/HEXAPIC<span class="w"> </span>test/input_file.inp<span class="w"> </span>-steps<span class="w"> </span>Nsteps
-</span></code></pre></div>
-    <strong><em>NOTE</em></strong>: If <code>-steps Nsteps</code> is not provided, the simulation will run for <strong>100</strong> steps.</p>
-</li>
-</ol>
-<h2 id="visualise-code-output">Visualise code output<a class="headerlink" href="#visualise-code-output" title="Permanent link">&para;</a></h2>
-<ol>
-<li>
-<p>Install required Python modules: <em>numpy</em>, <em>scipy</em>, <em>pyqtgraph</em>, <em>pyside6</em>, <em>opengl</em></p>
-</li>
-<li>
-<p>Run:</p>
-<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python<span class="w"> </span>vis/vis3D-class.py<span class="w"> </span>test/input_file.inp.bp4
-</span></code></pre></div>
-This will bring up the GUI:</p>
-<p><p align="center">
-  <img src="../images/gui.png" width="90%">
-</p></p>
-</li>
-<li>
-<p>Click on the fields to the left to switch between the physical quantities to visualise.</p>
-<p>GUI field description:</p>
+                <h1 id="scaling-v080">Scaling v0.8.0<a class="headerlink" href="#scaling-v080" title="Permanent link">&para;</a></h1>
+<h2 id="vega-hpc">VEGA HPC<a class="headerlink" href="#vega-hpc" title="Permanent link">&para;</a></h2>
+<p>128 cores/node.</p>
+<p>See the machine website for more specifications: <a href="https://doc.vega.izum.si/general-spec/">https://doc.vega.izum.si/general-spec/</a>.</p>
+<h3 id="strong-scaling">Strong scaling<a class="headerlink" href="#strong-scaling" title="Permanent link">&para;</a></h3>
 <ul>
-<li>n&#8203;<em>x</em> : Particle density of specie <em>x</em> in <em>m<sup>−3</sup></em></li>
-<li>T&#8203;<em>x</em>: Temperature of specie <em>x</em> in <em>eV</em></li>
-<li>v&#8203;<em>x</em>: Velocity of specie <em>x</em> in <em>m/s</em></li>
-<li>V   : Space potential in V</li>
+<li>Mesh size 2048x2048, single node RAM usage ~180 GB.</li>
+</ul>
+<p align="center">
+  <img src="../images/strong_scaling.png" alt="strong_scaling" width="100%">
+</p>
+
+<p align="center">
+  <img src="../images/speedup.png" alt="speedup" width="100%">
+</p>
+
+<h3 id="weak-scaling">Weak scaling<a class="headerlink" href="#weak-scaling" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Single node mesh size 2048x2048, single node RAM usage ~180 GB. </li>
+<li>Mesh size increase 2048*nodes, e.g.:<ul>
+<li>1 node  : 2048x2048</li>
+<li>2 nodes : 2048x4096</li>
+<li>4 nodes : 4096x4096</li>
+<li>etc...</li>
 </ul>
 </li>
-</ol>
+</ul>
+<p align="center">
+  <img src="../images/weak_scaling.png" alt="weak_scaling" width="100%">
+</p>
+
+<p align="center">
+  <img src="../images/parallel_efficiency.png" alt="parallel_efficiency" width="100%">
+</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href=".." class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../scaling/" class="btn btn-neutral float-right" title="Scaling">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../usage/" class="btn btn-neutral float-left" title="Usage"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../api/files/" class="btn btn-neutral float-right" title="-- All --">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -251,10 +211,10 @@ This will bring up the GUI:</p>
         </span>
     
     
-      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../usage/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../scaling/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../api/files/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

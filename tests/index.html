@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://lecad-peg.github.io/hexapic/tests/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Tests - HEXAPIC</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Tests";
+        var mkdocs_page_input_path = "tests.md";
+        var mkdocs_page_url = "/hexapic/tests/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> HEXAPIC
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Overview</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../usage/">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../scaling/">Scaling</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Tests</a>
+    <ul class="current">
+    </ul>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Files</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../api/files/">-- All --</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../api/collisions_8cpp/">collisions.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../api/diagnostics_8cpp/">diagnostics.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../api/domain__decomposition_8cpp/">domain_decomposition.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../api/field__solver__petsc_8cpp/">field_solver_petsc.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../api/main_8cpp/">main.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../api/particles_8cpp/">particles.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../api/plasma__wall_8cpp/">plasma_wall.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../api/read__input__file_8cpp/">read_input_file.cpp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../api/volumetric__source_8cpp/">volumetric_source.cpp</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Classes</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../api/annotated/">-- All --</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../api/structBoundary/">Boundary</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../api/structCell/">Cell</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../api/structCollision/">Collision</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../api/structGrid/">Grid</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../api/structNeighbours/">Neighbours</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../api/structParticle/">Particle</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../api/structSecondaryEmission/">SecondaryEmission</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../api/structSource/">Source</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../api/structSourceSpecie/">SourceSpecie</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../api/structSpecies/">Species</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../api/structSpecies__inject/">Species_inject</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../api/structSpecies__load/">Species_load</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../api/functions/">All Functions</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">HEXAPIC</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Tests</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/LeCAD-PEG/HEXAPIC.git/edit/master/docs/tests.md">Edit on HEXAPIC</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h3 id="running-the-tests">Running the tests<a class="headerlink" href="#running-the-tests" title="Permanent link">&para;</a></h3>
+<p>Tests are run with <code>bash run_physics_validation.slm</code> (or <code>sbatch</code> on HPC); use <code>--particle-pusher</code>, <code>--field-solver</code>, <code>--particle-mesh-coupling</code>, or <code>--all</code> to choose groups. On first run the script creates a local <code>.venv</code> in this directory and installs dependencies from <code>requirements.txt</code> (numpy, openpmd-api); later runs reuse that venv. The HEXAPIC executable needs <code>libopenPMD.so</code> at runtime—the script sets <code>LD_LIBRARY_PATH</code> from <code>OPENPMD_ROOT</code> (default <code>../openpmd</code> relative to the repo); override with <code>export OPENPMD_ROOT=/path/to/openpmd</code> if your openPMD install is elsewhere.</p>
+<hr />
+<h2 id="i-particle-pusher-verification">I. Particle Pusher Verification<a class="headerlink" href="#i-particle-pusher-verification" title="Permanent link">&para;</a></h2>
+<p><em>These tests verify the Boris integrator and 3V vector logic. Maxwell solver and Deposition are disabled (<code>FieldSolverFlag = 0</code>).</em></p>
+<p><em><strong>Threshold framework:</strong> All thresholds are adaptive, computed as $
+    ext{threshold} = K \times (\text{physics_err} + \text{float_err})$
+where <span class="arithmatex">\(K=10\)</span> is a safety factor. Physics error captures Boris integrator <span class="arithmatex">\(O(\Delta t^2)\)</span> phase drift, and float error captures <span class="arithmatex">\(O(\epsilon_m \sqrt{N})\)</span> accumulation over <span class="arithmatex">\(N\)</span> output steps (<span class="arithmatex">\(\epsilon_m \approx 2.22 \times 10^{-16}\)</span>).</em></p>
+<h3 id="1-multi-species-larmor-orbit-in-plane">1) Multi-Species Larmor Orbit (In-Plane)<a class="headerlink" href="#1-multi-species-larmor-orbit-in-plane" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Verifies basic cyclotron rotation in the simulation plane (x,y) and charge sign handling using an electron-positron pair.</p>
+<ul>
+<li>
+<p><strong>Field E:</strong> Disabled</p>
+</li>
+<li>
+<p><strong>Field B:</strong> <span class="arithmatex">\(B=(0,0,0.1)\)</span> T</p>
+</li>
+<li>
+<p><strong>Particles:</strong></p>
+<ul>
+<li><strong>Species 1 (e−):</strong> <span class="arithmatex">\(q=-e,\; m=m_e,\; v_0=(10^6,\; -8794,\; 0)\)</span> m/s</li>
+<li><strong>Species 2 (e+):</strong> <span class="arithmatex">\(q=+e,\; m=m_e,\; v_0=(10^6,\; +8794,\; 0)\)</span> m/s
+<em>(The non-zero <span class="arithmatex">\(v_y\)</span> is the Boris half-step back correction: <span class="arithmatex">\(v_y \approx \mp v_\perp \omega_c \Delta t / 2\)</span>.)</em></li>
+</ul>
+</li>
+<li>
+<p><strong>Simulation Time:</strong> <span class="arithmatex">\(\Delta t = 10^{-12}\)</span> s, <span class="arithmatex">\(T_{\text{total}}= 3 \times T_{Larmor}\)</span>. Only the last 1/3 of output steps is analyzed (initial transient skipped).</p>
+</li>
+<li>
+<p><strong>Metrics &amp; Pass Criteria:</strong></p>
+<ol>
+<li>
+<p><strong>Energy Conservation (Absolute):</strong>
+    <span class="arithmatex">\(\epsilon_E = \max|E_k(t)-E_k(0)|\)</span>, <span class="arithmatex">\(E_k = \frac{1}{2}m(v_x^2+v_y^2+v_z^2)\)</span></p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(\epsilon_E &lt; K \cdot \epsilon_m \cdot \sqrt{N}\)</span></p>
+</li>
+<li>
+<p><strong>4-Radius Separation:</strong>
+    <span class="arithmatex">\(\Delta_{\text{sep}} = \max_t |\mathbf{x}_{e^-}(t) - \mathbf{x}_{e^+}(t)|\)</span>
+    expected <span class="arithmatex">\(4 R_L\)</span> where <span class="arithmatex">\(R_L = \frac{m v_\perp}{|q| B_0}\)</span></p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(|\Delta_{\text{sep}} - 4 R_L| &lt; K \cdot (4 R_L \cdot \frac{20(\omega_c \Delta t)^2}{12} + 4 R_L \cdot \epsilon_m \sqrt{N})\)</span></p>
+</li>
+<li>
+<p><strong>Y-Projection Trajectory:</strong>
+    <span class="arithmatex">\(\text{Extent} = (\max(y) - \min(y)) \cdot \Delta y\)</span>
+    expected <span class="arithmatex">\(2 R_L\)</span>.</p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(|\text{extent} - 2 R_L| &lt; K \cdot (2 R_L \cdot \frac{10(\omega_c \Delta t)^2}{12} + 2 R_L \cdot \epsilon_m \sqrt{N})\)</span></p>
+</li>
+<li>
+<p><strong>Z-Axis Stability:</strong>
+    <span class="arithmatex">\(\Delta z = \max|z(t)-z(0)|\)</span></p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(\Delta z &lt; K \cdot R_L \cdot \epsilon_m \cdot \sqrt{N}\)</span></p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-multi-species-larmor-orbit-out-of-plane-3v">2) Multi-Species Larmor Orbit (Out-of-Plane / 3V)<a class="headerlink" href="#2-multi-species-larmor-orbit-out-of-plane-3v" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Verifies the coupling between the spatial grid (x) and the virtual velocity component (<span class="arithmatex">\(v_z\)</span>) using a <span class="arithmatex">\(B_y\)</span> field. Only the electron trajectory is analyzed.</p>
+<ul>
+<li>
+<p><strong>Field E:</strong> Disabled</p>
+</li>
+<li>
+<p><strong>Field B:</strong> <span class="arithmatex">\(B=(0,0.1,0)\)</span> T</p>
+</li>
+<li>
+<p><strong>Particles:</strong> </p>
+<ul>
+<li><strong>Species 1 (e−) &amp; Species 2 (e+):</strong> <span class="arithmatex">\(v_0=(0,\;0,\;10^6)\)</span> m/s</li>
+</ul>
+</li>
+<li>
+<p><strong>Simulation Time:</strong> <span class="arithmatex">\(\Delta t = 10^{-12}\)</span> s, <span class="arithmatex">\(T_{\text{total}}= 3 \times T_{Larmor}\)</span>. Only the last 1/3 of output steps is analyzed.</p>
+</li>
+<li>
+<p><strong>Metrics &amp; Pass Criteria:</strong></p>
+<ol>
+<li>
+<p><strong>Energy Conservation (Absolute):</strong>
+    <span class="arithmatex">\(\epsilon_E = \max|E_k(t)-E_k(0)|\)</span></p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(\epsilon_E &lt; K \cdot \epsilon_m \cdot \sqrt{N}\)</span></p>
+</li>
+<li>
+<p><strong>X-Projection Trajectory:</strong>
+    <span class="arithmatex">\(\text{Extent} = (\max(x) - \min(x)) \cdot \Delta x\)</span>
+    expected <span class="arithmatex">\(2 R_L\)</span>.</p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(|\text{extent} - 2 R_L| &lt; K \cdot (2 R_L \cdot \frac{10(\omega_c \Delta t)^2}{12} + 2 R_L \cdot \epsilon_m \sqrt{N})\)</span></p>
+</li>
+<li>
+<p><strong>Y-Axis Stability:</strong>
+    <span class="arithmatex">\(\Delta y = \max|y(t)-y(0)|\)</span></p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(\Delta y &lt; K \cdot R_L \cdot \epsilon_m \cdot \sqrt{N}\)</span></p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="3-eb-drift">3) E×B Drift<a class="headerlink" href="#3-eb-drift" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Verifies the Lorentz force combination by creating a drift along the Y-axis via crossed E and B fields.</p>
+<ul>
+<li>
+<p><strong>Field E:</strong> From boundary potentials: <span class="arithmatex">\(V=0\)</span> at <span class="arithmatex">\(x=0\)</span>, <span class="arithmatex">\(V=100\)</span> V at <span class="arithmatex">\(x=L_x=0.01\)</span> m. Gives <span class="arithmatex">\(E_x = -10^4\)</span> V/m.</p>
+</li>
+<li>
+<p><strong>Field B:</strong> <span class="arithmatex">\(B=(0,0,0.1)\)</span> T</p>
+</li>
+<li>
+<p><strong>Particles:</strong> </p>
+<ul>
+<li><strong>Species 1 (e−):</strong> <span class="arithmatex">\(v_0=(0,\; 10^5,\; 0)\)</span> m/s. Placed at domain center.</li>
+</ul>
+</li>
+<li>
+<p><strong>Simulation Time:</strong> <span class="arithmatex">\(\Delta t = 10^{-11}\)</span> s, 400 steps, output every 20 steps.</p>
+</li>
+<li>
+<p><strong>Metrics &amp; Pass Criteria:</strong></p>
+<ol>
+<li>
+<p><strong>Hamiltonian Conservation:</strong>
+    <span class="arithmatex">\(H = \frac{1}{2}m|\mathbf{v}|^2 + q\phi\)</span>
+    where <span class="arithmatex">\(\phi = -E_x \cdot x\)</span>.</p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(\max|H(t) - H(0)| &lt; K \cdot (|H_0| \cdot \frac{(\omega_c \Delta t)^2}{8} + |H_0| \cdot \epsilon_m \sqrt{N})\)</span>
+    2. <strong>Drift Velocity (Y):</strong> Mean <span class="arithmatex">\(v_y\)</span> over the second half of the simulation, expected <span class="arithmatex">\(v_{\text{drift}} = -\frac{E_x}{B_z}\)</span></p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(|\bar{v}_y - v_{\text{drift}}| &lt; K \cdot (|v_{\text{drift}}| \cdot \frac{(\omega_c \Delta t)^2}{8} + |v_{\text{drift}}| \cdot \epsilon_m \sqrt{N})\)</span></p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="ii-field-solver-verification">II. Field Solver Verification<a class="headerlink" href="#ii-field-solver-verification" title="Permanent link">&para;</a></h2>
+<p><em>These tests verify the Poisson Solver logic $
+\nabla^2\phi = -\frac{\rho}{\epsilon_0}$
+and boundary condition implementation. The solver uses an iterative method with target relative residual <span class="arithmatex">\(\text{rtol} \sim 10^{-6}\)</span>.</em></p>
+<p><em><strong>Threshold framework:</strong> Thresholds combine solver residual error (<span class="arithmatex">\(O(\text{rtol})\)</span>), floating point accumulation (<span class="arithmatex">\(O(\epsilon_m \sqrt{N_{\text{cells}}})\)</span>), and grid truncation error (<span class="arithmatex">\(O(1/N)\)</span>), scaled by safety factor <span class="arithmatex">\(K=10\)</span>.</em></p>
+<h3 id="4-mixed-boundaries-capacitor-dirichlet-neumann">4) Mixed Boundaries (Capacitor / Dirichlet-Neumann)<a class="headerlink" href="#4-mixed-boundaries-capacitor-dirichlet-neumann" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Verifies the transition between fixed potential (electrodes) and open space (dielectric). Simulates a finite parallel-plate capacitor.</p>
+<ul>
+<li>
+<p><strong>Domain:</strong> <span class="arithmatex">\(32 \times 32\)</span> grid, <span class="arithmatex">\(L = 0.001\)</span> m</p>
+</li>
+<li>
+<p><strong>Boundary Conditions:</strong></p>
+<ul>
+<li><strong>Y-Axis (Electrodes):</strong> <span class="arithmatex">\(\phi(x, 0) = -10\)</span> V, <span class="arithmatex">\(\phi(x, L_y) = +10\)</span> V (Dirichlet)</li>
+<li><strong>X-Axis (Open):</strong> <span class="arithmatex">\(\frac{\partial \phi}{\partial x} = 0\)</span> at <span class="arithmatex">\(x=0, x=L_x\)</span> (Neumann / Dielectric)</li>
+</ul>
+</li>
+<li>
+<p><strong>Source:</strong> No particles (vacuum solve)</p>
+</li>
+<li>
+<p><strong>Metrics &amp; Pass Criteria:</strong></p>
+<ol>
+<li>
+<p><strong>Boundary Value Integrity:</strong>
+    <span class="arithmatex">\(\epsilon_{BC} = \max(|\phi_{y=0} - (-10)|,\; |\phi_{y=L_y} - 10|)\)</span></p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(\epsilon_{BC} &lt; K \cdot \epsilon_m \cdot V_0\)</span></p>
+</li>
+<li>
+<p><strong>Field Uniformity (Interior):</strong> Standard deviation of <span class="arithmatex">\(E_y\)</span> in the interior (excluding 2-cell border near Neumann/Dirichlet corners).</p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(\sigma(E_y) &lt; K \cdot (|\bar{E}_y| \cdot \text{rtol} + |\bar{E}_y| \cdot \epsilon_m \sqrt{N_{\text{cells}}})\)</span></p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="5-fully-open-boundaries-isolated-system">5) Fully Open Boundaries (Isolated System)<a class="headerlink" href="#5-fully-open-boundaries-isolated-system" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Verifies solver stability for a floating potential system using all-Neumann boundaries. Uses a neutral dipole to ensure <span class="arithmatex">\(\int \rho \, dV = 0\)</span>.</p>
+<ul>
+<li>
+<p><strong>Domain:</strong> <span class="arithmatex">\(32 \times 32\)</span> grid, <span class="arithmatex">\(L = 0.001\)</span> m</p>
+</li>
+<li>
+<p><strong>Boundary Conditions:</strong></p>
+<ul>
+<li><strong>All boundaries:</strong> <span class="arithmatex">\(\frac{\partial \phi}{\partial n} = 0\)</span> (Neumann everywhere)</li>
+</ul>
+</li>
+<li>
+<p><strong>Source:</strong> Neutral Dipole — electron cloud at <span class="arithmatex">\(x \approx 0.35 L\)</span>, positron cloud at <span class="arithmatex">\(x \approx 0.65 L\)</span>.</p>
+</li>
+<li>
+<p><strong>Metrics &amp; Pass Criteria:</strong></p>
+<ol>
+<li>
+<p><strong>Boundary Flux Leakage:</strong> Maximum of mean <span class="arithmatex">\(|E_n|\)</span> across all four boundaries.</p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(\max(\overline{|E_x|}_{\text{walls}},\; \overline{|E_y|}_{\text{walls}}) &lt; K \cdot (E_{\text{scale}} \cdot \text{rtol} + E_{\text{scale}} \cdot \epsilon_m \sqrt{N} + E_{\text{scale}} / N_{\min})\)</span>
+where <span class="arithmatex">\(E_{\text{scale}} = \max|\mathbf{E}|\)</span> over the domain, <span class="arithmatex">\(N_{\min} = \min(N_x, N_y)\)</span></p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="6-closed-metal-box-all-dirichlet">6) Closed Metal Box (All-Dirichlet)<a class="headerlink" href="#6-closed-metal-box-all-dirichlet" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Verifies the basic "grounded box" scenario. Tests solver matrix construction and solution symmetry.</p>
+<ul>
+<li>
+<p><strong>Domain:</strong> <span class="arithmatex">\(32 \times 32\)</span> grid, <span class="arithmatex">\(L = 0.001\)</span> m</p>
+</li>
+<li>
+<p><strong>Boundary Conditions:</strong></p>
+<ul>
+<li><strong>All boundaries:</strong> <span class="arithmatex">\(\phi = 0\)</span> (Ground)</li>
+</ul>
+</li>
+<li>
+<p><strong>Source:</strong> Electron charge cloud centered at <span class="arithmatex">\((L_x/2, L_y/2)\)</span>.</p>
+</li>
+<li>
+<p><strong>Metrics &amp; Pass Criteria:</strong></p>
+<ol>
+<li>
+<p><strong>Boundary Zero Check:</strong>
+    <span class="arithmatex">\(\epsilon_{wall} = \max_{\text{all boundaries}} |\phi|\)</span></p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(\epsilon_{wall} &lt; K \cdot \epsilon_m \cdot \max(|\phi_{\text{boundary}}|, 1)\)</span></p>
+</li>
+<li>
+<p><strong>Symmetry:</strong>
+    <span class="arithmatex">\(\epsilon_{sym} = P_{99.9}(|\phi(x,y) - \phi(L_x-x, L_y-y)|)\)</span>
+    over interior points (excluding 2-cell border and 3-cell radius around center singularity).</p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(\epsilon_{sym} &lt; K \cdot (V_{\text{scale}} \cdot \text{rtol} + V_{\text{scale}} \cdot \epsilon_m \sqrt{N} + V_{\text{scale}} / N^{1.5})\)</span></p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="7-periodic-boundaries">7) Periodic Boundaries<a class="headerlink" href="#7-periodic-boundaries" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Verifies matrix topology connectivity. Signals leaving the right boundary must wrap to the left boundary. Periodic in X direction with Neumann in Y.</p>
+<ul>
+<li>
+<p><strong>Domain:</strong> <span class="arithmatex">\(32 \times 32\)</span> grid, <span class="arithmatex">\(L = 0.001\)</span> m</p>
+</li>
+<li>
+<p><strong>Boundary Conditions:</strong></p>
+<ul>
+<li><strong>X-Axis:</strong> <span class="arithmatex">\(\phi(0, y) = \phi(L_x, y)\)</span> (Periodic, <code>PeriodicFlagX1 = 1</code>)</li>
+<li><strong>Y-Axis:</strong> <span class="arithmatex">\(\frac{\partial \phi}{\partial y} = 0\)</span> (Neumann)</li>
+</ul>
+</li>
+<li>
+<p><strong>Source:</strong> Neutral dipole — electron and positron clouds at symmetric x-positions.</p>
+</li>
+<li>
+<p><strong>Metrics &amp; Pass Criteria:</strong></p>
+<ol>
+<li>
+<p><strong>Periodicity (Derivative Continuity):</strong> Checks that the first derivative of <span class="arithmatex">\(\phi\)</span> is continuous across the periodic boundary (left-right wrap-around). Automatically detects whether the solver duplicates the endpoint (<span class="arithmatex">\(\phi[0] = \phi[N_x]\)</span>) or not.</p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(\text{derivative jump} &lt; K \cdot (\text{max internal curvature} + V_{\text{range}} \cdot \text{rtol} + V_{\text{range}} \cdot \epsilon_m \sqrt{N})\)</span></p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="8-analytical-accuracy-greens-function">8) Analytical Accuracy (Green's Function)<a class="headerlink" href="#8-analytical-accuracy-greens-function" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Quantifies numerical error by comparing the grid solution to the analytical <span class="arithmatex">\(\ln(r)\)</span> profile for a 2D point charge.</p>
+<ul>
+<li>
+<p><strong>Domain:</strong> <span class="arithmatex">\(64 \times 64\)</span> grid, <span class="arithmatex">\(L = 0.001\)</span> m</p>
+</li>
+<li>
+<p><strong>Boundary Conditions:</strong> All Dirichlet <span class="arithmatex">\(\phi = 0\)</span>.</p>
+</li>
+<li>
+<p><strong>Source:</strong> Electron charge cloud at center <span class="arithmatex">\((L_x/2, L_y/2)\)</span>.</p>
+</li>
+<li>
+<p><strong>Comparison:</strong> Fit <span class="arithmatex">\(\phi_{\text{num}}(r)\)</span> to <span class="arithmatex">\(A \ln(r) + B\)</span> via linear regression in the annular region <span class="arithmatex">\(3\Delta x &lt; r &lt; 0.35 \min(L_x, L_y)\)</span>.</p>
+</li>
+<li>
+<p><strong>Metrics &amp; Pass Criteria:</strong></p>
+<ol>
+<li>
+<p><strong>Analytical Fit (<span class="arithmatex">\(1 - R^2\)</span>):</strong> Coefficient of determination for <span class="arithmatex">\(\phi\)</span> vs <span class="arithmatex">\(\ln(r)\)</span> regression. Measures how well the numerical potential follows the expected logarithmic profile.</p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(1 - R^2 &lt; K \cdot ((\Delta x / r_{\min})^2 + 100 \cdot \epsilon_m)\)</span></p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="iii-particle-mesh-coupling-verification">III. Particle-Mesh Coupling Verification<a class="headerlink" href="#iii-particle-mesh-coupling-verification" title="Permanent link">&para;</a></h2>
+<p><em>These tests verify the projection of particle quantities to the grid (Deposition) and the sampling of grid fields to the particle (Interpolation/Gathering).</em></p>
+<p>_<strong>Threshold framework:</strong> All thresholds are adaptive, computed as $
+    ext{threshold} = K \times (\text{physics_err} + \text{float_err})$
+where <span class="arithmatex">\(K=10\)</span> is a safety factor. Physics error captures solver residual (<span class="arithmatex">\(O(\text{rtol})\)</span>), discretization (<span class="arithmatex">\(O(\Delta x^2)\)</span>), and CIC shape-function effects. Float error captures <span class="arithmatex">\(O(\epsilon_m \sqrt{N})\)</span> accumulation (<span class="arithmatex">\(\epsilon_m \approx 2.22 \times 10^{-16}\)</span>). Grid charge is inferred via Gauss's law: <span class="arithmatex">\(Q_{\text{grid}} = -\epsilon_0 \sum_{\text{interior}} (\nabla^2 \phi)_{i,j}\, \Delta x \, \Delta y\)</span></p>
+<h3 id="9-charge-deposition-potential-topology">9) Charge Deposition &amp; Potential Topology<a class="headerlink" href="#9-charge-deposition-potential-topology" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Verifies that deposited charge creates a quantitatively correct and symmetric potential well. Ensures coupling between CIC particle weighting and the Poisson solver, and that physical constants (<span class="arithmatex">\(\epsilon_0\)</span>) are correctly applied.</p>
+<ul>
+<li>
+<p><strong>Domain:</strong> <span class="arithmatex">\(32 \times 32\)</span> grid, <span class="arithmatex">\(L = 0.001\)</span> m, All-Dirichlet (<span class="arithmatex">\(\phi = 0\)</span>).</p>
+</li>
+<li>
+<p><strong>Source:</strong> Charge cloud at center <span class="arithmatex">\((L_x/2, L_y/2)\)</span>. Total charge <span class="arithmatex">\(Q_{\text{total}} = -q_e \cdot n \cdot \Delta x \cdot \Delta y\)</span> where <span class="arithmatex">\(n = 2.1 \times 10^{15}\)</span> m<span class="arithmatex">\(^{-3}\)</span> (from <code>static_deposit.inp</code>).</p>
+</li>
+<li>
+<p><strong>Simulation:</strong> 5 steps, <span class="arithmatex">\(\Delta t = 10^{-12}\)</span> s. Field read from final iteration.</p>
+</li>
+<li>
+<p><strong>Metrics &amp; Pass Criteria:</strong></p>
+<ol>
+<li>
+<p><strong>Integrated Charge Conservation:</strong>
+    <span class="arithmatex">\(\epsilon_Q = |Q_{\text{grid}} - Q_{\text{total}}|\)</span></p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(\epsilon_Q &lt; K \cdot |Q_{\text{total}}| \cdot (\text{rtol} + 1/N + \epsilon_m \sqrt{N_{\text{cells}}})\)</span>
+<em>(Combines solver residual, <span class="arithmatex">\(O(1/N)\)</span> Laplacian discretization error, and float accumulation.)</em></p>
+</li>
+<li>
+<p><strong>Symmetry:</strong>
+    <span class="arithmatex">\(\epsilon_{\text{sym}} = P_{99.9}(|\phi(x,y) - \phi(L_x-x, L_y-y)|)\)</span>
+    over interior points (excluding 2-cell border and 3-cell radius around center singularity).</p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(\epsilon_{\text{sym}} &lt; K \cdot V_{\text{scale}} \cdot (\text{rtol} + \epsilon_m \sqrt{N_{\text{pts}}} + 1/N_{\text{grid}})\)</span>
+<em>(Combines solver residual, float accumulation, and <span class="arithmatex">\(O(1/N)\)</span> grid discretization asymmetry from CIC and Laplacian.)</em></p>
+</li>
+<li>
+<p><strong>L2 Profile Error:</strong> 
+    Relative RMS between simulated <span class="arithmatex">\(\phi\)</span> and analytic Green's function <span class="arithmatex">\(\phi_{\text{ana}}\)</span> (2D Fourier series for point charge in grounded box, 50 modes).</p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(\sqrt{\frac{\sum (\phi - \phi_{\text{ana}})^2}{\sum \phi_{\text{ana}}^2}} &lt; K \cdot (\text{rtol} + 1/N_{\text{grid}} + \epsilon_m \sqrt{N_{\text{pts}}})\)</span>
+<em>(Combines solver residual, <span class="arithmatex">\(O(1/N)\)</span> Fourier truncation and grid discretization error, and float accumulation.)</em></p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="10-field-interpolation-acceleration">10) Field Interpolation (Acceleration)<a class="headerlink" href="#10-field-interpolation-acceleration" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Verifies that a particle in a uniform E-field experiences the correct Lorentz acceleration <span class="arithmatex">\(a = qE/m\)</span> by measuring velocity change over multiple timesteps.</p>
+<ul>
+<li>
+<p><strong>Domain:</strong> <span class="arithmatex">\(32 \times 32\)</span> grid, <span class="arithmatex">\(L_y\)</span> from input file (default <span class="arithmatex">\(L = 0.001\)</span> m).</p>
+</li>
+<li>
+<p><strong>Boundary Conditions:</strong></p>
+<ul>
+<li><strong>Y-Axis (Electrodes):</strong> <span class="arithmatex">\(\phi(x, 0) = -10\)</span> V, <span class="arithmatex">\(\phi(x, L_y) = +10\)</span> V (Dirichlet)</li>
+<li><strong>X-Axis (Open):</strong> <span class="arithmatex">\(\frac{\partial \phi}{\partial x} = 0\)</span> (Neumann / Dielectric)</li>
+</ul>
+</li>
+<li>
+<p><strong>Particle:</strong> Single electron (<span class="arithmatex">\(q = -e\)</span>, <span class="arithmatex">\(m = m_e\)</span>) at center, <span class="arithmatex">\(v_0 = 0\)</span>.</p>
+</li>
+<li>
+<p><strong>Simulation:</strong> 20 steps, <span class="arithmatex">\(\Delta t = 10^{-12}\)</span> s, output every step.</p>
+</li>
+<li>
+<p><strong>Metrics &amp; Pass Criteria:</strong></p>
+<ol>
+<li>
+<p><strong>Acceleration Accuracy:</strong> Linear fit
+    <span class="arithmatex">\(v_y(t) = a_{\text{meas}} \cdot t + v_0\)</span>
+    gives measured acceleration. Expected: <span class="arithmatex">\(a_{\text{expected}} = \frac{q E_y}{m}\)</span>
+    where <span class="arithmatex">\(E_y = -(V_{\text{top}} - V_{\text{bot}}) / L_y\)</span>.</p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(|a_{\text{meas}} - a_{\text{expected}}| &lt; K \cdot |a_{\text{expected}}| \cdot (\text{rtol} + 1/N_{\text{grid}} + \epsilon_m \sqrt{N_{\text{pts}}})\)</span>
+<em>(Combines solver residual, <span class="arithmatex">\(O(1/N)\)</span> grid error from CIC and finite-difference E, and float accumulation in the linear fit.)</em></p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="11-self-force-stability-stationary-particle">11) Self-Force Stability (Stationary Particle)<a class="headerlink" href="#11-self-force-stability-stationary-particle" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Integration test for the full PIC loop: Deposit <span class="arithmatex">\(\rho \to\)</span> Solve Poisson <span class="arithmatex">\(\to\)</span> Interpolate <span class="arithmatex">\(\mathbf{E} \to\)</span> Push. A stationary particle at the center of a symmetric grounded box should feel near-zero net force; any displacement is parasitic (self-force).</p>
+<ul>
+<li>
+<p><strong>Domain:</strong> <span class="arithmatex">\(32 \times 32\)</span> grid, <span class="arithmatex">\(L = 0.001\)</span> m, All-Dirichlet (<span class="arithmatex">\(\phi = 0\)</span>).</p>
+</li>
+<li>
+<p><strong>Particle:</strong> Single electron at rest (<span class="arithmatex">\(v_0 = 0\)</span>) centered at <span class="arithmatex">\((L_x/2, L_y/2)\)</span>.</p>
+</li>
+<li>
+<p><strong>Simulation:</strong> 20 steps, <span class="arithmatex">\(\Delta t = 10^{-12}\)</span> s, output every step.</p>
+</li>
+<li>
+<p><strong>Metrics &amp; Pass Criteria:</strong></p>
+<ol>
+<li>
+<p><strong>Parasitic Displacement:</strong>
+    <span class="arithmatex">\(\Delta r = \sqrt{(x_{\text{final}} - x_0)^2 + (y_{\text{final}} - y_0)^2}\)</span></p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(\Delta r &lt; K \cdot (N_{\text{steps}} \cdot \Delta x + \epsilon_m \cdot \Delta x \cdot \sqrt{N_{\text{steps}}})\)</span>
+<em>(PIC codes exhibit parasitic motion from CIC shape asymmetry, field gradient noise, and pusher-solver coupling. Threshold is grid-based: displacement bounded by <span class="arithmatex">\(O(N \cdot \Delta x)\)</span> over the simulation.)</em></p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="12-current-deposition-charge-conservation">12) Current Deposition (Charge Conservation)<a class="headerlink" href="#12-current-deposition-charge-conservation" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Verifies that moving a particle and re-depositing charge conserves total charge on the grid. This ensures Gauss's law (<span class="arithmatex">\(\nabla \cdot \mathbf{E} = \rho / \epsilon_0\)</span>) holds at every timestep, critical for Esirkepov-type current deposition schemes.</p>
+<ul>
+<li>
+<p><strong>Domain:</strong> <span class="arithmatex">\(32 \times 32\)</span> grid, <span class="arithmatex">\(L = 0.001\)</span> m, All-Dirichlet (<span class="arithmatex">\(\phi = 0\)</span>).</p>
+</li>
+<li>
+<p><strong>Particle:</strong> Single electron with <span class="arithmatex">\(v_x = 10^4\)</span> m/s (traverses <span class="arithmatex">\(\sim 0.2\)</span> cells over 10 steps).</p>
+</li>
+<li>
+<p><strong>Simulation:</strong> 10 steps, <span class="arithmatex">\(\Delta t = 10^{-12}\)</span> s, output every step. Poisson solver active (<code>FieldSolverFlag = 1</code>).</p>
+</li>
+<li>
+<p><strong>Metrics &amp; Pass Criteria:</strong></p>
+<ol>
+<li>
+<p><strong>Charge Conservation (Gauss):</strong>
+    <span class="arithmatex">\(\Delta Q = |Q_{\text{grid}}(t_{\text{final}}) - Q_{\text{grid}}(t_0)|\)</span>
+    where <span class="arithmatex">\(Q_{\text{grid}}\)</span> is computed via discrete Laplacian of <span class="arithmatex">\(\phi\)</span>.</p>
+<p><strong>Pass if:</strong> <span class="arithmatex">\(\Delta Q &lt; K \cdot |Q| \cdot (\text{rtol} + \epsilon_m \sqrt{N_{\text{cells}}} + 1/N)\)</span>
+<em>(Combines solver residual at two iterations, float accumulation, and <span class="arithmatex">\(O(1/N)\)</span> CIC spreading discretization error.)</em></p>
+</li>
+</ol>
+</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../scaling/" class="btn btn-neutral float-left" title="Scaling"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../api/files/" class="btn btn-neutral float-right" title="-- All --">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 LeCAD-PEG</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/LeCAD-PEG/HEXAPIC.git" class="fa fa-code-fork" style="color: #fcfcfc"> HEXAPIC</a>
+        </span>
+    
+    
+      <span><a href="../scaling/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../api/files/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

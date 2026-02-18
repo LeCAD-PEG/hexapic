@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://lecad-peg.github.io/hexapic/scaling/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://lecad-peg.github.io/hexapic/comparison/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Scaling - HEXAPIC</title>
+    <title>XOOPIC - HEXAPIC</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Scaling";
-        var mkdocs_page_input_path = "scaling.md";
-        var mkdocs_page_url = "/hexapic/scaling/";
+        var mkdocs_page_name = "XOOPIC";
+        var mkdocs_page_input_path = "comparison.md";
+        var mkdocs_page_url = "/hexapic/comparison/";
       </script>
     
     <!--[if lt IE 9]>
@@ -47,12 +47,8 @@
                 <li class="toctree-l1"><a class="reference internal" href="../usage/">Usage</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Scaling</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#vega-hpc">VEGA HPC</a>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../scaling/">Scaling</a>
                 </li>
               </ul>
               <ul>
@@ -132,9 +128,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Scaling</li>
+      <li class="breadcrumb-item active">XOOPIC</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/LeCAD-PEG/HEXAPIC.git/edit/master/docs/scaling.md">Edit on HEXAPIC</a>
+          <a href="https://github.com/LeCAD-PEG/HEXAPIC.git/edit/master/docs/comparison.md">Edit on HEXAPIC</a>
     </li>
   </ul>
   <hr/>
@@ -142,31 +138,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="scaling-v080">Scaling v0.8.0<a class="headerlink" href="#scaling-v080" title="Permanent link">&para;</a></h1>
-<h2 id="vega-hpc">VEGA HPC<a class="headerlink" href="#vega-hpc" title="Permanent link">&para;</a></h2>
-<p>128 cores/node.</p>
-<p>See the machine website for more specifications: <a href="https://doc.vega.izum.si/general-spec/">https://doc.vega.izum.si/general-spec/</a>.</p>
+                <h1 id="xoopic">XOOPIC<a class="headerlink" href="#xoopic" title="Permanent link">&para;</a></h1>
+<h2 id="two-stream-instability">Two-stream instability<a class="headerlink" href="#two-stream-instability" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Strong scaling:</strong> mesh size 2048x2048, single node RAM usage ~180 GB.</li>
-<li><strong>Weak scaling</strong>: mesh size increase 2048*nodes<ul>
-<li>1 node  : 2048x2048</li>
-<li>2 nodes : 2048x4096</li>
-<li>4 nodes : 4096x4096</li>
-<li>etc...</li>
+<li>Input file:  </li>
 </ul>
-</li>
-</ul>
-<p align="center">
-  <img src="../images/strong_scaling.png" alt="strong_scaling" width="45%">
-  <img src="../images/weak_scaling.png" alt="weak_scaling" width="54%">
-</p>
               
             </div>
           </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../usage/" class="btn btn-neutral float-left" title="Usage"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../tests/" class="btn btn-neutral float-right" title="Tests">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
 
   <hr/>
 
@@ -193,10 +172,6 @@
         </span>
     
     
-      <span><a href="../usage/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../tests/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

@@ -532,11 +532,44 @@ def save_results(tests: List[TestCase], filepath: str):
         json.dump(data, f, indent=2)
 
 
+def _validate_results_path(filepath: str) -> Path:
+    """
+    Validate a results file path coming from user-controlled input.
+
+    The path is resolved against the current working directory and must:
+      - exist
+      - be a regular file
+      - remain within the current working directory tree
+    """
+    cwd = Path.cwd().resolve()
+    # Resolve the path safely relative to the current working directory.
+    candidate = Path(filepath).expanduser().resolve()
+
+    # Ensure the path is within the current working directory.
+    try:
+        candidate.relative_to(cwd)
+    except ValueError:
+        raise ValueError(f"Refusing to access results file outside working directory: {filepath}")
+
+    if not candidate.is_file():
+        raise ValueError(f"Results file does not exist or is not a file: {filepath}")
+
+    return candidate
+
+
 def load_results(filepath: str) -> List[TestCase]:
     """Load test results from JSON."""
-    if not os.path.exists(filepath):
+    # Validate and normalize the path before accessing the filesystem.
+    try:
+        safe_path = _validate_results_path(filepath)
+    except ValueError as exc:
+        # For test utilities, treat invalid paths as "no results" rather than crashing.
+        print(str(exc), file=sys.stderr)
         return []
-    with open(filepath, "r") as f:
+
+    if not os.path.exists(safe_path):
+        return []
+    with open(safe_path, "r") as f:
         data = json.load(f)
 
     tests = []

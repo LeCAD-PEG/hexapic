@@ -1,7 +1,3 @@
-HEXAPIC
-SPDX-License-Identifier: EUPL-1.2
-SPDX-FileCopyrightText: 2025 Stefan Costea, LeCAD-PEG
-
 European Union Public Licence v. 1.2 (EUPL-1.2)
 
 This European Union Public Licence (the ‘EUPL’) applies to the Work (as defined below) which is provided under the terms of this Licence. Any use of the Work, other than as authorised under this Licence is prohibited (to the extent such use is covered by a right of the copyright holder of the Work).

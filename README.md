@@ -2,13 +2,13 @@
 
 [**H**eterogenous **EXA**scale **P**article-**I**n-**C**ell](https://github.com/lecad-peg/hexapic)
 
-CPU OpenMPI version with parallel I/O through openPMD with ADIOS2 backend.
+OpenMPI version with parallel I/O through openPMD with ADIOS2 backend.
 
 Feature: 3D visualisation with pyqtgraph.
 
 ### Dependency installation ###
 
-See source/compile_HPCFS.sh or source/compile_VEGA.sh for the required modules before the installation of libraries on different HPCs.
+See source/compile_HPCFS.sh and source/compile_VEGA.sh for the required modules before the installation of libraries on different HPCs.
 
 #### ADIOS2 ####
 
@@ -36,6 +36,18 @@ cmake --build .
 # optional: ctest
 cmake --build . --target install
 ```
+
+#### HYPRE ####
+```bash
+cd ~/
+git clone https://github.com/hypre-space/hypre.git
+cd hypre/src
+./configure --prefix=$HOME/hypre/install --with-MPI
+make -j$(nproc)
+# optional: ctest
+make install
+```
+
 
 #### Python modules ####
 
@@ -65,6 +77,10 @@ cd ../
 ```
 
 
+### Pre-commit ###
+
+We use [pre-commit](https://pre-commit.com/) to enforce trailing-whitespace and end-of-file fixes, YAML checks, and clang-format for C/C++ in the repo. Install pre-commit (e.g. `pip install pre-commit`), then from the repo root run `pre-commit install`. Hooks run automatically on `git commit`; you can run them on all files anytime with `pre-commit run --all-files`.
+
 ### Usage ###
 
 Run the executable:
@@ -90,7 +106,7 @@ python ../vis/vis3D-class.py input_file.inp.bp4
 1. Open ParaView
 2. Open > select `.bp4` output.
 3. On dialog *Open Data With...* select `ADIOS2CoreImageReader` and press `OK`.
-4. On the lfet side, under *Proeperties* where arrays are located, select the arrays to plot. Do not mix cell-centered meshes (n, T, v) with node-centered meshes (V). 
+4. On the lfet side, under *Proeperties* where arrays are located, select the arrays to plot. Do not mix cell-centered meshes (n, T, v) with node-centered meshes (V).
 5. Under *Properties*, on *Image Dimension* select one of your selected arrays.
 6. On *Time step array* select `/data/meshes/time`.
 7. Press `Apply` and wait for the data to load.

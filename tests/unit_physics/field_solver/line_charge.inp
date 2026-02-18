@@ -1,0 +1,90 @@
+HEXAPIC
+{	Test 8: Analytical Accuracy (Line Charge / Green's Function).
+	Dirichlet boundaries with potential set to zero.
+	Localized electron charge at center simulating line charge.
+	Compare numerical solution to analytical: phi ~ -lambda/(2*pi*eps0)*ln(r)
+}
+Region
+{
+Species
+{
+	name = electron
+	m = 9.1093837015e-31
+	q = -1.602176634e-19
+	subcycle = 1
+}
+Grid
+{
+	J = 64
+	x1s = 0.0
+	x1f = 0.001
+	n1 = 1.0
+	K = 64
+	x2s = 0.0
+	x2f = 0.001
+	n2 = 1.0
+	Geometry = 1
+}
+Control
+{
+	dt = 1e-12
+	B01 = 0.0
+	B02 = 0.0
+	B03 = 0.0
+	FieldSolverFlag = 1
+	ParticleDiagnosticFlag = 0
+}
+Equipotential
+{
+	C = 0
+	j1 = 0
+	j2 = 0
+	k1 = 0
+	k2 = 64
+	normal = 1
+}
+Equipotential
+{
+	C = 0
+	j1 = 64
+	j2 = 64
+	k1 = 0
+	k2 = 64
+	normal = -1
+}
+Equipotential
+{
+	C = 0
+	j1 = 0
+	j2 = 64
+	k1 = 0
+	k2 = 0
+	normal = 1
+}
+Equipotential
+{
+	C = 0
+	j1 = 0
+	j2 = 64
+	k1 = 64
+	k2 = 64
+	normal = -1
+}
+Load
+{
+	speciesName = electron
+	x1MinMKS = 0.000484375
+	x1MaxMKS = 0.000515625
+	x2MinMKS = 0.000484375
+	x2MaxMKS = 0.000515625
+	density = 5e+17
+	np2c = 1.0e+05
+	v1thermal = 0.0
+	v2thermal = 0.0
+	v3thermal = 0.0
+	v1drift = 0.0
+	v2drift = 0.0
+	v3drift = 0.0
+	LoadMethodFlag = 0
+}
+}

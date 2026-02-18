@@ -2,7 +2,7 @@
 
 module --force purge
 module load OpenMPI/4.1.6-GCC-13.2.0
-module load Python/3.11.5-GCCcore-13.2.0 
+module load Python/3.11.5-GCCcore-13.2.0
 
 export OMP_NUM_THREADS=1
 

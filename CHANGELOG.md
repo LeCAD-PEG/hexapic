@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.8.1 - 18.02.2026
+
+### Added
+ * Physics unit tests
+
 
 ## 0.8.0 - 14.11.2025
 
@@ -18,7 +23,7 @@
 
 ### Changed
 
-* PETSc solver changed to HYPRE PFMG solver 
+* PETSc solver changed to HYPRE PFMG solver
 
 
 ## 0.6.0 - 27.02.2025
@@ -82,7 +87,7 @@
 
 ## 0.1.0 - 29.07.2024
 
-### Added 
+### Added
 
 * **Serial** 2D PIC routine
 * Uniform initial particle load

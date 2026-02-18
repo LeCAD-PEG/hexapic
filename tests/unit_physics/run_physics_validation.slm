@@ -1,0 +1,201 @@
+#!/bin/bash
+#SBATCH --job-name=hexapic-physics-validation
+#SBATCH --ntasks=1
+#SBATCH --time=02:00:00
+# Uncomment next two lines to capture job output to files when using sbatch:
+# #SBATCH --output=physics_validation.out
+# #SBATCH --error=physics_validation.err
+# For live output in terminal, run with: bash run_physics_validation.slm [OPTIONS]
+
+set -euo pipefail
+
+usage() {
+    cat <<'EOF'
+Usage: bash run_physics_validation.slm [OPTIONS]
+   or: sbatch run_physics_validation.slm [OPTIONS]
+
+Test group flags (choose one or more):
+  --particle-pusher        Run particle pusher validation tests
+  --field-solver           Run field solver validation tests
+  --particle-mesh-coupling Run particle-mesh coupling validation tests
+  --all                    Run all validation tests (default if no flags)
+
+Common options:
+  --exe PATH            Path to HEXAPIC executable (default: <repo>/source/HEXAPIC)
+  --no-cleanup          Keep output files after tests
+  --help                Show this help message
+EOF
+}
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+
+# Optional: load modules (HPC); skip if not available
+module purge 2>/dev/null || true
+module load OpenMPI/5.0.8-GCC-14.3.0 2>/dev/null || true
+module load OpenBLAS/0.3.30-GCC-14.3.0 2>/dev/null || true
+module load FFmpeg/7.1.2-GCCcore-14.3.0 2>/dev/null || true
+module load Python/3.13.5-GCCcore-14.3.0 2>/dev/null || true
+
+# Use repo-local venv: create and install deps if missing, then activate
+VENV_DIR="${SCRIPT_DIR}/.venv"
+REQUIREMENTS="${SCRIPT_DIR}/requirements.txt"
+if [[ ! -d "${VENV_DIR}" ]]; then
+    echo "Creating venv at ${VENV_DIR} and installing dependencies..."
+    python3 -m venv "${VENV_DIR}"
+    "${VENV_DIR}/bin/pip" install --quiet --upgrade pip
+    "${VENV_DIR}/bin/pip" install --quiet -r "${REQUIREMENTS}"
+fi
+source "${VENV_DIR}/bin/activate"
+PYTHON_EXE="${VENV_DIR}/bin/python3"
+
+export OMP_NUM_THREADS=1
+
+# HEXAPIC binary needs libopenPMD.so at runtime; set OPENPMD_ROOT to override
+OPENPMD_ROOT="${OPENPMD_ROOT:-${ROOT_DIR}/../openpmd}"
+if [[ -d "${OPENPMD_ROOT}/lib64" ]]; then
+    export LD_LIBRARY_PATH="${OPENPMD_ROOT}/lib64:${LD_LIBRARY_PATH:-}"
+elif [[ -d "${OPENPMD_ROOT}/lib" ]]; then
+    export LD_LIBRARY_PATH="${OPENPMD_ROOT}/lib:${LD_LIBRARY_PATH:-}"
+fi
+
+EXE_PATH="${ROOT_DIR}/source/HEXAPIC"
+NPROCS="${SLURM_NTASKS:-1}"
+RUN_PARTICLE_PUSHER=false
+RUN_FIELD_SOLVER=false
+RUN_PARTICLE_MESH_COUPLING=false
+NO_CLEANUP=false
+
+if [[ $# -eq 0 ]]; then
+    RUN_PARTICLE_PUSHER=true
+    RUN_FIELD_SOLVER=true
+    RUN_PARTICLE_MESH_COUPLING=true
+fi
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --particle-pusher)
+            RUN_PARTICLE_PUSHER=true
+            shift
+            ;;
+        --field-solver)
+            RUN_FIELD_SOLVER=true
+            shift
+            ;;
+        --particle-mesh-coupling)
+            RUN_PARTICLE_MESH_COUPLING=true
+            shift
+            ;;
+        --all)
+            RUN_PARTICLE_PUSHER=true
+            RUN_FIELD_SOLVER=true
+            RUN_PARTICLE_MESH_COUPLING=true
+            shift
+            ;;
+        --exe)
+            EXE_PATH="$2"
+            shift 2
+            ;;
+        --no-cleanup)
+            NO_CLEANUP=true
+            shift
+            ;;
+        --help|-h)
+            usage
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $1"
+            usage
+            exit 1
+            ;;
+    esac
+done
+
+if [[ "${RUN_PARTICLE_PUSHER}" == "false" && "${RUN_FIELD_SOLVER}" == "false" && "${RUN_PARTICLE_MESH_COUPLING}" == "false" ]]; then
+    echo "No test groups selected. Use --particle-pusher, --field-solver, --particle-mesh-coupling, or --all."
+    exit 1
+fi
+
+# Check executable exists (needed for all test groups)
+if [[ "${RUN_PARTICLE_PUSHER}" == "true" || "${RUN_FIELD_SOLVER}" == "true" || "${RUN_PARTICLE_MESH_COUPLING}" == "true" ]]; then
+    if [[ ! -x "${EXE_PATH}" ]]; then
+        echo "HEXAPIC executable not found or not executable: ${EXE_PATH}"
+        echo "Build it first or pass --exe /path/to/HEXAPIC"
+        exit 1
+    fi
+fi
+
+# Clear any stale result files from previous runs
+rm -f "${SCRIPT_DIR}/pp_results.json" "${SCRIPT_DIR}/fs_results.json" "${SCRIPT_DIR}/pmc_results.json"
+
+# All tests run with NPROCS (1 rank by default). Multi-rank testing later.
+DISPLAY_NPROCS="${NPROCS}"
+
+echo "ROOT_DIR: ${ROOT_DIR}"
+echo "HEXAPIC:  ${EXE_PATH}"
+echo "NPROCS:   ${DISPLAY_NPROCS}"
+echo ""
+
+# Print main header once
+COMMIT=$(git -C "${ROOT_DIR}" rev-parse --short HEAD 2>/dev/null || echo "n/a")
+printf '=======================================================================================================\n'
+printf '                                    HEXAPIC PHYSICS VALIDATION SUITE                                   \n'
+printf '                 Date: %s | Host: %s | Procs: %s | Commit: %s                 \n' \
+    "$(date +"%Y-%m-%d %H:%M")" "$(hostname)" "${DISPLAY_NPROCS}" "${COMMIT}"
+printf '=======================================================================================================\n\n'
+
+# Run one test group: copy inputs to temp dir, run Python test script, aggregate results.
+# Usage: run_test_group <run_flag> <tmpdir_prefix> <subdir> <test_script> <results_json>
+run_test_group() {
+    local run_flag="$1"
+    local tmp_prefix="$2"
+    local subdir="$3"
+    local test_script="$4"
+    local results_json="$5"
+    [[ "${run_flag}" != "true" ]] && return 0
+
+    local tmp_dir
+    tmp_dir=$(mktemp -d -p "${SCRIPT_DIR}" "${tmp_prefix}XXXXXX")
+    RUN_TMP_DIR="${tmp_dir}"
+    trap '[[ -n "${RUN_TMP_DIR:-}" ]] && rm -rf "${RUN_TMP_DIR}"' EXIT
+
+    cp "${SCRIPT_DIR}/${subdir}"/*.inp "${tmp_dir}/"
+    cp "${SCRIPT_DIR}/${subdir}/${test_script}" "${tmp_dir}/"
+    cp "${SCRIPT_DIR}/utils.py" "${tmp_dir}/"
+
+    pushd "${tmp_dir}" >/dev/null
+    rm -f "${SCRIPT_DIR}/${results_json}"
+    local args=("--exe" "${EXE_PATH}" "--nprocs" "${NPROCS}" "--results-json" "${SCRIPT_DIR}/${results_json}")
+    if [[ "${NO_CLEANUP}" == "true" ]]; then
+        args+=("--no-cleanup")
+        trap - EXIT
+    fi
+    ${PYTHON_EXE} "${test_script}" "${args[@]}" || true
+    popd >/dev/null
+
+    if [[ "${NO_CLEANUP}" == "false" ]]; then
+        rm -rf "${tmp_dir}"
+        RUN_TMP_DIR=
+        trap - EXIT
+    fi
+}
+
+run_test_group "${RUN_PARTICLE_PUSHER}"          "run_pp_"   "particle_pusher"          "test_particle_pusher.py"          "pp_results.json"
+run_test_group "${RUN_FIELD_SOLVER}"             "run_fs_"   "field_solver"             "test_field_solver.py"            "fs_results.json"
+run_test_group "${RUN_PARTICLE_MESH_COUPLING}"   "run_pmc_"  "particle_mesh_coupling"   "test_particle_mesh_coupling.py" "pmc_results.json"
+
+RESULT_FILES=()
+if [[ -f "${SCRIPT_DIR}/pp_results.json" ]]; then RESULT_FILES+=("${SCRIPT_DIR}/pp_results.json"); fi
+if [[ -f "${SCRIPT_DIR}/fs_results.json" ]]; then RESULT_FILES+=("${SCRIPT_DIR}/fs_results.json"); fi
+if [[ -f "${SCRIPT_DIR}/pmc_results.json" ]]; then RESULT_FILES+=("${SCRIPT_DIR}/pmc_results.json"); fi
+
+if [[ ${#RESULT_FILES[@]} -gt 0 ]]; then
+    AGG_EXIT=0
+    ${PYTHON_EXE} "${SCRIPT_DIR}/utils.py" "${RESULT_FILES[@]}" || AGG_EXIT=$?
+    rm -f "${RESULT_FILES[@]}"
+    exit "${AGG_EXIT}"
+else
+    echo "No result files found. Something went wrong."
+    exit 1
+fi

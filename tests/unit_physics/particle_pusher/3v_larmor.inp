@@ -1,0 +1,72 @@
+HEXAPIC
+{    Test 2: Larmor Orbit (Out-of-Plane / 3V).
+     By field, electron with vz.
+}
+Region
+{
+Species
+{
+     name = electron
+     m = 9.1093837139e-31
+     q = -1.602176634e-19
+     subcycle = 1
+}
+Grid
+{
+     J = 100
+     x1s = 0.0
+     x1f = 0.002
+     n1 = 1.0
+     K = 100
+     x2s = 0.0
+     x2f = 0.002
+     n2 = 1.0
+     Geometry = 1
+}
+Control
+{
+     dt = 1e-12
+     B01 = 0.0
+     B02 = 0.1
+     B03 = 0.0
+     FieldSolverFlag = 0
+     ParticleDiagnosticFlag = 1
+}
+Dielectric
+{
+     QuseFlag = 0
+     reflection = 0
+     j1 = 0
+     j2 = 0
+     k1 = 0
+     k2 = 100
+     normal = 1
+}
+Dielectric
+{
+     QuseFlag = 0
+     reflection = 0
+     j1 = 100
+     j2 = 100
+     k1 = 0
+     k2 = 100
+     normal = -1
+}
+Load
+{
+     speciesName = electron
+     x1MinMKS = 0.001
+     x1MaxMKS = 0.001001
+     x2MinMKS = 0.001
+     x2MaxMKS = 0.001001
+     density = 2e+18
+     np2c = 1.0
+     v1thermal = 0.0
+     v2thermal = 0.0
+     v3thermal = 0.0
+     v1drift = 0.0
+     v2drift = 0.0
+     v3drift = 1.0e6
+     LoadMethodFlag = 0
+}
+}

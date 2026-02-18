@@ -1,7 +1,7 @@
-HEXAPIC 
-{	 Uniformly distributed electron-proton plasma between two biased plates with wall injection. MCC + PSI. 
+HEXAPIC
+{	 Uniformly distributed electron-proton plasma between two biased plates with wall injection. MCC + PSI.
 }
-Region 
+Region
 {
 Species
 {
@@ -35,11 +35,11 @@ Grid
 	 J = 100
 	 x1s = 0.0
 	 x1f = 0.001
-	 n1 = 1.0 
+	 n1 = 1.0
 	 K = 100
 	 x2s = 0.0
 	 x2f = 0.001
-	 n2 = 1.0 
+	 n2 = 1.0
 	 Geometry = 1
 }
 Control
@@ -47,17 +47,18 @@ Control
 	 dt = 1e-12
 	 B01 = 0.1
 	 B02 = 0.0
-	 ElectrostaticFlag = 1 
+	 FieldSolverFlag = 1
+	 ParticleDiagnosticFlag = 0
 }
 Dielectric
 {
 	 QuseFlag = 0
 	 reflection = 0
-	 j1 = 0 
-	 j2 = 0 
-	 k1 = 0 
+	 j1 = 0
+	 j2 = 0
+	 k1 = 0
 	 k2 = 100
-	 normal = 1 
+	 normal = 1
 }
 Dielectric
 {
@@ -65,29 +66,29 @@ Dielectric
 	 reflection = 0
 	 j1 = 100
 	 j2 = 100
-	 k1 = 0 
+	 k1 = 0
 	 k2 = 100
-	 normal = -1 
+	 normal = -1
 }
 Equipotential
 {
 	 C = -10
 	 reflection = 0.0
-	 j1 = 0 
+	 j1 = 0
 	 j2 = 100
-	 k1 = 0 
-	 k2 = 0 
-	 normal = 1 
+	 k1 = 0
+	 k2 = 0
+	 normal = 1
 }
 Equipotential
 {
 	 C = 10
 	 reflection = 0.0
-	 j1 = 0 
+	 j1 = 0
 	 j2 = 100
 	 k1 = 100
 	 k2 = 100
-	 normal = -1 
+	 normal = -1
 }
 Load
 {

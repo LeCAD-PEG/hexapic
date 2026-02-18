@@ -528,28 +528,63 @@ def save_results(tests: List[TestCase], filepath: str):
         }
         data.append(_convert_for_json(t_dict))
 
-    with open(filepath, "w") as f:
+    # Normalize and constrain the output path to the results root directory.
+    safe_path = _normalize_results_path_for_write(filepath)
+
+    with open(safe_path, "w") as f:
         json.dump(data, f, indent=2)
+
+
+def _get_results_root() -> Path:
+    """
+    Return the root directory under which result files are allowed.
+
+    Currently this is the current working directory, matching prior behavior,
+    but centralizing this allows tightening the boundary in one place if needed.
+    """
+    return Path.cwd().resolve()
+
+
+def _normalize_results_path_for_write(filepath: str) -> Path:
+    """
+    Normalize a results file path for writing, ensuring it stays within the
+    configured results root directory.
+    """
+    results_root = _get_results_root()
+    # Build the candidate path relative to the results root and resolve it.
+    candidate = (results_root / filepath).expanduser().resolve()
+
+    # Ensure the path is within the results root directory.
+    try:
+        candidate.relative_to(results_root)
+    except ValueError:
+        raise ValueError(
+            f"Refusing to write results file outside results root directory: {filepath}"
+        )
+
+    return candidate
 
 
 def _validate_results_path(filepath: str) -> Path:
     """
     Validate a results file path coming from user-controlled input.
 
-    The path is resolved against the current working directory and must:
+    The path is resolved against the results root directory and must:
       - exist
       - be a regular file
-      - remain within the current working directory tree
+      - remain within the results root directory tree
     """
-    cwd = Path.cwd().resolve()
-    # Resolve the path safely relative to the current working directory.
-    candidate = Path(filepath).expanduser().resolve()
+    results_root = _get_results_root()
+    # Resolve the path safely relative to the results root directory.
+    candidate = (results_root / filepath).expanduser().resolve()
 
-    # Ensure the path is within the current working directory.
+    # Ensure the path is within the results root directory.
     try:
-        candidate.relative_to(cwd)
+        candidate.relative_to(results_root)
     except ValueError:
-        raise ValueError(f"Refusing to access results file outside working directory: {filepath}")
+        raise ValueError(
+            f"Refusing to access results file outside results root directory: {filepath}"
+        )
 
     if not candidate.is_file():
         raise ValueError(f"Results file does not exist or is not a file: {filepath}")

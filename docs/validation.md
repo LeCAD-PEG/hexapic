@@ -29,7 +29,7 @@
 * **Description**: Ion deposition on a substrate surface, including a trench.
 
 * **Input file:** original XOOPIC `deposition.inp` with the following modifications:
-	- grid size from 20$\times$20 to 32$\times$64 but keeping the same spatial resolution `dx=dy=5e-8m`
+	- grid size from 30$\times$100 to 32$\times$64 but keeping the same spatial resolution `dx=dy=5e-8m`
 	- time step from `1e-13s` to `0.5e-13s` (better time resolution)
 	- `np2c` from `1e4` to `1e3` (10$\times$ simulated particles for better statistics) 
 

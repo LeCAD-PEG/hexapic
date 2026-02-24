@@ -62,6 +62,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#electron-beam-spreading">Electron Beam Spreading</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#deposition">Deposition</a>
+    </li>
     </ul>
                 </li>
               </ul>
@@ -162,11 +164,12 @@
   <source src="../videos/hexapic_vs_xoopic_twostream.mp4" type="video/mp4">
 </video>
 
-<p>--</p>
+<p></p>
+
 <h2 id="electron-beam-spreading">Electron Beam Spreading<a class="headerlink" href="#electron-beam-spreading" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
-<p><strong>Physics</strong>: Spreading of an electron beam when propagating along metallic walls.</p>
+<p><strong>Description</strong>: Spreading of an electron beam when propagating along metallic walls.</p>
 </li>
 <li>
 <p><strong>Input file:</strong> original XOOPIC <code>xybeam.inp</code> with modified grid size 48<span class="arithmatex">\(\times\)</span>24 (from 20<span class="arithmatex">\(\times\)</span>20)</p>
@@ -174,6 +177,26 @@
 </ul>
 <video controls loop muted width="100%">
   <source src="../videos/hexapic_vs_xoopic_xybeam.mp4" type="video/mp4">
+</video>
+
+<p></p>
+
+<h2 id="deposition">Deposition<a class="headerlink" href="#deposition" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><strong>Description</strong>: Ion deposition on a substrate surface, including a trench.</p>
+</li>
+<li>
+<p><strong>Input file:</strong> original XOOPIC <code>deposition.inp</code> with the following modifications:</p>
+<ul>
+<li>grid size from 20<span class="arithmatex">\(\times\)</span>20 to 32<span class="arithmatex">\(\times\)</span>64 but keeping the same spatial resolution <code>dx=dy=5e-8m</code></li>
+<li>time step from <code>1e-13s</code> to <code>0.5e-13s</code> (better time resolution)</li>
+<li><code>np2c</code> from <code>1e4</code> to <code>1e3</code> (10<span class="arithmatex">\(\times\)</span> simulated particles for better statistics) </li>
+</ul>
+</li>
+</ul>
+<video controls loop muted width="100%">
+  <source src="../videos/hexapic_vs_xoopic_deposition.mp4" type="video/mp4">
 </video>
               
             </div>

@@ -1,4 +1,4 @@
-# XOOPIC
+# vs. XOOPIC
 
 ## Two-stream instability
 

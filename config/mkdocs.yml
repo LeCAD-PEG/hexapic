@@ -9,6 +9,7 @@ nav:
     - Usage: 'usage.md'
     - Scaling: 'scaling.md'
     - Tests: 'tests.md'    
+    - Examples: 'examples.md'
     - Validation: 'validation.md'
     - API:
         - Files:

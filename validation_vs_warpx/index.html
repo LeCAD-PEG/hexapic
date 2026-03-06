@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://lecad-peg.github.io/hexapic/examples/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://lecad-peg.github.io/hexapic/validation_vs_warpx/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Examples - HEXAPIC</title>
+    <title>Validation vs warpx - HEXAPIC</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Examples";
-        var mkdocs_page_input_path = "examples.md";
-        var mkdocs_page_url = "/hexapic/examples/";
+        var mkdocs_page_name = "Validation vs warpx";
+        var mkdocs_page_input_path = "validation_vs_warpx.md";
+        var mkdocs_page_url = "/hexapic/validation_vs_warpx/";
       </script>
     
     <!--[if lt IE 9]>
@@ -55,14 +55,8 @@
                 <li class="toctree-l1"><a class="reference internal" href="../tests/">Tests</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Examples</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#floating-conductive-object">Floating conductive object</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#floating-conductive-boundary">Floating conductive boundary</a>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../examples/">Examples</a>
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Validation</span></p>
@@ -143,9 +137,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Examples</li>
+      <li class="breadcrumb-item active">Validation vs warpx</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/LeCAD-PEG/HEXAPIC.git/edit/master/docs/examples.md">Edit on HEXAPIC</a>
+          <a href="https://github.com/LeCAD-PEG/HEXAPIC.git/edit/master/docs/validation_vs_warpx.md">Edit on HEXAPIC</a>
     </li>
   </ul>
   <hr/>
@@ -153,41 +147,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="custom-input-files">Custom input files<a class="headerlink" href="#custom-input-files" title="Permanent link">&para;</a></h1>
-<h2 id="floating-conductive-object">Floating conductive object<a class="headerlink" href="#floating-conductive-object" title="Permanent link">&para;</a></h2>
+                <h2 id="two-stream-instability">Two-stream instability<a class="headerlink" href="#two-stream-instability" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>Description</strong>: Formation of Debye sheath around a floating conductive object inside the plasma and evolution of the floating potential of the conductive object.</p>
-</li>
-<li>
-<p><strong>Input file:</strong> custom <code>conductive_object.inp</code></p>
-</li>
+<li><strong>Description</strong>: Formation of two-stream instability when counter-propagating electron beams have velocities much larger than their thermal velocity, in a background of cold ions.</li>
+<li><strong>Specifics</strong>: Both codes starts with a fixed number of particles per cell, as opposed to random particle placement inside the whole system.</li>
 </ul>
 <video controls loop muted width="100%">
-  <source src="../videos/hexapic_conductive_object.mp4" type="video/mp4">
+  <source src="../videos/hexapic_vs_warpx_twostream.mp4" type="video/mp4">
 </video>
 
 <p></p>
-
-<h2 id="floating-conductive-boundary">Floating conductive boundary<a class="headerlink" href="#floating-conductive-boundary" title="Permanent link">&para;</a></h2>
-<ul>
-<li>
-<p><strong>Description</strong>: Formation of Debye sheath in front of a floating conductive boundary and the evolution of its floating potential.</p>
-</li>
-<li>
-<p><strong>Input file:</strong> custom <code>conductive_boundary.inp</code></p>
-</li>
-</ul>
-<video controls loop muted width="100%">
-  <source src="../videos/hexapic_floating_boundary.mp4" type="video/mp4">
-</video>
               
             </div>
           </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../tests/" class="btn btn-neutral float-left" title="Tests"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../validation_vs_xoopic/" class="btn btn-neutral float-right" title="vs. XOOPIC">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
 
   <hr/>
 
@@ -214,10 +186,6 @@
         </span>
     
     
-      <span><a href="../tests/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../validation_vs_xoopic/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

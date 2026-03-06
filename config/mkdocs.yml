@@ -10,7 +10,9 @@ nav:
     - Scaling: 'scaling.md'
     - Tests: 'tests.md'    
     - Examples: 'examples.md'
-    - Validation: 'validation.md'
+    - Validation:
+        - vs. XOOPIC: 'validation_vs_xoopic.md'
+      # - vs. WarpX: 'validation_vs_warpx.md'
     - API:
         - Files:
             - -- All --: 'api/files.md'

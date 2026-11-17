@@ -1,0 +1,14 @@
+# GMG3D: multigrid in 3-D
+
+The 3-D solver is a conjugate-gradient iteration preconditioned by a V-cycle
+with a Chebyshev smoother. On several ranks it uses the pipelined form of
+conjugate gradients with a single reduction per iteration. The V-cycle runs
+in `float` inside the `double` iteration, which is set by
+`HEXAPIC_GMG3D_VREAL`.
+
+The bottom level is solved with a dense solver if it has at most 512
+unknowns. On several ranks, the first level with at most 5000 nodes is
+gathered and solved on every rank. The distributed levels use a
+communication-avoiding cycle with a deep halo. The parameters are in
+[`[solver.multigrid3d]`](../user-guide/case-toml.md#solvermultigrid3d-3-d).
+

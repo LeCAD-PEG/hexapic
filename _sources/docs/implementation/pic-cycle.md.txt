@@ -1,0 +1,65 @@
+# The step
+
+Positions are 2-D or 3-D, and velocities always have three components. The
+two configurations are called 2D3V and 3D3V. Velocities are defined at half
+steps and positions at whole steps.
+
+## The order of a step
+
+1. Field. The charge density left by the last push is smoothed, as set in
+   [`[smoothing]`](../user-guide/case-toml.md#smoothing). The
+   [field solver](../solvers/index.md) then solves the Poisson equation, and
+   $\mathbf{E} = -\nabla\phi$ is computed at the nodes. The gradient uses
+   central differences, and one-sided differences at a wall and next to a
+   conductor.
+2. Push. Each species is pushed in a single kernel. The kernel gathers the
+   field at the particle, advances the velocity and the position, applies
+   the walls and deposits the charge at the new position. Applying the walls
+   includes absorption, reflection, emission and the charge a wall collects.
+3. Exchange. Particles that left the part of the domain owned by a rank are
+   sent to the neighbouring rank.
+4. Sources. Beams inject particles and volumetric sources create them.
+   Heating acts on the particles in its region.
+5. Collisions, described in [Collisions](collisions.md).
+6. Output, at the output steps.
+
+The field solve, the particles and the collisions run on separate GPU
+queues. The host waits only where it needs a result, so the stages overlap.
+
+## Subcycling
+
+A species with `subcycle = n` is pushed every $n$ steps with the time step
+$n\Delta t$. It moves in the field averaged over those $n$ steps. Its charge
+density is kept between its pushes.
+
+## Shape
+
+The particle shape is chosen at compile time with `HEXAPIC_SHAPE_ORDER`. The
+value `1` selects CIC and `2` selects TSC, which is the default. See
+[Build options](../user-guide/build-options.md). In 2-D and 3-D the weight is
+the product of the weights along each axis. In 2-D a cell has the volume
+$\Delta x\,\Delta y \times 1\,\mathrm{m}$.
+
+## Loading
+
+A `[[load]]` draws positions uniformly in its box and velocities from a
+drifting Maxwellian. The Maxwellian has one temperature, or one per axis.
+
+With `same_positions_as`, a second species is placed at the positions of the
+first. The run then starts without charge separation.
+
+## The particles in memory
+
+The particles stay on the GPU for the whole run. They are stored as a
+structure of arrays and grouped in bins of 8 × 8 cells in 2-D or 4 × 4 × 4
+cells in 3-D. The position of a particle is stored relative to its bin, so
+its resolution does not depend on where the particle is in the domain. The
+push compacts each bin in place and moves the particles that leave it to
+their new bin.
+
+## Domain decomposition
+
+On several ranks the grid is split into blocks, one per rank. At the seams
+between blocks, the charge of both sides is summed and the halo of the
+potential is exchanged. Particles that cross a seam are sent to the
+neighbour after the push.

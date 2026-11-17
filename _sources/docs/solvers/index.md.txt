@@ -1,0 +1,74 @@
+# Solvers
+
+Every step solves the Poisson equation
+
+$$
+-\nabla\cdot\left(\varepsilon\,\nabla\phi\right) = \rho
+$$ (eq:poisson)
+
+for the potential $\phi$. The charge density $\rho$ comes from the particles,
+and the permittivity $\varepsilon$ describes the domain and its dielectrics.
+
+HEXAPIC's field solvers are its own. They are written entirely in alpaka3
+kernels and use no vendor libraries. A solver runs inside the PIC step, on
+the same domain decomposition as the particles, and computes in its own
+precision, `HEXAPIC_MG_REAL_TYPE`, which is `double` by default. The settings
+are in [`[solver]`](../user-guide/case-toml.md#solver).
+
+| Solver | `type` | Dimension | Method | Applies to |
+|---|---|---|---|---|
+| [GMGa3](gmga3.md) | `multigrid` | 2-D | Conjugate gradients preconditioned by a geometric multigrid V-cycle | Every 2-D case |
+| [GMG3D](gmg3d.md) | `multigrid` | 3-D | Conjugate gradients preconditioned by a geometric multigrid V-cycle | Every 3-D case |
+| [Strip](strip.md) | `strip` | 2-D | Direct: modes across y, a tridiagonal system along x | A strip with Dirichlet walls at both x ends and nothing inside |
+
+A build with HYPRE (`HEXAPIC_USE_HYPRE`) adds `type = "hypre"` in 2-D. It is
+meant for A/B checks of the solvers above.
+
+## Choosing a solver
+
+The default, `type = "auto"`, takes the strip solver for a 2-D case that
+meets [its conditions](strip.md#the-cases-it-solves) and has at most 128
+cells across y, where it is faster than the multigrid. Every other case gets
+the multigrid. The run prints the choice and its reason. This is the line of
+the two-stream example, which is periodic in x:
+
+```text
+[solver] auto: the multigrid: x is not Dirichlet (Conductor, Equipotential or open) at both ends
+```
+
+## The operator
+
+The operator is the standard five-point stencil on a uniform grid, or the
+seven-point stencil in 3-D. A permittivity that varies in space is stored at
+every node. A uniform permittivity is detected at setup and handled by a
+constant-coefficient path. Every multigrid level uses the same
+operator, discretised again with the spacing of that level.
+
+## Conductors and dielectrics
+
+The multigrid solvers handle conductors and dielectrics inside the domain.
+
+Biased conductors, both walls and regions, are nodes fixed at their
+potential. A coarse node is fixed if its prolongation reaches any fixed fine
+node. A conductor that is only one node thick is therefore present on every
+level.
+
+Floating conductor regions take the potential that follows from their
+charge. Each solve combines a solve with the conductors grounded and the
+unit responses of the conductors, weighted through their capacitance matrix.
+Regions of one `group` share one potential.
+
+Floating walls are Neumann walls. The charge they collect enters the
+right-hand side, and the wall floats to its sheath potential.
+
+Dielectric walls that collect charge are treated in the same way. A node
+that a biased wall or a conductor also covers keeps its fixed potential.
+
+```{toctree}
+:maxdepth: 1
+:hidden:
+
+gmga3
+gmg3d
+strip
+```

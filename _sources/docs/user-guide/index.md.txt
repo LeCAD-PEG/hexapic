@@ -1,0 +1,17 @@
+# User guide
+
+A case is a single file, `case.toml`. HEXAPIC reads it, runs it and writes
+the output next to it. This guide covers the command line, every key of the
+file, the compile-time options, writing a case in Python, and the files a run
+produces.
+
+```{toctree}
+:maxdepth: 1
+
+running
+case-toml
+build-options
+picmi
+collision-data
+output
+```

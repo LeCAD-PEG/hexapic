@@ -1,0 +1,140 @@
+# PICMI
+
+You can write a case as a Python script with `hexapic.picmi`. This package
+is the HEXAPIC implementation of the
+[PICMI standard](https://github.com/picmi-standard/picmi). The script writes
+`case.toml`, checks it with the reader that HEXAPIC itself uses, and can
+start the run. The same script can also write an XOOPIC deck.
+
+## Installation
+
+Install the package once per machine. It needs Python 3.11 or newer.
+
+```bash
+python3 -m venv python/.venv
+python/.venv/bin/pip install -e python/
+```
+
+The install is editable. It finds the build in the repository at
+`build/HEXAPIC`.
+
+## A first script
+
+The script `python/examples/biased_plates.py` sets up a cold
+electron–positron plasma between two biased plates. Both species are also
+injected through part of the x = 0 plane.
+
+```python
+from hexapic import picmi
+
+nx = ny = 96
+dx = 1e-5
+grid = picmi.Cartesian2DGrid(number_of_cells=[nx, ny], lower_bound=[0.0, 0.0],
+                             upper_bound=[nx * dx, ny * dx],
+                             lower_boundary_conditions=["open", "dirichlet"],
+                             upper_boundary_conditions=["open", "dirichlet"])
+sim = picmi.Simulation(solver=picmi.ElectrostaticSolver(grid=grid),
+                       time_step_size=1e-11, max_steps=1000)
+sim.add_applied_field(picmi.ConstantAppliedField(By=0.1))
+sim.add_boundary(picmi.Boundary(type="biased", location="y_lo", voltage=-10.0))
+sim.add_boundary(picmi.Boundary(type="biased", location="y_hi", voltage=10.0))
+
+for particle in ("electron", "positron"):
+    plasma = picmi.UniformDistribution(density=1e18, hexapic_temperature_eV=2.0,
+                                       hexapic_weight=1e7)
+    sim.add_species(picmi.Species(particle_type=particle, name=f"{particle}s",
+                                  initial_distribution=[plasma]), None)
+
+sim.add_diagnostic(picmi.FieldDiagnostic(grid=grid, period=10))
+sim.write_input_file("cases/biased_plates/case.toml")
+print(sim.check())
+```
+
+Run the script to write the case, then run the case:
+
+```bash
+python/.venv/bin/python python/examples/biased_plates.py cases/biased_plates
+build/HEXAPIC cases/biased_plates/case.toml
+```
+
+You can also start the run from the script with
+`sim.run(launch="mpirun -np 2")`.
+
+`sim.check()` runs `HEXAPIC --check` on the case. Every key is checked by
+the same reader that a run uses, and an error names the file and the line
+and suggests the key you may have meant.
+
+## Objects of the standard
+
+| PICMI | `case.toml` |
+|---|---|
+| `Cartesian2DGrid`, `Cartesian3DGrid` and their boundary conditions | `[grid]` and the walls |
+| `Simulation` with `time_step_size`, `max_steps` or `max_time`, `particle_shape` | `[time]` and `[build] shape_order` |
+| `Species` with `particle_type` and `charge_state`, or with `mass` and `charge` | `[[species]]` |
+| `UniformDistribution` with `PseudoRandomLayout` | `[[load]]` |
+| `AnalyticFluxDistribution` | `[[beam]]` |
+| `ConstantAppliedField` | `[magnetic_field]` |
+| `FieldDiagnostic`, `ElectrostaticFieldDiagnostic` | `[output]` keys `every`, `dir` and `from` |
+| `ElectrostaticSolver` with `required_precision` | `[solver] tolerance` |
+
+Some details of this mapping:
+
+- The boundary condition `dirichlet` becomes a grounded wall, and `neumann`
+  with `reflecting` becomes a reflective wall. `open` and `periodic` keep
+  their names.
+- The `rms_velocity` of a distribution is the thermal speed of the load.
+- `AnalyticFluxDistribution` describes a constant flux through part of a
+  plane.
+- `ConstantAppliedField` supports only B.
+
+The best way to define a species is `particle_type`, for example
+`"electron"`, or `"Ar"` with `charge_state=1`. HEXAPIC then uses the CODATA
+mass and charge. The function
+`picmi.particle_mass_charge(particle_type, charge_state)` returns the same
+numbers to a script.
+
+## HEXAPIC extensions
+
+Where the standard has no object, HEXAPIC adds its own classes. Their keyword
+arguments are the keys of the matching `case.toml` table. A species can be
+passed as an object or by its name.
+
+| Class | Added with | `case.toml` |
+|---|---|---|
+| `Boundary` | `sim.add_boundary` | `[[boundary]]` |
+| `Region` | `sim.add_region` | `[[region]]` |
+| `Beam` | `sim.add_beam` | `[[beam]]` |
+| `Source` | `sim.add_source` | `[[source]]` |
+| `Heating` | `sim.add_heating` | `[[heating]]` |
+| `MCCCollisions`, `CoulombCollisions` | `sim.add_interaction` | `[[collisions]]` |
+
+The classes of the standard accept HEXAPIC arguments with the prefix
+`hexapic_`:
+
+| Class | Arguments |
+|---|---|
+| `Species` | `hexapic_subcycle` |
+| `UniformDistribution` | `hexapic_temperature_eV`, `hexapic_weight`, `hexapic_same_positions_as` |
+| `AnalyticFluxDistribution` | `hexapic_weight`, `hexapic_temperature_eV`, `hexapic_every` |
+| `ElectrostaticSolver` | `hexapic_type`, `hexapic_phi_extrapolation`, `hexapic_zero_line_x`, `hexapic_multigrid`, in 3-D `hexapic_multigrid3d` |
+| `Simulation` | The tables `hexapic_run`, `hexapic_output`, `hexapic_checkpoint`, `hexapic_smoothing`, `hexapic_tuning`, `hexapic_debug`, `hexapic_build` and `hexapic_magnetic_field` |
+
+Use `hexapic_magnetic_field` for a `profile` field, which
+`ConstantAppliedField` cannot describe.
+
+The walls of the grid are written after the `Boundary` objects. The order
+matters in one case: a corner shared by two biased walls takes the voltage of
+the later wall. If you depend on this, define every wall as a `Boundary`.
+
+## XOOPIC as a target
+
+Replace `from hexapic import picmi` with `from xoopic import picmi`, and the
+same script writes an XOOPIC deck. `sim.run()` then runs XOOPIC on it.
+
+XOOPIC has no block for floating conductor regions, heating or Coulomb
+collisions. These are listed in `// Not carried over` lines at the top of
+the deck. Arguments specific to XOOPIC have the prefix `xoopic_`, and HEXAPIC
+ignores them.
+
+The [verification against XOOPIC](../verification/codes.md#xoopic) relies on this.
+Each case is one script that runs on both codes.

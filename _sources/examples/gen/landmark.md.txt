@@ -1,0 +1,137 @@
+# LANDMARK: axial-azimuthal Hall thruster
+
+<video class="hx-video" controls loop muted playsinline preload="metadata" poster="../../_static/videos/landmark.jpg" src="../../_static/videos/landmark.mp4"></video>
+
+The benchmark of {cite:t}`charoy2019` is an E×B discharge as in the channel
+and the plume of a Hall thruster. The axial direction $x$ runs from the
+anode to the cathode, the azimuthal direction $y$ is periodic, and the
+radial magnetic field points out of the plane. The electrons drift along
+$y$, and the instability that grows in this drift carries them across the
+magnetic field towards the anode. Seven particle-in-cell codes agree on the
+result within 5 %, which makes the case a test of the whole code on a
+turbulent, magnetized plasma.
+
+## Setup
+
+| | |
+|---|---|
+| Domain | 2.52 cm × 1.28 cm, periodic in $y$. The benchmark's domain is 2.5 cm; the extra 0.2 mm lie behind the cathode line, because the number of cells along an axis is a multiple of 8. |
+| Grid | 504 × 256 cells of 50 µm |
+| Walls | anode at $x = 0$, 200 V; grounded wall at $x = 2.52$ cm; both absorb |
+| Magnetic field | along $z$, a Gaussian profile in $x$: 6 mT at the anode, 10 mT at 0.75 cm, 1 mT at 2.5 cm |
+| Plasma at the start | electrons (10 eV) and Xe⁺ (0.5 eV), $5\times10^{16}\ \mathrm{m^{-3}}$ |
+| Ionization | no collisions. Electron–ion pairs are created between 0.25 and 1 cm at a rate with a cosine profile, which gives the ion current $J_M = 400\ \mathrm{A/m^2}$. |
+| Cathode | at $x = 2.4$ cm. Each step it emits as many electrons (10 eV) as the anode collected net, and the mean potential on this line is held at 0 V. |
+| Particles | case 2 of the benchmark: 75 per cell and species at the start, about $37\times10^{6}$ electrons at the end |
+| Time step | $5\times10^{-12}$ s |
+| Run | $4\times10^{6}$ steps (20 µs), output every 10 000 steps |
+| Field solver | [GMGa3](../../docs/solvers/gmga3.md), the 2-D multigrid; relative tolerance $10^{-5}$ |
+| Build | linear particle shape (CIC), as the codes of the benchmark use: `-DHEXAPIC_SHAPE_ORDER=1` |
+| Cost | about 6 hours on one NVIDIA A100 |
+
+## Running
+
+The case needs a build with the linear particle shape. See
+[Build options](../../docs/user-guide/build-options.md).
+
+```bash
+cmake --preset default -B build-cic -DHEXAPIC_SHAPE_ORDER=1 && cmake --build build-cic -j
+python examples/thrusters/landmark/case.py runs/landmark
+build-cic/HEXAPIC runs/landmark/case.toml > runs/landmark/run.log
+python examples/thrusters/landmark/analyze.py runs/landmark
+```
+
+`case.py` writes `runs/landmark/case.toml`. `analyze.py` reads the series
+and the log of the run, `run.log`, which has the currents of the walls and
+of the cathode. It prints the numbers below and writes `results.json` and
+the two figures into the run's directory.
+
+| Option of `case.py` | |
+|---|---|
+| `--case N` | the benchmark's case: 1 (150 particles per cell and species at the start), 2 (75, the default) or 3 (300) |
+| `--steps N` | the number of steps |
+| `--every N` | an output every `N` steps |
+| `--live` | write the frames that HEXAPIC / VIZ shows during the run |
+
+## Results
+
+The paper compares its codes over the last 4 µs of the 20 µs. All numbers
+below are means over this window.
+
+### Axial profiles against the paper
+
+The profiles of the axial field $E_x$, of the ion density $n_i$ and of the
+electron temperature $T_e$ are averaged over $y$ and over the window. The
+paper shows the curves of the seven codes in its figure 6. Their peaks are
+read off that figure and stored in `reference/charoy2019/peaks.csv`.
+
+![The axial profiles of the electric field, the ion density and the electron temperature, with the peaks of the paper's curves](../../_examples/thrusters/landmark/figures/profiles.png)
+
+*The axial profiles of HEXAPIC, averaged over $y$ and over 16 to 20 µs. The
+crosses are the peaks of the curves in figure 6 of the paper.*
+
+| | HEXAPIC | Paper | Ratio |
+|---|---|---|---|
+| Peak of $E_x$ [V/m] | $5.01\times10^{4}$ at 0.870 cm | $5.05\times10^{4}$ at 0.86 cm | 0.992 |
+| Peak of $n_i$ [$\mathrm{m^{-3}}$] | $3.69\times10^{17}$ at 0.478 cm | $3.7\times10^{17}$ at 0.48 cm | 0.998 |
+| Peak of $T_e$ [eV] | 52.8 at 0.723 cm | 53.5 at 0.72 cm | 0.986 |
+| $n_i$ in the plume, 1.5 to 2.2 cm [$\mathrm{m^{-3}}$] | $1.49\times10^{17}$ | $1.45\times10^{17}$ | 1.03 |
+
+The three peaks agree with the paper within 1.4 %, and the density of the
+plume within 3 %. The codes of the paper agree with each other within 5 %.
+The paper's numbers are read off curves, which limits them to about 1 %.
+
+### Cathode current against the paper
+
+The cathode emits the electron current $J_{ec}$. A part of it neutralizes
+the ion beam that leaves the domain, $J_{ic}$. The rest,
+$J_{ec1} = J_{ec} - J_{ic}$, enters the channel and crosses the magnetic
+field. Its ratio to the imposed ion current $J_M$ measures the transport of
+the electrons across the field, which only the instability provides.
+
+![The cathode current into the channel over time, with the range of the paper's codes](../../_examples/thrusters/landmark/figures/current.png)
+
+*The current $J_{ec1}/J_M$ over the run. The grey band is the range of the
+paper's codes, and the violet band is the window of the means.*
+
+| | $J_{ec1}/J_M$ |
+|---|---|
+| HEXAPIC, mean and standard deviation over the window | $0.92 \pm 0.15$ |
+| Paper, the range of its codes (figure 3) | 0.75 to 1 |
+
+The current overshoots to 3.6 near 5 µs, as in the paper, and then settles
+inside the range of the paper's codes.
+
+## Files
+
+| | |
+|---|---|
+| `case.py` | the case as a PICMI script |
+| `case.toml` | case 2 as `case.py` writes it |
+| `analyze.py` | the profiles and the cathode current, from a run and its log |
+| `figures/` | the figures above, as `analyze.py` writes them |
+| `reference/charoy2019/` | the peaks read off the paper's figures |
+| `reference/SOURCE.md` | the sources of the reference data |
+
+## The script
+
+:::{dropdown} `case.py`
+```{literalinclude} ../../_examples/thrusters/landmark/case.py
+:language: python
+```
+:::
+
+## References
+
+The benchmark, its parameters and the results of its seven codes:
+{cite:t}`charoy2019`.
+
+### The paper's numbers (`charoy2019/`)
+
+- `peaks.csv`: the peaks of the axial profiles of $E_x$, $n_i$ and $T_e$,
+  read by eye off the curves of the paper's figure 5 (case 1) and figure 6
+  (case 2), where the seven codes lie within 5 % of each other. The reading
+  is good to about 1 %.
+- The ion density of the plume, $1.45\times10^{17}\ \mathrm{m^{-3}}$, is
+  read off the same figures. The range of $J_{ec1}/J_M$, 0.75 to 1, is read
+  off the paper's figure 3. Both are constants in `analyze.py`.

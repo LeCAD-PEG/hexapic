@@ -1,0 +1,86 @@
+# Tests
+
+## Unit tests
+
+The host tests need only a C++20 compiler. The last two also need the
+alpaka3 checkout of the main build.
+
+| Test | What it checks |
+|---|---|
+| `band_cholesky_test` | The band Cholesky factorisation of the coarse solver |
+| `case_toml_test` | The `case.toml` reader and writer |
+| `rng_test` | The random numbers used on the device |
+| `coulomb_test` | The Coulomb collision model |
+
+```bash
+source/tests/run_tests.sh
+```
+
+The GPU tests are built as separate targets together with HEXAPIC:
+
+| Test | What it checks |
+|---|---|
+| `test_dmg`, `test_gmg3d` | The field solvers |
+| `pic_store_test` | The particle store |
+| `smooth_test`, `smooth3_test` | The charge smoothing |
+| `coulomb_kernel_test`, `coulomb_relax_test` | The Coulomb kernels |
+
+The Python package has its own tests:
+
+```bash
+python/.venv/bin/python python/tests/test_picmi.py
+```
+
+## The bit-for-bit gate
+
+Some changes should not change the results at all. To check such a change,
+run a set of cases with two builds and compare the particles in their last
+checkpoints. The comparison exits with 0 if every case is identical.
+
+```bash
+tools/gate/gate.sh build-a out-a
+tools/gate/gate.sh build-b out-b
+tools/gate/gatecmp.sh out-a out-b
+```
+
+Both builds need deterministic charge deposition, which is enabled with
+`-DCMAKE_CUDA_FLAGS=-DHEXAPIC_DET_RHO=1`. The cases leave out the features
+that are not reproducible yet: autotuning, collisions, emission and heating.
+Before you compare two builds, compare the baseline build with itself. It
+must come out identical.
+
+## Physics tests
+
+The physics tests run cases and check their results against theory. A case
+is an example (`examples/<group>/<name>/`) or a check of one part of the code
+that is not shown as an example (`tests/physics/<name>/`, laid out as an
+example: `case.py`, `analyze.py`, `README.md`).
+A test runs an example as its README says: `case.py` writes the case,
+HEXAPIC runs it, and `analyze.py` measures the result. The test then
+compares the measured number with the theoretical one, within a tolerance.
+
+```bash
+python tests/physics/run.py
+python tests/physics/run.py two_stream
+python tests/physics/run.py --list
+```
+
+```text
+PASS  two_stream              15.8 s  growth_rate / growth_rate_theory = 0.994 (tolerance 5%)
+```
+
+`--hexapic` names the binary (default `build/HEXAPIC`), and `--python` names
+the interpreter for `analyze.py`, which needs `openpmd_api`. A failed test
+keeps its run and its log. The exit status is 1 if a test fails.
+
+A test also fails when a file that the example keeps is no longer what its
+`case.py` writes. Such files are `case.toml` and the input of another code
+in `reference/`.
+
+Comparisons with other codes are not tests. They are part of the examples
+and are listed in [Verification](../verification/index.md).
+
+## Verification runs
+
+The comparisons that are not examples yet and the consistency suites are
+described in [Verification](../verification/index.md).

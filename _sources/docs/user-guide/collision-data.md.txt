@@ -1,0 +1,94 @@
+# Collision data
+
+Monte Carlo collisions are enabled with a `[[collisions]]` table of
+`type = "mcc"`. They need cross sections. By default HEXAPIC reads them from
+the directory `mcc/` in the repository. You can point it to another directory
+with `data_dir`, or load the electron processes from an LXCat file.
+
+## The built-in gases
+
+| Gas | Electron–neutral | Ion–neutral |
+|---|---|---|
+| `H` | elastic, excitation, ionization | elastic, charge exchange |
+| `D` | same as H | same as H at the same relative speed |
+| `Ar` | elastic, excitation, ionization | elastic, charge exchange |
+| `He` | elastic, excitation, ionization, double ionization | elastic, charge exchange |
+| `N` | elastic, excitation, ionization, double ionization | elastic, charge exchange |
+| `Ne` | elastic, excitation, ionization, double ionization | elastic, charge exchange |
+
+Double ionization produces the species named in `ion2`. The sources of the
+data are listed in `mcc/README.md`.
+
+The ion tables are looked up at the centre-of-mass energy. The H⁺ + H files
+give the energy in the lab frame, with the neutral at rest, which is twice
+the centre-of-mass energy. HEXAPIC halves their energies when it reads them.
+
+## The file format
+
+Each process has its own file, named `e_<gas>_<process>.dat` for electrons
+and `i_<gas>_<process>.dat` for ions. A file has two columns, the energy in
+eV and the cross section in m². Lines that start with `#` are comments.
+Between two points the cross section is interpolated linearly. Outside the
+tabulated range it stays constant.
+
+This is the beginning of `mcc/e_Ar_elastic.dat`:
+
+```text
+# Elastic scattering: e + Ar -> e + Ar
+0.001   3.90e-20
+0.002   2.70e-20
+0.003   2.15e-20
+...
+```
+
+The keys `scale_electron` and `scale_ion` multiply all electron or all ion
+cross sections by a factor.
+
+## LXCat files
+
+The electron–neutral processes can instead come from a file in the
+[LXCat](https://www.lxcat.net) download format. The path is relative to the
+working directory or to the case.
+
+```toml
+[[collisions]]
+type = "mcc"
+gas = "Ar"
+pressure_Torr = 0.1
+electron = "electrons"
+ion = "ions"
+lxcat_file = "Ar_set.txt"
+```
+
+HEXAPIC reads the blocks whose target is the gas:
+
+| Block | Treated as |
+|---|---|
+| `ELASTIC` | Momentum transfer with isotropic scattering |
+| `EFFECTIVE` | Elastic, after the inelastic processes of the set are subtracted |
+| `EXCITATION` | One process per level. The threshold is the energy lost. |
+| `IONIZATION` | Ionization |
+| `ATTACHMENT` | Not supported. The file is refused. |
+
+The ion–neutral processes still come from the `i_<gas>_*.dat` files. An LXCat
+file works only with the uniform background gas, so the table must not have a
+`neutral` species.
+
+## The BIT1 set
+
+For comparisons with BIT1, HEXAPIC can use the data and the kinematics of
+BIT1. Set `set = "bit1"` together with `gas = "D"` and a `neutral` species.
+The comparison itself is described in
+[Other codes](../verification/codes.md#bit1). The set contains:
+
+- For e + D, elastic scattering, excitation with a loss of 11.0 eV, and the
+  Janev fit used by BIT1 for ionization with a loss of 13.6057 eV.
+- For D⁺ + D, elastic scattering and charge exchange. The data are from
+  Krstic and Schultz below 100 eV and from the Janev fit above.
+
+Every table is indexed by the centre-of-mass energy, which is how BIT1 looks
+them up. The scattering angles, the energy losses and the energy sharing
+also follow BIT1.
+
+The tables are in `mcc/bit1/`. The script `mcc/bit1/make_tables.py` generates
+them from the BIT1 data.

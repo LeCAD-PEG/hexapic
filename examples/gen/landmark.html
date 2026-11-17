@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Example: LANDMARK: axial-azimuthal Hall thruster</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/hexapic.css?v=e5596fca" />
+    <link rel="stylesheet" type="text/css" href="../../_static/site.css?v=370520c7" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=18bd87630a240e9c25be"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be" />
+
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/gen/landmark';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script defer="defer" src="../../_static/hero.js?v=8e2d957d"></script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Space-charge-limited diode" href="child_langmuir.html" />
+    <link rel="prev" title="Ion optics of a gridded ion thruster" href="ion_thruster.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo-dark-ink.png" class="logo__image only-light" alt="HEXAPIC"/>
+    <img src="../../_static/logo-light-ink.png" class="logo__image only-dark pst-js-only" alt="HEXAPIC"/>
+  
+  
+    <p class="title logo__title">HEXAPIC</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../docs/index.html">
+    Documentation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../about/index.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/LeCAD-PEG/hexapic" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../docs/index.html">
+    Documentation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../about/index.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/LeCAD-PEG/hexapic" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button type="button" id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic plasma</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="landau_damping.html">Landau damping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="two_stream.html">Two-stream instability</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Discharges</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ccp_helium.html">Capacitive discharge in helium (Turner benchmark)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Thrusters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="hall_thruster_3d.html">Hall thruster in 3-D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ion_thruster.html">Ion optics of a gridded ion thruster</a></li>
+<li class="toctree-l1 current active"><a aria-current="page" class="current reference internal" href="#">LANDMARK: axial-azimuthal Hall thruster</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Walls</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="child_langmuir.html">Space-charge-limited diode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deposition.html">Ion deposition in a trench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="floating_wall.html">Floating wall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wall_types.html">Wall types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xybeam.html">Electron beam between grounded plates</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Examples</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">LANDMARK: axial-azimuthal Hall thruster</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="landmark-axial-azimuthal-hall-thruster">
+<h1>LANDMARK: axial-azimuthal Hall thruster<a class="headerlink" href="#landmark-axial-azimuthal-hall-thruster" title="Link to this heading">#</a></h1>
+<p><video class="hx-video" controls loop muted playsinline preload="metadata" poster="../../_static/videos/landmark.jpg" src="../../_static/videos/landmark.mp4"></video></p>
+<p>The benchmark of <span class="bibtex-citation" id="id1">Charoy and others [<a class="reference internal" href="../../docs/references.html#id9" title="T. Charoy and others. 2d axial-azimuthal particle-in-cell benchmark for low-temperature partially magnetized plasmas. Plasma Sources Science and Technology, 28:105010, 2019.">2019</a>]</span> is an E×B discharge as in the channel
+and the plume of a Hall thruster. The axial direction <span class="math notranslate nohighlight">\(x\)</span> runs from the
+anode to the cathode, the azimuthal direction <span class="math notranslate nohighlight">\(y\)</span> is periodic, and the
+radial magnetic field points out of the plane. The electrons drift along
+<span class="math notranslate nohighlight">\(y\)</span>, and the instability that grows in this drift carries them across the
+magnetic field towards the anode. Seven particle-in-cell codes agree on the
+result within 5 %, which makes the case a test of the whole code on a
+turbulent, magnetized plasma.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Domain</p></td>
+<td><p>2.52 cm × 1.28 cm, periodic in <span class="math notranslate nohighlight">\(y\)</span>. The benchmark’s domain is 2.5 cm; the extra 0.2 mm lie behind the cathode line, because the number of cells along an axis is a multiple of 8.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Grid</p></td>
+<td><p>504 × 256 cells of 50 µm</p></td>
+</tr>
+<tr class="row-even"><td><p>Walls</p></td>
+<td><p>anode at <span class="math notranslate nohighlight">\(x = 0\)</span>, 200 V; grounded wall at <span class="math notranslate nohighlight">\(x = 2.52\)</span> cm; both absorb</p></td>
+</tr>
+<tr class="row-odd"><td><p>Magnetic field</p></td>
+<td><p>along <span class="math notranslate nohighlight">\(z\)</span>, a Gaussian profile in <span class="math notranslate nohighlight">\(x\)</span>: 6 mT at the anode, 10 mT at 0.75 cm, 1 mT at 2.5 cm</p></td>
+</tr>
+<tr class="row-even"><td><p>Plasma at the start</p></td>
+<td><p>electrons (10 eV) and Xe⁺ (0.5 eV), <span class="math notranslate nohighlight">\(5\times10^{16}\ \mathrm{m^{-3}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Ionization</p></td>
+<td><p>no collisions. Electron–ion pairs are created between 0.25 and 1 cm at a rate with a cosine profile, which gives the ion current <span class="math notranslate nohighlight">\(J_M = 400\ \mathrm{A/m^2}\)</span>.</p></td>
+</tr>
+<tr class="row-even"><td><p>Cathode</p></td>
+<td><p>at <span class="math notranslate nohighlight">\(x = 2.4\)</span> cm. Each step it emits as many electrons (10 eV) as the anode collected net, and the mean potential on this line is held at 0 V.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Particles</p></td>
+<td><p>case 2 of the benchmark: 75 per cell and species at the start, about <span class="math notranslate nohighlight">\(37\times10^{6}\)</span> electrons at the end</p></td>
+</tr>
+<tr class="row-even"><td><p>Time step</p></td>
+<td><p><span class="math notranslate nohighlight">\(5\times10^{-12}\)</span> s</p></td>
+</tr>
+<tr class="row-odd"><td><p>Run</p></td>
+<td><p><span class="math notranslate nohighlight">\(4\times10^{6}\)</span> steps (20 µs), output every 10 000 steps</p></td>
+</tr>
+<tr class="row-even"><td><p>Field solver</p></td>
+<td><p><a class="reference internal" href="../../docs/solvers/gmga3.html"><span class="std std-doc">GMGa3</span></a>, the 2-D multigrid; relative tolerance <span class="math notranslate nohighlight">\(10^{-5}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Build</p></td>
+<td><p>linear particle shape (CIC), as the codes of the benchmark use: <code class="docutils literal notranslate"><span class="pre">-DHEXAPIC_SHAPE_ORDER=1</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Cost</p></td>
+<td><p>about 6 hours on one NVIDIA A100</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="running">
+<h2>Running<a class="headerlink" href="#running" title="Link to this heading">#</a></h2>
+<p>The case needs a build with the linear particle shape. See
+<a class="reference internal" href="../../docs/user-guide/build-options.html"><span class="std std-doc">Build options</span></a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>--preset<span class="w"> </span>default<span class="w"> </span>-B<span class="w"> </span>build-cic<span class="w"> </span>-DHEXAPIC_SHAPE_ORDER<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>cmake<span class="w"> </span>--build<span class="w"> </span>build-cic<span class="w"> </span>-j
+python<span class="w"> </span>examples/thrusters/landmark/case.py<span class="w"> </span>runs/landmark
+build-cic/HEXAPIC<span class="w"> </span>runs/landmark/case.toml<span class="w"> </span>&gt;<span class="w"> </span>runs/landmark/run.log
+python<span class="w"> </span>examples/thrusters/landmark/analyze.py<span class="w"> </span>runs/landmark
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">case.py</span></code> writes <code class="docutils literal notranslate"><span class="pre">runs/landmark/case.toml</span></code>. <code class="docutils literal notranslate"><span class="pre">analyze.py</span></code> reads the series
+and the log of the run, <code class="docutils literal notranslate"><span class="pre">run.log</span></code>, which has the currents of the walls and
+of the cathode. It prints the numbers below and writes <code class="docutils literal notranslate"><span class="pre">results.json</span></code> and
+the two figures into the run’s directory.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option of <code class="docutils literal notranslate"><span class="pre">case.py</span></code></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--case</span> <span class="pre">N</span></code></p></td>
+<td><p>the benchmark’s case: 1 (150 particles per cell and species at the start), 2 (75, the default) or 3 (300)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--steps</span> <span class="pre">N</span></code></p></td>
+<td><p>the number of steps</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--every</span> <span class="pre">N</span></code></p></td>
+<td><p>an output every <code class="docutils literal notranslate"><span class="pre">N</span></code> steps</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--live</span></code></p></td>
+<td><p>write the frames that HEXAPIC / VIZ shows during the run</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="results">
+<h2>Results<a class="headerlink" href="#results" title="Link to this heading">#</a></h2>
+<p>The paper compares its codes over the last 4 µs of the 20 µs. All numbers
+below are means over this window.</p>
+<section id="axial-profiles-against-the-paper">
+<h3>Axial profiles against the paper<a class="headerlink" href="#axial-profiles-against-the-paper" title="Link to this heading">#</a></h3>
+<p>The profiles of the axial field <span class="math notranslate nohighlight">\(E_x\)</span>, of the ion density <span class="math notranslate nohighlight">\(n_i\)</span> and of the
+electron temperature <span class="math notranslate nohighlight">\(T_e\)</span> are averaged over <span class="math notranslate nohighlight">\(y\)</span> and over the window. The
+paper shows the curves of the seven codes in its figure 6. Their peaks are
+read off that figure and stored in <code class="docutils literal notranslate"><span class="pre">reference/charoy2019/peaks.csv</span></code>.</p>
+<p><img alt="The axial profiles of the electric field, the ion density and the electron temperature, with the peaks of the paper's curves" src="../../_images/profiles2.png" /></p>
+<p><em>The axial profiles of HEXAPIC, averaged over <span class="math notranslate nohighlight">\(y\)</span> and over 16 to 20 µs. The
+crosses are the peaks of the curves in figure 6 of the paper.</em></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>HEXAPIC</p></th>
+<th class="head"><p>Paper</p></th>
+<th class="head"><p>Ratio</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Peak of <span class="math notranslate nohighlight">\(E_x\)</span> [V/m]</p></td>
+<td><p><span class="math notranslate nohighlight">\(5.01\times10^{4}\)</span> at 0.870 cm</p></td>
+<td><p><span class="math notranslate nohighlight">\(5.05\times10^{4}\)</span> at 0.86 cm</p></td>
+<td><p>0.992</p></td>
+</tr>
+<tr class="row-odd"><td><p>Peak of <span class="math notranslate nohighlight">\(n_i\)</span> [<span class="math notranslate nohighlight">\(\mathrm{m^{-3}}\)</span>]</p></td>
+<td><p><span class="math notranslate nohighlight">\(3.69\times10^{17}\)</span> at 0.478 cm</p></td>
+<td><p><span class="math notranslate nohighlight">\(3.7\times10^{17}\)</span> at 0.48 cm</p></td>
+<td><p>0.998</p></td>
+</tr>
+<tr class="row-even"><td><p>Peak of <span class="math notranslate nohighlight">\(T_e\)</span> [eV]</p></td>
+<td><p>52.8 at 0.723 cm</p></td>
+<td><p>53.5 at 0.72 cm</p></td>
+<td><p>0.986</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(n_i\)</span> in the plume, 1.5 to 2.2 cm [<span class="math notranslate nohighlight">\(\mathrm{m^{-3}}\)</span>]</p></td>
+<td><p><span class="math notranslate nohighlight">\(1.49\times10^{17}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1.45\times10^{17}\)</span></p></td>
+<td><p>1.03</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The three peaks agree with the paper within 1.4 %, and the density of the
+plume within 3 %. The codes of the paper agree with each other within 5 %.
+The paper’s numbers are read off curves, which limits them to about 1 %.</p>
+</section>
+<section id="cathode-current-against-the-paper">
+<h3>Cathode current against the paper<a class="headerlink" href="#cathode-current-against-the-paper" title="Link to this heading">#</a></h3>
+<p>The cathode emits the electron current <span class="math notranslate nohighlight">\(J_{ec}\)</span>. A part of it neutralizes
+the ion beam that leaves the domain, <span class="math notranslate nohighlight">\(J_{ic}\)</span>. The rest,
+<span class="math notranslate nohighlight">\(J_{ec1} = J_{ec} - J_{ic}\)</span>, enters the channel and crosses the magnetic
+field. Its ratio to the imposed ion current <span class="math notranslate nohighlight">\(J_M\)</span> measures the transport of
+the electrons across the field, which only the instability provides.</p>
+<p><img alt="The cathode current into the channel over time, with the range of the paper's codes" src="../../_images/current1.png" /></p>
+<p><em>The current <span class="math notranslate nohighlight">\(J_{ec1}/J_M\)</span> over the run. The grey band is the range of the
+paper’s codes, and the violet band is the window of the means.</em></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(J_{ec1}/J_M\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>HEXAPIC, mean and standard deviation over the window</p></td>
+<td><p><span class="math notranslate nohighlight">\(0.92 \pm 0.15\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Paper, the range of its codes (figure 3)</p></td>
+<td><p>0.75 to 1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The current overshoots to 3.6 near 5 µs, as in the paper, and then settles
+inside the range of the paper’s codes.</p>
+</section>
+</section>
+<section id="files">
+<h2>Files<a class="headerlink" href="#files" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">case.py</span></code></p></td>
+<td><p>the case as a PICMI script</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">case.toml</span></code></p></td>
+<td><p>case 2 as <code class="docutils literal notranslate"><span class="pre">case.py</span></code> writes it</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">analyze.py</span></code></p></td>
+<td><p>the profiles and the cathode current, from a run and its log</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">figures/</span></code></p></td>
+<td><p>the figures above, as <code class="docutils literal notranslate"><span class="pre">analyze.py</span></code> writes them</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">reference/charoy2019/</span></code></p></td>
+<td><p>the peaks read off the paper’s figures</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">reference/SOURCE.md</span></code></p></td>
+<td><p>the sources of the reference data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="the-script">
+<h2>The script<a class="headerlink" href="#the-script" title="Link to this heading">#</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text"><code class="docutils literal notranslate"><span class="pre">case.py</span></code></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="sd">"""landmark: the 2-D axial-azimuthal Hall thruster benchmark of Charoy et al. (2019).</span>
+
+<span class="sd">    python case.py DIR              # DIR/case.toml</span>
+<span class="sd">    python case.py DIR --run        # and HEXAPIC on it (build/HEXAPIC; --hexapic: another), into DIR/output</span>
+<span class="sd">    python case.py                  # the case.toml beside this script</span>
+
+<span class="sd">An E x B discharge as in the channel and the plume of a Hall thruster: x is</span>
+<span class="sd">axial, y azimuthal (periodic), the radial magnetic field points out of the</span>
+<span class="sd">plane.</span>
+
+<span class="sd">    x = 0       the anode, 200 V; ions and electrons absorbed</span>
+<span class="sd">    0.25-1 cm   the ionisation: electron-ion pairs created at the rate</span>
+<span class="sd">                S0 cos(pi (x - xm) / (x2 - x1)), 400 A/m^2 of ions; no collisions</span>
+<span class="sd">    0.75 cm     the peak of B, 10 mT (6 mT at the anode, 1 mT at the far end)</span>
+<span class="sd">    2.4 cm      the cathode: electrons emitted along y, as many each step as</span>
+<span class="sd">                the anode collected net, and the mean potential there held at 0</span>
+<span class="sd">    2.52 cm     grounded; ions and electrons absorbed</span>
+
+<span class="sd">The benchmark's domain is 2.5 cm (500 cells of 50 um).  HEXAPIC's cells along</span>
+<span class="sd">an axis are a multiple of 8, so the domain has 504: the 4 more lie behind the</span>
+<span class="sd">cathode line.  --case is the benchmark's: 1 (150 macroparticles per cell and</span>
+<span class="sd">species at the start), 2 (75) or 3 (300).  --steps and --every shorten the</span>
+<span class="sd">run and set its output; --live writes the frames HEXAPIC / VIZ shows during</span>
+<span class="sd">the run.</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">hexapic</span><span class="w"> </span><span class="kn">import</span> <span class="n">picmi</span>
+
+<span class="n">ap</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"the LANDMARK Hall thruster benchmark: case.toml"</span><span class="p">)</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"dir"</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s2">"?"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">Path</span><span class="p">)</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--case"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">default</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"the benchmark's case (default 2)"</span><span class="p">)</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--steps"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">4000000</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"4e6: the benchmark's 20 us"</span><span class="p">)</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--every"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"an output every this many steps"</span><span class="p">)</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--live"</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">"store_true"</span><span class="p">)</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--run"</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">"store_true"</span><span class="p">)</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--hexapic"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">Path</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"the binary --run runs (default build/HEXAPIC)"</span><span class="p">)</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">ap</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="n">HERE</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span>
+
+<span class="c1"># the benchmark's parameters (its table 1 and section 2)</span>
+<span class="n">LX</span><span class="p">,</span> <span class="n">LY</span><span class="p">,</span> <span class="n">NX</span><span class="p">,</span> <span class="n">NY</span> <span class="o">=</span> <span class="mf">2.5e-2</span><span class="p">,</span> <span class="mf">1.28e-2</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">256</span>
+<span class="n">DT</span> <span class="o">=</span> <span class="mf">5e-12</span>
+<span class="n">U0</span> <span class="o">=</span> <span class="mf">200.0</span>                              <span class="c1"># the anode [V]</span>
+<span class="n">N0</span><span class="p">,</span> <span class="n">TE0</span><span class="p">,</span> <span class="n">TI0</span> <span class="o">=</span> <span class="mf">5e16</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.5</span>          <span class="c1"># the plasma at the start [m^-3], [eV], [eV]</span>
+<span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">,</span> <span class="n">S0</span> <span class="o">=</span> <span class="mf">0.25e-2</span><span class="p">,</span> <span class="mf">1.0e-2</span><span class="p">,</span> <span class="mf">5.23e23</span>   <span class="c1"># the ionisation [m], [m], [m^-3 s^-1]</span>
+<span class="n">X_E</span><span class="p">,</span> <span class="n">TE_EMIT</span> <span class="o">=</span> <span class="mf">2.4e-2</span><span class="p">,</span> <span class="mf">10.0</span>             <span class="c1"># the cathode's emission line [m], its electrons [eV]</span>
+<span class="n">B0</span><span class="p">,</span> <span class="n">BMAX</span><span class="p">,</span> <span class="n">BLX</span> <span class="o">=</span> <span class="mf">6e-3</span><span class="p">,</span> <span class="mf">10e-3</span><span class="p">,</span> <span class="mf">1e-3</span>       <span class="c1"># B at x = 0, its peak, at x = Lx [T]</span>
+<span class="n">XBMAX</span><span class="p">,</span> <span class="n">SIGMA</span> <span class="o">=</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">LX</span><span class="p">,</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="n">LX</span>      <span class="c1"># the peak's position, the width of both Gaussians [m]</span>
+<span class="n">PPC</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">300</span><span class="p">}[</span><span class="n">args</span><span class="o">.</span><span class="n">case</span><span class="p">]</span>
+
+<span class="n">dx</span> <span class="o">=</span> <span class="n">LX</span> <span class="o">/</span> <span class="n">NX</span>
+<span class="n">nxd</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="n">NX</span> <span class="o">//</span> <span class="mi">8</span><span class="p">)</span> <span class="o">*</span> <span class="mi">8</span>                   <span class="c1"># the domain's cells along x: 504</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">b</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""The radial field, the paper's equation (2) with the coefficients of its appendix A."""</span>
+    <span class="n">lo</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">XBMAX</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">XBMAX</span> <span class="k">if</span> <span class="n">lo</span> <span class="k">else</span> <span class="n">LX</span> <span class="o">-</span> <span class="n">XBMAX</span><span class="p">)</span> <span class="o">/</span> <span class="n">SIGMA</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">B0</span> <span class="k">if</span> <span class="n">lo</span> <span class="k">else</span> <span class="n">BLX</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">BMAX</span> <span class="o">-</span> <span class="n">end</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">g</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">XBMAX</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">SIGMA</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">BMAX</span> <span class="o">*</span> <span class="n">g</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">g</span><span class="p">)</span>
+
+
+<span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="n">dx</span> <span class="o">*</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nxd</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>   <span class="c1"># B at every node</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">picmi</span><span class="o">.</span><span class="n">Cartesian2DGrid</span><span class="p">(</span><span class="n">number_of_cells</span><span class="o">=</span><span class="p">[</span><span class="n">nxd</span><span class="p">,</span> <span class="n">NY</span><span class="p">],</span> <span class="n">lower_bound</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">upper_bound</span><span class="o">=</span><span class="p">[</span><span class="n">nxd</span> <span class="o">*</span> <span class="n">dx</span><span class="p">,</span> <span class="n">LY</span><span class="p">],</span>
+                             <span class="n">lower_boundary_conditions</span><span class="o">=</span><span class="p">[</span><span class="s2">"dirichlet"</span><span class="p">,</span> <span class="s2">"periodic"</span><span class="p">],</span>
+                             <span class="n">upper_boundary_conditions</span><span class="o">=</span><span class="p">[</span><span class="s2">"dirichlet"</span><span class="p">,</span> <span class="s2">"periodic"</span><span class="p">])</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">picmi</span><span class="o">.</span><span class="n">Simulation</span><span class="p">(</span>
+    <span class="n">solver</span><span class="o">=</span><span class="n">picmi</span><span class="o">.</span><span class="n">ElectrostaticSolver</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span> <span class="n">hexapic_zero_line_x</span><span class="o">=</span><span class="n">X_E</span><span class="p">),</span> <span class="n">time_step_size</span><span class="o">=</span><span class="n">DT</span><span class="p">,</span> <span class="n">max_steps</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">steps</span><span class="p">,</span>
+    <span class="n">particle_shape</span><span class="o">=</span><span class="s2">"linear"</span><span class="p">,</span> <span class="n">hexapic_title</span><span class="o">=</span><span class="s2">"landmark"</span><span class="p">,</span> <span class="n">hexapic_run</span><span class="o">=</span><span class="p">{</span><span class="s2">"init"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">},</span>
+    <span class="n">hexapic_description</span><span class="o">=</span><span class="s2">"The 2-D axial-azimuthal Hall thruster benchmark of Charoy et al. (2019), "</span>
+                        <span class="sa">f</span><span class="s2">"case </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">case</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">PPC</span><span class="si">}</span><span class="s2"> macroparticles per cell and species at the start."</span><span class="p">,</span>
+    <span class="n">hexapic_output</span><span class="o">=</span><span class="p">{</span><span class="s2">"final_particles"</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span> <span class="o">|</span> <span class="p">({</span><span class="s2">"live"</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">live</span> <span class="k">else</span> <span class="p">{}),</span>
+    <span class="n">hexapic_magnetic_field</span><span class="o">=</span><span class="p">{</span><span class="s2">"type"</span><span class="p">:</span> <span class="s2">"profile"</span><span class="p">,</span> <span class="s2">"axis"</span><span class="p">:</span> <span class="s2">"x"</span><span class="p">,</span> <span class="s2">"position"</span><span class="p">:</span> <span class="n">xs</span><span class="p">,</span> <span class="s2">"vector"</span><span class="p">:</span> <span class="p">[[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">b</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">]})</span>
+
+<span class="n">electrons</span> <span class="o">=</span> <span class="n">picmi</span><span class="o">.</span><span class="n">Species</span><span class="p">(</span><span class="n">particle_type</span><span class="o">=</span><span class="s2">"electron"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"electrons"</span><span class="p">,</span>
+                          <span class="n">initial_distribution</span><span class="o">=</span><span class="n">picmi</span><span class="o">.</span><span class="n">UniformDistribution</span><span class="p">(</span><span class="n">density</span><span class="o">=</span><span class="n">N0</span><span class="p">,</span> <span class="n">hexapic_temperature_eV</span><span class="o">=</span><span class="n">TE0</span><span class="p">))</span>
+<span class="n">ions</span> <span class="o">=</span> <span class="n">picmi</span><span class="o">.</span><span class="n">Species</span><span class="p">(</span><span class="n">particle_type</span><span class="o">=</span><span class="s2">"Xe"</span><span class="p">,</span> <span class="n">charge_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"ions"</span><span class="p">,</span>
+                     <span class="n">initial_distribution</span><span class="o">=</span><span class="n">picmi</span><span class="o">.</span><span class="n">UniformDistribution</span><span class="p">(</span><span class="n">density</span><span class="o">=</span><span class="n">N0</span><span class="p">,</span> <span class="n">hexapic_temperature_eV</span><span class="o">=</span><span class="n">TI0</span><span class="p">,</span>
+                                                                    <span class="n">hexapic_same_positions_as</span><span class="o">=</span><span class="s2">"electrons"</span><span class="p">))</span>
+<span class="n">layout</span> <span class="o">=</span> <span class="n">picmi</span><span class="o">.</span><span class="n">PseudoRandomLayout</span><span class="p">(</span><span class="n">n_macroparticles_per_cell</span><span class="o">=</span><span class="n">PPC</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_species</span><span class="p">(</span><span class="n">electrons</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_species</span><span class="p">(</span><span class="n">ions</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_diagnostic</span><span class="p">(</span><span class="n">picmi</span><span class="o">.</span><span class="n">FieldDiagnostic</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">every</span><span class="p">))</span>
+
+<span class="n">sim</span><span class="o">.</span><span class="n">add_boundary</span><span class="p">(</span><span class="n">picmi</span><span class="o">.</span><span class="n">Boundary</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">"biased"</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s2">"x_lo"</span><span class="p">,</span> <span class="n">voltage</span><span class="o">=</span><span class="n">U0</span><span class="p">))</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_boundary</span><span class="p">(</span><span class="n">picmi</span><span class="o">.</span><span class="n">Boundary</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">"grounded"</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s2">"x_hi"</span><span class="p">))</span>
+
+<span class="c1"># the ionisation: pairs at one position; the mean of the rate over [X1, X2] is 2 / pi S0</span>
+<span class="n">rate</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">S0</span>
+<span class="n">region</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"lower"</span><span class="p">:</span> <span class="p">[</span><span class="n">X1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="s2">"upper"</span><span class="p">:</span> <span class="p">[</span><span class="n">X2</span><span class="p">,</span> <span class="n">LY</span><span class="p">]}</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_source</span><span class="p">(</span><span class="n">picmi</span><span class="o">.</span><span class="n">Source</span><span class="p">(</span><span class="n">species</span><span class="o">=</span><span class="n">electrons</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="n">rate</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="n">region</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s2">"sine"</span><span class="p">,</span> <span class="n">temperature_eV</span><span class="o">=</span><span class="n">TE0</span><span class="p">))</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_source</span><span class="p">(</span><span class="n">picmi</span><span class="o">.</span><span class="n">Source</span><span class="p">(</span><span class="n">species</span><span class="o">=</span><span class="n">ions</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="n">rate</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="n">region</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s2">"sine"</span><span class="p">,</span> <span class="n">temperature_eV</span><span class="o">=</span><span class="n">TI0</span><span class="p">,</span>
+                            <span class="n">same_positions_as</span><span class="o">=</span><span class="s2">"electrons"</span><span class="p">))</span>
+<span class="c1"># the cathode: the charge the anode collected net, emitted again as electrons along x = X_E</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_source</span><span class="p">(</span><span class="n">picmi</span><span class="o">.</span><span class="n">Source</span><span class="p">(</span><span class="n">species</span><span class="o">=</span><span class="n">electrons</span><span class="p">,</span> <span class="n">balance_wall</span><span class="o">=</span><span class="s2">"x_lo"</span><span class="p">,</span>
+                            <span class="n">region</span><span class="o">=</span><span class="p">{</span><span class="s2">"lower"</span><span class="p">:</span> <span class="p">[</span><span class="n">X_E</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="s2">"upper"</span><span class="p">:</span> <span class="p">[</span><span class="n">X_E</span><span class="p">,</span> <span class="n">LY</span><span class="p">]},</span> <span class="n">temperature_eV</span><span class="o">=</span><span class="n">TE_EMIT</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">run</span> <span class="ow">and</span> <span class="n">args</span><span class="o">.</span><span class="n">dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">ap</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"--run needs a directory for the run"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">write_input_file</span><span class="p">((</span><span class="n">args</span><span class="o">.</span><span class="n">dir</span> <span class="ow">or</span> <span class="n">HERE</span><span class="p">)</span> <span class="o">/</span> <span class="s2">"case.toml"</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">run</span><span class="p">:</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">**</span><span class="p">({}</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">hexapic</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{</span><span class="s2">"hexapic"</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">hexapic</span><span class="o">.</span><span class="n">resolve</span><span class="p">()}))</span>
+</pre></div>
+</div>
+</div>
+</details></section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>The benchmark, its parameters and the results of its seven codes:
+<span class="bibtex-citation" id="id2">Charoy and others [<a class="reference internal" href="../../docs/references.html#id9" title="T. Charoy and others. 2d axial-azimuthal particle-in-cell benchmark for low-temperature partially magnetized plasmas. Plasma Sources Science and Technology, 28:105010, 2019.">2019</a>]</span>.</p>
+<section id="the-paper-s-numbers-charoy2019">
+<h3>The paper’s numbers (<code class="docutils literal notranslate"><span class="pre">charoy2019/</span></code>)<a class="headerlink" href="#the-paper-s-numbers-charoy2019" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">peaks.csv</span></code>: the peaks of the axial profiles of <span class="math notranslate nohighlight">\(E_x\)</span>, <span class="math notranslate nohighlight">\(n_i\)</span> and <span class="math notranslate nohighlight">\(T_e\)</span>,
+read by eye off the curves of the paper’s figure 5 (case 1) and figure 6
+(case 2), where the seven codes lie within 5 % of each other. The reading
+is good to about 1 %.</p></li>
+<li><p>The ion density of the plume, <span class="math notranslate nohighlight">\(1.45\times10^{17}\ \mathrm{m^{-3}}\)</span>, is
+read off the same figures. The range of <span class="math notranslate nohighlight">\(J_{ec1}/J_M\)</span>, 0.75 to 1, is read
+off the paper’s figure 3. Both are constants in <code class="docutils literal notranslate"><span class="pre">analyze.py</span></code>.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ion_thruster.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Ion optics of a gridded ion thruster</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="child_langmuir.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Space-charge-limited diode</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running">Running</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#axial-profiles-against-the-paper">Axial profiles against the paper</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cathode-current-against-the-paper">Cathode current against the paper</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#files">Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-script">The script</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-paper-s-numbers-charoy2019">The paper’s numbers (<code class="docutils literal notranslate"><span class="pre">charoy2019/</span></code>)</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, LECAD-PEG, University of Ljubljana.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

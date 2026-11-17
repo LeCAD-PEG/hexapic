@@ -1,0 +1,234 @@
+# Ion deposition in a trench
+
+<video class="hx-video" controls loop muted playsinline preload="metadata" poster="../../_static/videos/deposition.jpg" src="../../_static/videos/deposition.mp4"></video>
+
+A substrate at $-100$ V is covered by a dielectric layer with a trench. The
+wall opposite to it stands for the edge of a plasma sheath: it emits ions
+and electrons. The ions fall through the 100 V onto the layer and into the
+trench, and the electrons turn back. The case has a dielectric region,
+dielectric walls inside the domain, a biased wall and two emitters. It is
+taken from XOOPIC and run with both codes. The two codes treat the
+dielectric differently, so only the flow above the layer and in the trench
+is compared, and only before the layer has charged.
+
+## Setup
+
+| | |
+|---|---|
+| Domain | 1.6 µm × 3.2 µm, periodic in $x$; 32 × 64 cells of 50 nm |
+| Substrate | the bottom wall, at $-100$ V, absorbing |
+| Layer | a dielectric region with the relative permittivity $\varepsilon_r = 10$, 1 µm thick |
+| Trench | 0.5 µm wide and 0.9 µm deep, in the middle; 0.1 µm of the layer is left under it. Its two sides and its bottom are dielectric walls. |
+| Top wall | at 0 V; it emits ions and electrons downwards over its whole width |
+| Ions | $1.5\times10^{5}\ \mathrm{A/m^2}$ (0.24 A per metre of depth), 0.025 eV, 40 electron masses |
+| Electrons | $5\times10^{4}\ \mathrm{A/m^2}$ (0.08 A/m), 5 eV |
+| Collisions | Monte Carlo collisions of both species with argon at 10 mTorr, with the cross sections multiplied by 40 |
+| Particles | 1000 per macroparticle: 75 ions and 25 electrons per step |
+| Time step | $5\times10^{-14}$ s |
+| Run | 1000 steps (50 ps), output every 10 steps, no charge smoothing |
+| Field solver | [GMGa3](../../docs/solvers/gmga3.md), the 2-D multigrid; relative tolerance $10^{-5}$ |
+| Cost | about 4 s on one NVIDIA A100 |
+
+An ion crosses the domain in about 120 steps. The run is eight such
+transits: the flow is steady, and the charge that the ions bring changes the
+potential by less than 0.1 V. The charge of the ions in flight changes it by
+less than 0.01 V, so the potential is that of the empty geometry.
+
+![Two maps of the domain with the outline of the layer and the trench: the potential with its equipotential lines, and the ion density](../../_examples/walls/deposition/figures/case.png)
+
+*The potential and the ion density of the steady state in HEXAPIC, with the
+outline of the layer. In HEXAPIC the ions are also inside the layer (see
+below).*
+
+## Running
+
+```bash
+python examples/walls/deposition/case.py runs/deposition --run
+python examples/walls/deposition/analyze.py runs/deposition
+```
+
+`case.py` writes `runs/deposition/case.toml` and, with `--run`, runs
+`build/HEXAPIC` on it (`--hexapic` names another binary). `case.toml` beside
+the script is the same case, for a run without Python. `analyze.py` prints
+the numbers below and writes `results.json` and the two figures into the
+run's directory. Given several runs, it prints their mean and standard
+deviation.
+
+| Option of `case.py` | |
+|---|---|
+| `--run` | run HEXAPIC on the case |
+| `--live` | write the frames that HEXAPIC / VIZ shows during the run |
+| `--seed N` | the seed of the random numbers |
+| `--xoopic` | write the case as an XOOPIC deck, `case.inp` |
+
+## Results
+
+### Ion flow and potential against XOOPIC
+
+The numbers are means over the outputs from step 300 on. HEXAPIC is run with
+five seeds:
+
+```bash
+for s in 1 2 3 4 5; do
+    python examples/walls/deposition/case.py runs/deposition_$s --seed $s --run
+done
+python examples/walls/deposition/analyze.py runs/deposition_?
+```
+
+Both codes are reduced in the same way. The ions are counted in each cell,
+with the sums of their $v_y$ and of their $|v|^2$. The ion current through a
+row of cells of the trench is
+
+$$
+I = \frac{q\,w}{\Delta y} \sum v_y ,
+$$
+
+with the charge $q$ of an ion, the weight $w$ of a macroparticle, the cell
+size $\Delta y$ and the sum over the ions in that row. An even flow of
+$1.5\times10^{5}\ \mathrm{A/m^2}$ over the width of the trench is 0.075 A/m.
+
+![Four panels: the ions above the layer against time, the ion density above the layer and the ion current down the trench against y, and the difference of the two potentials against y](../../_examples/walls/deposition/figures/comparison.png)
+
+*Top: the ions above the layer against time, and their density against the
+height $y$. Bottom left: the ion current through each row of cells of the
+trench, with the range of the five HEXAPIC seeds. Bottom right: the
+difference of the potentials of the two codes along two vertical lines.*
+
+| Steady state | HEXAPIC, 5 seeds | XOOPIC | Difference |
+|---|---|---|---|
+| Ions above the layer (macroparticles) | $7106 \pm 1$ | 7224 | $-1.6$ % |
+| Ion current into the trench, top row of cells [A/m] | $0.0730 \pm 0.0015$ | 0.0728 | $+0.2$ % |
+| Ion current onto the bottom of the trench, lowest two rows [A/m] | $0.0679 \pm 0.0011$ | 0.0657 | $+3.4$ % |
+| Mean energy of the ions in those two rows [eV] | $98.189 \pm 0.002$ | 96.33 | $+1.9$ % |
+| Potential at the mouth of the trench [V] | $-90.93$ | $-90.03$ | 0.90 V |
+| Potential on the surface of the layer, between two trenches [V] | $-94.62$ | $-94.44$ | 0.18 V |
+| Potential one cell above that point [V] | $-93.36$ | $-92.17$ | 1.19 V |
+| Potential at the bottom of the trench [V] | $-99.88$ | $-99.90$ | 0.02 V |
+| Electrons in the domain (macroparticles) | $158.6 \pm 0.6$ | 157.5 | $+0.7$ % |
+
+The ion density above the layer, the current into the trench and the number
+of electrons agree within 2 %. The potentials differ by at most 1.2 V of
+100 V. The remaining differences have four causes.
+
+**The surface of the layer.** HEXAPIC sets the permittivity on the nodes, and
+a cell edge between a node of the layer and a node outside takes a value in
+between. The layer therefore acts about half a cell thicker than in XOOPIC,
+which changes the permittivity exactly at the surface. The field above the
+layer is 43 V/µm, so this shifts the potential there by about 1 V. The
+difference is largest one cell above the surface and falls linearly to zero
+at the top wall.
+
+**The emitter.** XOOPIC starts each particle on the wall. HEXAPIC starts it
+half a cell inside the domain, where the potential is already $-1.07$ V. The
+ions of HEXAPIC miss this part of the fall, and the two rows of cells at the
+emitter hold about 200 fewer of them. This gives the 1.6 % in the number of
+ions.
+
+**The collisions.** In XOOPIC the charge exchange with the gas takes
+2.8 eV from the mean energy of the ions at the bottom of the trench: without
+its `MCC` block, XOOPIC gives 99.18 eV there, 1.0 eV above HEXAPIC as the
+emitter explains. In HEXAPIC no ion and no electron collided in this run.
+The keys `scale_electron` and `scale_ion` have no effect in the current
+version: the collision rates in the log are those of the cross sections
+without the factor 40.
+
+**The walls of the trench.** XOOPIC absorbs an ion that reaches a side of the
+trench. In HEXAPIC a dielectric wall inside the domain does not stop the
+particles: an ion that reaches a side moves on into the layer, and an ion
+inside the layer can enter the trench. HEXAPIC has 3.4 % more current at
+the bottom of the trench. This is the likely cause; it was not measured
+separately.
+
+### What is not compared
+
+XOOPIC stops the particles at the surface of a dielectric region and keeps
+their charge there. In HEXAPIC a dielectric region changes the permittivity
+only: the ions cross the layer and are absorbed by the substrate, and no
+charge stays on the layer or in the trench. The totals over the domain
+therefore differ:
+
+| Steady state, whole domain | HEXAPIC, 5 seeds | XOOPIC |
+|---|---|---|
+| Ions (macroparticles) | $8739 \pm 1$ | 7652 |
+| Kinetic energy [J/m] | $6.06\times10^{-11}$ | $4.17\times10^{-11}$ |
+| Field energy [J/m] | $2.840\times10^{-8}$ | $3.380\times10^{-8}$ |
+
+The two field energies are also not the same integral. Computed from the
+two potentials with one formula, $\int \tfrac{1}{2}\varepsilon_0\varepsilon_r
+E^2\,\mathrm{d}A$, they are $3.02\times10^{-8}$ and $3.00\times10^{-8}$ J/m.
+
+In XOOPIC the layer charges: at the end of this run its surface holds about
+$6\times10^{-6}\ \mathrm{C/m^2}$ and its potential has risen by 0.07 V. Over
+a run a thousand times longer this charge would change the flow, and HEXAPIC
+would not follow it. The comparison holds for the uncharged layer only.
+
+XOOPIC's numbers come from its stored run in `reference/xoopic/`.
+`analyze.py --xoopic DIR` takes them from a new run of XOOPIC instead (see
+`reference/SOURCE.md`).
+
+## Files
+
+| | |
+|---|---|
+| `case.py` | the case as a PICMI script |
+| `case.toml` | the case as `case.py` writes it |
+| `analyze.py` | the ion flow and the potential of one or several runs, against XOOPIC |
+| `figures/` | the figures above, as `analyze.py` writes them |
+| `reference/xoopic/` | XOOPIC's deck, its histories, its ion profiles and its potential |
+| `reference/SOURCE.md` | the sources of the case and of the reference data |
+
+## The script
+
+:::{dropdown} `case.py`
+```{literalinclude} ../../_examples/walls/deposition/case.py
+:language: python
+```
+:::
+
+## References
+
+The case follows XOOPIC's deck `input/deposition.inp`
+{cite:p}`verboncoeur1995`. That deck has a domain of 1.5 µm × 5 µm with
+30 × 100 cells, a time step of $10^{-13}$ s and $10^{4}$ particles per
+macroparticle. Here the domain is 1.6 µm × 3.2 µm with 32 × 64 cells of the
+same size, the time step is $5\times10^{-14}$ s and a macroparticle holds
+$10^{3}$ particles. The trench, the layer, the voltage, the emitted currents
+and the gas are those of the deck. There is no theory in this example.
+
+### XOOPIC's run (`xoopic/`)
+
+- `case.inp`: the deck XOOPIC ran, as `python case.py --xoopic` writes it.
+  Besides the case it has three `Diagnostic` blocks, which make XOOPIC write
+  the phase space of both species and the potential every 10 steps. Its
+  first lines note that XOOPIC's `DielectricRegion` stops the particles.
+- `history.csv`: at every 10th of 1000 steps, XOOPIC's field and kinetic
+  energy (J/m) and its numbers of ions and electrons from the `ENERGY_CSV`
+  lines it prints (which list the species in the reverse order of the
+  deck), and the ions above the layer from the phase-space files.
+- `ions.csv`: the steady state, the mean over the steps 300 to 990, by row
+  of cells: the ion density above the layer, and in the trench the ion
+  current, the mean ion energy and the number of ions.
+- `potential.csv`: the mean potential over the same steps along $x = 0$ and
+  along the axis of the trench.
+
+XOOPIC 2.70 (github.com/rinku-mishra/xoopic, commit 3fa6670) with the
+`ENERGY_CSV` lines added to `otools/diagn.cpp`
+([Running XOOPIC](../../docs/verification/codes.md#running-xoopic) gives the patch and the build), run on
+2026-11-17 as
+
+```bash
+mkdir -p runs/deposition_xoopic
+python examples/walls/deposition/case.py runs/deposition_xoopic --xoopic --run > runs/deposition_xoopic/xoopic.log
+```
+
+which is `xoopic -nox -i case.inp -s 1000 -exit` in that directory, about
+3 s on one CPU core. The three CSV files were then written by
+
+```bash
+python examples/walls/deposition/analyze.py runs/deposition_? --xoopic runs/deposition_xoopic --store
+```
+
+XOOPIC draws the same random numbers in each run. The number in the README
+for XOOPIC without collisions is from the same deck without its `MCC` block
+and without the `collisionModel` lines of the two species; that run is not
+stored.

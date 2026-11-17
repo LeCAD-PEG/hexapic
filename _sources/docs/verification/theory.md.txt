@@ -1,0 +1,15 @@
+# Theory
+
+A case with an analytic result checks the code directly, with no other
+code's choices in between. The example measures a number from its run, and
+the number is set against the theoretical one.
+
+:::{hexapic-comparisons} theory
+:::
+
+The rows marked "(test)" are checks of one part of the code -- the push, the
+field solve, a collision operator -- that are not examples; their cases are
+in `tests/physics/<name>/`. These comparisons are also the physics tests. `tests/physics/run.py` runs
+the example and fails when the measured number leaves its tolerance. The
+tolerance comes from the scatter of the number over several seeds. See
+[Tests](../development/tests.md#physics-tests).

@@ -1,0 +1,52 @@
+# Scaling
+
+## The field solver
+
+The 2-D field solver, GMGa3, was compared with HYPRE-PFMG, PETSc and AMReX
+MLMG on LUMI-G. The nodes have AMD MI250X GPUs with eight GCDs per node, and
+the runs use up to sixteen nodes. All solvers were measured on the same
+machine with the same toolchain, following a fairness protocol that is stated
+in the paper on the solver. The paper is in preparation.
+
+| Measurement | Result |
+|---|---|
+| $16384^2$ on one node (8 GCDs) | 60 ms per solve |
+| $16384^2$ on sixteen nodes (128 GCDs) | 7.4 ms per solve |
+| Speedup over the fastest library at the same requested tolerance | 1.8 to 5.3 times |
+| Speedup over the fastest library at the same delivered accuracy | 1.6 to 3.9 times |
+
+```{figure} ../_static/images/scaling.svg
+:name: fig:scaling-perf
+:width: 100%
+:alt: Strong and weak scaling of the field solver on AMD MI250X
+
+Strong scaling (left, global grid fixed at $16384^2$) and weak scaling
+(right, $2048^2$ per node, $1024\times512$ per GCD). AMD MI250X, eight GCDs per
+node, Dirichlet, float64, $\mathrm{tol}=10^{-5}$. Each point is a median over
+ten independent submissions.
+```
+
+The measurements and their job scripts are in `benchmarks/scaling_study/`
+and `paper/`. These directories also contain the scripts that check the
+tables of the paper against the measurements.
+
+## Measuring a run
+
+At the end of a run HEXAPIC prints the time spent in its loop. This is the
+output of the two-stream case of [First run](../get-started/first-run.md) on
+one A100:
+
+```text
+═══ ASYNC LOOP (2000 steps, 9 store re-plans) ═══
+  TOTAL [s]              min=    3.0099  avg=    3.0099  max=    3.0099
+  per step [ms]          min=    1.5049  avg=    1.5049  max=    1.5049
+  per step, steady [ms]  min=    1.4537  avg=    1.4537  max=    1.4537
+  Throughput [steps/s]   min=  664.4753  avg=  664.4753  max=  664.4753
+```
+
+The minimum, average and maximum are taken over the ranks. With
+`[debug] poisson_timing`, the run also prints the share of the step that the
+field solve takes.
+
+For a breakdown of the step by phase and by rank, turn on
+[`[output] performance`](../user-guide/output.md#performance).

@@ -1,0 +1,32 @@
+# Verification
+
+HEXAPIC's results are compared with theory, with other codes and with
+published benchmarks. HEXAPIC is also compared with itself: one problem must
+give one answer in 2-D and in 3-D, in every orientation and on any number of
+ranks.
+
+Most comparisons belong to an {site}`example <examples/index>`. The
+example's page has the setup, the commands that repeat the comparison, the
+figure and the numbers. The pages of this section list the comparisons by
+what the result is compared with. Each row of their tables links to the
+section of the example that has the comparison.
+
+| Page | What is compared |
+|---|---|
+| [Theory](theory.md) | A measured number and an analytic result. These comparisons are also the physics tests. |
+| [Other codes](codes.md) | The same case, run by HEXAPIC and by XOOPIC or BIT1 |
+| [Published benchmarks](benchmarks.md) | A benchmark that a paper defines, and the numbers and figures of the paper |
+| [Consistency](consistency.md) | The same problem in 2-D and in 3-D, in every orientation and on any number of ranks |
+
+Some examples have nothing to compare with. They show what the code does,
+and they are listed with the others in the {site}`examples <examples/index>`.
+
+```{toctree}
+:maxdepth: 1
+:hidden:
+
+theory
+codes
+benchmarks
+consistency
+```

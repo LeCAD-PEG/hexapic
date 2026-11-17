@@ -1,0 +1,39 @@
+# Get started
+
+Three steps take you from the source code to a first plasma simulation. On a
+machine with a GPU and a recent CMake this takes a few minutes, because the
+build downloads its dependencies itself.
+
+::::{grid} 1 1 3 3
+:gutter: 3
+:class-container: hx-cards
+
+:::{grid-item-card} 1. Install
+:link: installation
+:link-type: doc
+
+Build HEXAPIC with one CMake command on a workstation or a cluster.
+:::
+
+:::{grid-item-card} 2. First run
+:link: first-run
+:link-type: doc
+
+Generate the two-stream case from a PICMI script, check it, run it and open
+it in the viewer.
+:::
+
+:::{grid-item-card} 3. Examples
+
+Start your own case from one of the {site}`examples <examples/index>`. They
+are complete cases with their scripts and their results.
+:::
+
+::::
+
+```{toctree}
+:hidden:
+
+installation
+first-run
+```

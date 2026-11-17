@@ -1,0 +1,47 @@
+# Strip: a direct solve
+
+The strip solver solves the Poisson equation of a 2-D strip directly, in one
+pass without iterations. An example is a scrape-off layer from divertor to
+divertor. It follows the 1-D field solve of BIT1, carried over to a strip.
+Its discrete operator is the one of [GMGa3](gmga3.md), so the two solvers
+agree to rounding.
+
+## The cases it solves
+
+- Dirichlet walls at both x ends, grounded or biased
+- y walls that are reflective, grounded or periodic
+- a uniform permittivity
+- nothing inside the domain
+
+The ranks split the strip along x only, so every rank holds whole columns.
+`type = "auto"` takes the strip solver when the case meets these conditions,
+its cells split into whole bins on P × 1 ranks, and it has at most 128 cells
+across y. Above that the multigrid is faster: the cost of the strip solver
+per cell grows with the number of cells across.
+
+## The method
+
+1. Across y, the operator is diagonalised once at setup. In every step the
+   charge of each column is transformed to these modes.
+2. Along x, every mode $k$ is a constant tridiagonal system,
+
+   $$
+   -\phi_{i-1} + \left(2 + \mu_k \frac{\Delta x^2}{\Delta y^2}\right)\phi_i - \phi_{i+1} = \Delta x^2\, b_i ,
+   $$
+
+   with $\mu_k$ the eigenvalue of the mode and $b_i$ its right-hand side.
+   Each rank solves its own columns.
+3. The values at the rank boundaries follow from a small tridiagonal system
+   per mode, which the ranks solve together.
+4. The modes are summed back to the grid.
+
+A step therefore needs a few kernels and one exchange between the ranks. On
+one rank there is no exchange.
+
+## Settings
+
+| Key of `[solver]` | Default | Description |
+|---|---|---|
+| `strip_exchange` | `"pcr"` | The values at the rank boundaries by parallel cyclic reduction, with messages between the ranks, or by `gather` to one rank and back |
+| `strip_overlap` | `"auto"` | Exchange those values while the GPU runs the sweeps (`on`), after them (`off`), or time both on the first solve and keep the faster |
+| `strip_check` | `0` | Compare the first this many solves with a multigrid solve, and print the largest difference and both residuals |

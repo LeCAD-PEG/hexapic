@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Example: Ion deposition in a trench</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/hexapic.css?v=e5596fca" />
+    <link rel="stylesheet" type="text/css" href="../../_static/site.css?v=370520c7" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=18bd87630a240e9c25be"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be" />
+
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/gen/deposition';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script defer="defer" src="../../_static/hero.js?v=8e2d957d"></script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Floating wall" href="floating_wall.html" />
+    <link rel="prev" title="Space-charge-limited diode" href="child_langmuir.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo-dark-ink.png" class="logo__image only-light" alt="HEXAPIC"/>
+    <img src="../../_static/logo-light-ink.png" class="logo__image only-dark pst-js-only" alt="HEXAPIC"/>
+  
+  
+    <p class="title logo__title">HEXAPIC</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../docs/index.html">
+    Documentation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../about/index.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/LeCAD-PEG/hexapic" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../docs/index.html">
+    Documentation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../about/index.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/LeCAD-PEG/hexapic" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button type="button" id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic plasma</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="landau_damping.html">Landau damping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="two_stream.html">Two-stream instability</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Discharges</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ccp_helium.html">Capacitive discharge in helium (Turner benchmark)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Thrusters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="hall_thruster_3d.html">Hall thruster in 3-D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ion_thruster.html">Ion optics of a gridded ion thruster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="landmark.html">LANDMARK: axial-azimuthal Hall thruster</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Walls</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="child_langmuir.html">Space-charge-limited diode</a></li>
+<li class="toctree-l1 current active"><a aria-current="page" class="current reference internal" href="#">Ion deposition in a trench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="floating_wall.html">Floating wall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wall_types.html">Wall types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xybeam.html">Electron beam between grounded plates</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Examples</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Ion deposition in a trench</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="ion-deposition-in-a-trench">
+<h1>Ion deposition in a trench<a class="headerlink" href="#ion-deposition-in-a-trench" title="Link to this heading">#</a></h1>
+<p><video class="hx-video" controls loop muted playsinline preload="metadata" poster="../../_static/videos/deposition.jpg" src="../../_static/videos/deposition.mp4"></video></p>
+<p>A substrate at <span class="math notranslate nohighlight">\(-100\)</span> V is covered by a dielectric layer with a trench. The
+wall opposite to it stands for the edge of a plasma sheath: it emits ions
+and electrons. The ions fall through the 100 V onto the layer and into the
+trench, and the electrons turn back. The case has a dielectric region,
+dielectric walls inside the domain, a biased wall and two emitters. It is
+taken from XOOPIC and run with both codes. The two codes treat the
+dielectric differently, so only the flow above the layer and in the trench
+is compared, and only before the layer has charged.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Domain</p></td>
+<td><p>1.6 µm × 3.2 µm, periodic in <span class="math notranslate nohighlight">\(x\)</span>; 32 × 64 cells of 50 nm</p></td>
+</tr>
+<tr class="row-odd"><td><p>Substrate</p></td>
+<td><p>the bottom wall, at <span class="math notranslate nohighlight">\(-100\)</span> V, absorbing</p></td>
+</tr>
+<tr class="row-even"><td><p>Layer</p></td>
+<td><p>a dielectric region with the relative permittivity <span class="math notranslate nohighlight">\(\varepsilon_r = 10\)</span>, 1 µm thick</p></td>
+</tr>
+<tr class="row-odd"><td><p>Trench</p></td>
+<td><p>0.5 µm wide and 0.9 µm deep, in the middle; 0.1 µm of the layer is left under it. Its two sides and its bottom are dielectric walls.</p></td>
+</tr>
+<tr class="row-even"><td><p>Top wall</p></td>
+<td><p>at 0 V; it emits ions and electrons downwards over its whole width</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ions</p></td>
+<td><p><span class="math notranslate nohighlight">\(1.5\times10^{5}\ \mathrm{A/m^2}\)</span> (0.24 A per metre of depth), 0.025 eV, 40 electron masses</p></td>
+</tr>
+<tr class="row-even"><td><p>Electrons</p></td>
+<td><p><span class="math notranslate nohighlight">\(5\times10^{4}\ \mathrm{A/m^2}\)</span> (0.08 A/m), 5 eV</p></td>
+</tr>
+<tr class="row-odd"><td><p>Collisions</p></td>
+<td><p>Monte Carlo collisions of both species with argon at 10 mTorr, with the cross sections multiplied by 40</p></td>
+</tr>
+<tr class="row-even"><td><p>Particles</p></td>
+<td><p>1000 per macroparticle: 75 ions and 25 electrons per step</p></td>
+</tr>
+<tr class="row-odd"><td><p>Time step</p></td>
+<td><p><span class="math notranslate nohighlight">\(5\times10^{-14}\)</span> s</p></td>
+</tr>
+<tr class="row-even"><td><p>Run</p></td>
+<td><p>1000 steps (50 ps), output every 10 steps, no charge smoothing</p></td>
+</tr>
+<tr class="row-odd"><td><p>Field solver</p></td>
+<td><p><a class="reference internal" href="../../docs/solvers/gmga3.html"><span class="std std-doc">GMGa3</span></a>, the 2-D multigrid; relative tolerance <span class="math notranslate nohighlight">\(10^{-5}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Cost</p></td>
+<td><p>about 4 s on one NVIDIA A100</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>An ion crosses the domain in about 120 steps. The run is eight such
+transits: the flow is steady, and the charge that the ions bring changes the
+potential by less than 0.1 V. The charge of the ions in flight changes it by
+less than 0.01 V, so the potential is that of the empty geometry.</p>
+<p><img alt="Two maps of the domain with the outline of the layer and the trench: the potential with its equipotential lines, and the ion density" src="../../_images/case.png" /></p>
+<p><em>The potential and the ion density of the steady state in HEXAPIC, with the
+outline of the layer. In HEXAPIC the ions are also inside the layer (see
+below).</em></p>
+</section>
+<section id="running">
+<h2>Running<a class="headerlink" href="#running" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>examples/walls/deposition/case.py<span class="w"> </span>runs/deposition<span class="w"> </span>--run
+python<span class="w"> </span>examples/walls/deposition/analyze.py<span class="w"> </span>runs/deposition
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">case.py</span></code> writes <code class="docutils literal notranslate"><span class="pre">runs/deposition/case.toml</span></code> and, with <code class="docutils literal notranslate"><span class="pre">--run</span></code>, runs
+<code class="docutils literal notranslate"><span class="pre">build/HEXAPIC</span></code> on it (<code class="docutils literal notranslate"><span class="pre">--hexapic</span></code> names another binary). <code class="docutils literal notranslate"><span class="pre">case.toml</span></code> beside
+the script is the same case, for a run without Python. <code class="docutils literal notranslate"><span class="pre">analyze.py</span></code> prints
+the numbers below and writes <code class="docutils literal notranslate"><span class="pre">results.json</span></code> and the two figures into the
+run’s directory. Given several runs, it prints their mean and standard
+deviation.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option of <code class="docutils literal notranslate"><span class="pre">case.py</span></code></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--run</span></code></p></td>
+<td><p>run HEXAPIC on the case</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--live</span></code></p></td>
+<td><p>write the frames that HEXAPIC / VIZ shows during the run</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--seed</span> <span class="pre">N</span></code></p></td>
+<td><p>the seed of the random numbers</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--xoopic</span></code></p></td>
+<td><p>write the case as an XOOPIC deck, <code class="docutils literal notranslate"><span class="pre">case.inp</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="results">
+<h2>Results<a class="headerlink" href="#results" title="Link to this heading">#</a></h2>
+<section id="ion-flow-and-potential-against-xoopic">
+<h3>Ion flow and potential against XOOPIC<a class="headerlink" href="#ion-flow-and-potential-against-xoopic" title="Link to this heading">#</a></h3>
+<p>The numbers are means over the outputs from step 300 on. HEXAPIC is run with
+five seeds:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span>s<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">5</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span>python<span class="w"> </span>examples/walls/deposition/case.py<span class="w"> </span>runs/deposition_<span class="nv">$s</span><span class="w"> </span>--seed<span class="w"> </span><span class="nv">$s</span><span class="w"> </span>--run
+<span class="k">done</span>
+python<span class="w"> </span>examples/walls/deposition/analyze.py<span class="w"> </span>runs/deposition_?
+</pre></div>
+</div>
+<p>Both codes are reduced in the same way. The ions are counted in each cell,
+with the sums of their <span class="math notranslate nohighlight">\(v_y\)</span> and of their <span class="math notranslate nohighlight">\(|v|^2\)</span>. The ion current through a
+row of cells of the trench is</p>
+<div class="math notranslate nohighlight">
+\[
+I = \frac{q\,w}{\Delta y} \sum v_y ,
+\]</div>
+<p>with the charge <span class="math notranslate nohighlight">\(q\)</span> of an ion, the weight <span class="math notranslate nohighlight">\(w\)</span> of a macroparticle, the cell
+size <span class="math notranslate nohighlight">\(\Delta y\)</span> and the sum over the ions in that row. An even flow of
+<span class="math notranslate nohighlight">\(1.5\times10^{5}\ \mathrm{A/m^2}\)</span> over the width of the trench is 0.075 A/m.</p>
+<p><img alt="Four panels: the ions above the layer against time, the ion density above the layer and the ion current down the trench against y, and the difference of the two potentials against y" src="../../_images/comparison.png" /></p>
+<p><em>Top: the ions above the layer against time, and their density against the
+height <span class="math notranslate nohighlight">\(y\)</span>. Bottom left: the ion current through each row of cells of the
+trench, with the range of the five HEXAPIC seeds. Bottom right: the
+difference of the potentials of the two codes along two vertical lines.</em></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Steady state</p></th>
+<th class="head"><p>HEXAPIC, 5 seeds</p></th>
+<th class="head"><p>XOOPIC</p></th>
+<th class="head"><p>Difference</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Ions above the layer (macroparticles)</p></td>
+<td><p><span class="math notranslate nohighlight">\(7106 \pm 1\)</span></p></td>
+<td><p>7224</p></td>
+<td><p><span class="math notranslate nohighlight">\(-1.6\)</span> %</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ion current into the trench, top row of cells [A/m]</p></td>
+<td><p><span class="math notranslate nohighlight">\(0.0730 \pm 0.0015\)</span></p></td>
+<td><p>0.0728</p></td>
+<td><p><span class="math notranslate nohighlight">\(+0.2\)</span> %</p></td>
+</tr>
+<tr class="row-even"><td><p>Ion current onto the bottom of the trench, lowest two rows [A/m]</p></td>
+<td><p><span class="math notranslate nohighlight">\(0.0679 \pm 0.0011\)</span></p></td>
+<td><p>0.0657</p></td>
+<td><p><span class="math notranslate nohighlight">\(+3.4\)</span> %</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mean energy of the ions in those two rows [eV]</p></td>
+<td><p><span class="math notranslate nohighlight">\(98.189 \pm 0.002\)</span></p></td>
+<td><p>96.33</p></td>
+<td><p><span class="math notranslate nohighlight">\(+1.9\)</span> %</p></td>
+</tr>
+<tr class="row-even"><td><p>Potential at the mouth of the trench [V]</p></td>
+<td><p><span class="math notranslate nohighlight">\(-90.93\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-90.03\)</span></p></td>
+<td><p>0.90 V</p></td>
+</tr>
+<tr class="row-odd"><td><p>Potential on the surface of the layer, between two trenches [V]</p></td>
+<td><p><span class="math notranslate nohighlight">\(-94.62\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-94.44\)</span></p></td>
+<td><p>0.18 V</p></td>
+</tr>
+<tr class="row-even"><td><p>Potential one cell above that point [V]</p></td>
+<td><p><span class="math notranslate nohighlight">\(-93.36\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-92.17\)</span></p></td>
+<td><p>1.19 V</p></td>
+</tr>
+<tr class="row-odd"><td><p>Potential at the bottom of the trench [V]</p></td>
+<td><p><span class="math notranslate nohighlight">\(-99.88\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-99.90\)</span></p></td>
+<td><p>0.02 V</p></td>
+</tr>
+<tr class="row-even"><td><p>Electrons in the domain (macroparticles)</p></td>
+<td><p><span class="math notranslate nohighlight">\(158.6 \pm 0.6\)</span></p></td>
+<td><p>157.5</p></td>
+<td><p><span class="math notranslate nohighlight">\(+0.7\)</span> %</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The ion density above the layer, the current into the trench and the number
+of electrons agree within 2 %. The potentials differ by at most 1.2 V of
+100 V. The remaining differences have four causes.</p>
+<p><strong>The surface of the layer.</strong> HEXAPIC sets the permittivity on the nodes, and
+a cell edge between a node of the layer and a node outside takes a value in
+between. The layer therefore acts about half a cell thicker than in XOOPIC,
+which changes the permittivity exactly at the surface. The field above the
+layer is 43 V/µm, so this shifts the potential there by about 1 V. The
+difference is largest one cell above the surface and falls linearly to zero
+at the top wall.</p>
+<p><strong>The emitter.</strong> XOOPIC starts each particle on the wall. HEXAPIC starts it
+half a cell inside the domain, where the potential is already <span class="math notranslate nohighlight">\(-1.07\)</span> V. The
+ions of HEXAPIC miss this part of the fall, and the two rows of cells at the
+emitter hold about 200 fewer of them. This gives the 1.6 % in the number of
+ions.</p>
+<p><strong>The collisions.</strong> In XOOPIC the charge exchange with the gas takes
+2.8 eV from the mean energy of the ions at the bottom of the trench: without
+its <code class="docutils literal notranslate"><span class="pre">MCC</span></code> block, XOOPIC gives 99.18 eV there, 1.0 eV above HEXAPIC as the
+emitter explains. In HEXAPIC no ion and no electron collided in this run.
+The keys <code class="docutils literal notranslate"><span class="pre">scale_electron</span></code> and <code class="docutils literal notranslate"><span class="pre">scale_ion</span></code> have no effect in the current
+version: the collision rates in the log are those of the cross sections
+without the factor 40.</p>
+<p><strong>The walls of the trench.</strong> XOOPIC absorbs an ion that reaches a side of the
+trench. In HEXAPIC a dielectric wall inside the domain does not stop the
+particles: an ion that reaches a side moves on into the layer, and an ion
+inside the layer can enter the trench. HEXAPIC has 3.4 % more current at
+the bottom of the trench. This is the likely cause; it was not measured
+separately.</p>
+</section>
+<section id="what-is-not-compared">
+<h3>What is not compared<a class="headerlink" href="#what-is-not-compared" title="Link to this heading">#</a></h3>
+<p>XOOPIC stops the particles at the surface of a dielectric region and keeps
+their charge there. In HEXAPIC a dielectric region changes the permittivity
+only: the ions cross the layer and are absorbed by the substrate, and no
+charge stays on the layer or in the trench. The totals over the domain
+therefore differ:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Steady state, whole domain</p></th>
+<th class="head"><p>HEXAPIC, 5 seeds</p></th>
+<th class="head"><p>XOOPIC</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Ions (macroparticles)</p></td>
+<td><p><span class="math notranslate nohighlight">\(8739 \pm 1\)</span></p></td>
+<td><p>7652</p></td>
+</tr>
+<tr class="row-odd"><td><p>Kinetic energy [J/m]</p></td>
+<td><p><span class="math notranslate nohighlight">\(6.06\times10^{-11}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(4.17\times10^{-11}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Field energy [J/m]</p></td>
+<td><p><span class="math notranslate nohighlight">\(2.840\times10^{-8}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(3.380\times10^{-8}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The two field energies are also not the same integral. Computed from the
+two potentials with one formula, <span class="math notranslate nohighlight">\(\int \tfrac{1}{2}\varepsilon_0\varepsilon_r
+E^2\,\mathrm{d}A\)</span>, they are <span class="math notranslate nohighlight">\(3.02\times10^{-8}\)</span> and <span class="math notranslate nohighlight">\(3.00\times10^{-8}\)</span> J/m.</p>
+<p>In XOOPIC the layer charges: at the end of this run its surface holds about
+<span class="math notranslate nohighlight">\(6\times10^{-6}\ \mathrm{C/m^2}\)</span> and its potential has risen by 0.07 V. Over
+a run a thousand times longer this charge would change the flow, and HEXAPIC
+would not follow it. The comparison holds for the uncharged layer only.</p>
+<p>XOOPIC’s numbers come from its stored run in <code class="docutils literal notranslate"><span class="pre">reference/xoopic/</span></code>.
+<code class="docutils literal notranslate"><span class="pre">analyze.py</span> <span class="pre">--xoopic</span> <span class="pre">DIR</span></code> takes them from a new run of XOOPIC instead (see
+<code class="docutils literal notranslate"><span class="pre">reference/SOURCE.md</span></code>).</p>
+</section>
+</section>
+<section id="files">
+<h2>Files<a class="headerlink" href="#files" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">case.py</span></code></p></td>
+<td><p>the case as a PICMI script</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">case.toml</span></code></p></td>
+<td><p>the case as <code class="docutils literal notranslate"><span class="pre">case.py</span></code> writes it</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">analyze.py</span></code></p></td>
+<td><p>the ion flow and the potential of one or several runs, against XOOPIC</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">figures/</span></code></p></td>
+<td><p>the figures above, as <code class="docutils literal notranslate"><span class="pre">analyze.py</span></code> writes them</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">reference/xoopic/</span></code></p></td>
+<td><p>XOOPIC’s deck, its histories, its ion profiles and its potential</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">reference/SOURCE.md</span></code></p></td>
+<td><p>the sources of the case and of the reference data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="the-script">
+<h2>The script<a class="headerlink" href="#the-script" title="Link to this heading">#</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text"><code class="docutils literal notranslate"><span class="pre">case.py</span></code></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="sd">"""deposition: ions fall through 100 V onto a substrate under a dielectric layer with a trench.</span>
+
+<span class="sd">After XOOPIC's deck input/deposition.inp (reference/SOURCE.md), as a PICMI script: one description</span>
+<span class="sd">of the case for HEXAPIC and for XOOPIC.</span>
+
+<span class="sd">    python case.py DIR              # DIR/case.toml</span>
+<span class="sd">    python case.py DIR --run        # and HEXAPIC on it (build/HEXAPIC; --hexapic: another), into DIR/output</span>
+<span class="sd">    python case.py DIR --xoopic     # DIR/case.inp, the same case as an XOOPIC deck (--run: XOOPIC on it)</span>
+<span class="sd">    python case.py                  # the case.toml beside this script (--xoopic: reference/xoopic/case.inp)</span>
+
+<span class="sd">A strip of 1.6 um x 3.2 um, periodic in x, empty at the start.  The bottom</span>
+<span class="sd">wall is the substrate, at -100 V.  A dielectric layer (permittivity 10) of</span>
+<span class="sd">1 um lies on it, with a trench 0.5 um wide that leaves 0.1 um of the layer at</span>
+<span class="sd">its bottom; the trench's walls and bottom are dielectric walls.  The top wall</span>
+<span class="sd">is at 0 V and emits ions (1.5e5 A/m^2, 0.025 eV) and electrons (5e4 A/m^2,</span>
+<span class="sd">5 eV) downwards: a plasma's sheath edge.  The ions have 40 electron masses.</span>
+<span class="sd">They fall through the 100 V in about 120 steps; the electrons turn back</span>
+<span class="sd">within 0.6 um.  Monte Carlo collisions with argon at 10 mTorr are on, the</span>
+<span class="sd">cross sections times 40 (the deck's compensation for the light ions).</span>
+
+<span class="sd">The run is 1000 steps (50 ps), eight transits of the ions: the flow is steady</span>
+<span class="sd">and the layer has not charged yet.  --seed N is the run's seed, --live writes</span>
+<span class="sd">the frames HEXAPIC / VIZ shows during the run.  The XOOPIC deck also has a</span>
+<span class="sd">Diagnostic block that writes the potential beside the phase files</span>
+<span class="sd">(analyze.py reads both).</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">ap</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"ion deposition in a trench: case.toml, or XOOPIC's deck"</span><span class="p">)</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"dir"</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s2">"?"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">Path</span><span class="p">)</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--xoopic"</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">"store_true"</span><span class="p">)</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--seed"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--live"</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">"store_true"</span><span class="p">)</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--run"</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">"store_true"</span><span class="p">)</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--hexapic"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">Path</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"the binary --run runs (default build/HEXAPIC)"</span><span class="p">)</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">ap</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="n">HERE</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span>
+
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">xoopic</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">xoopic</span><span class="w"> </span><span class="kn">import</span> <span class="n">picmi</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">hexapic</span><span class="w"> </span><span class="kn">import</span> <span class="n">picmi</span>
+
+<span class="n">NX</span><span class="p">,</span> <span class="n">NY</span><span class="p">,</span> <span class="n">DX</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mf">5e-8</span>       <span class="c1"># the cells, their size [m]: 1.6 um x 3.2 um</span>
+<span class="n">LAYER</span> <span class="o">=</span> <span class="mi">20</span>                      <span class="c1"># the dielectric layer's thickness [cells]: 1 um</span>
+<span class="n">TRENCH</span> <span class="o">=</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>               <span class="c1"># the trench's walls [nodes along x]: 0.5 um wide</span>
+<span class="n">BOTTOM</span> <span class="o">=</span> <span class="mi">2</span>                      <span class="c1"># the layer left under the trench [cells]: 0.1 um</span>
+<span class="n">EPS_R</span> <span class="o">=</span> <span class="mf">10.0</span>                    <span class="c1"># the layer's relative permittivity</span>
+<span class="n">V_SHEATH</span> <span class="o">=</span> <span class="mf">100.0</span>                <span class="c1"># the substrate is at -V_SHEATH [V]</span>
+<span class="n">J_ION</span><span class="p">,</span> <span class="n">T_ION</span> <span class="o">=</span> <span class="mf">1.5e5</span><span class="p">,</span> <span class="mf">0.025</span>     <span class="c1"># the ions emitted at the top [A/m^2, eV]</span>
+<span class="n">J_ELECTRON</span><span class="p">,</span> <span class="n">T_ELECTRON</span> <span class="o">=</span> <span class="mf">5e4</span><span class="p">,</span> <span class="mf">5.0</span>   <span class="c1"># and the electrons</span>
+<span class="n">MASS_RATIO</span> <span class="o">=</span> <span class="mi">40</span>                 <span class="c1"># the ions' mass in electron masses</span>
+<span class="n">PRESSURE</span> <span class="o">=</span> <span class="mf">10e-3</span>                <span class="c1"># argon [Torr]</span>
+<span class="n">WEIGHT</span> <span class="o">=</span> <span class="mf">1000.0</span>                 <span class="c1"># particles per macroparticle: 75 ions and 25 electrons a step</span>
+<span class="n">DT</span> <span class="o">=</span> <span class="mf">5e-14</span>                      <span class="c1"># the time step [s]</span>
+<span class="n">STEPS</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">ME</span><span class="p">,</span> <span class="n">QE</span> <span class="o">=</span> <span class="mf">9.11e-31</span><span class="p">,</span> <span class="mf">1.6e-19</span>      <span class="c1"># the electron as XOOPIC's deck rounds it [kg, C]</span>
+<span class="n">EVERY</span> <span class="o">=</span> <span class="mi">10</span>                      <span class="c1"># the output's period [steps]</span>
+
+<span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">NX</span> <span class="o">*</span> <span class="n">DX</span><span class="p">,</span> <span class="n">NY</span> <span class="o">*</span> <span class="n">DX</span>
+<span class="n">xl</span><span class="p">,</span> <span class="n">xr</span><span class="p">,</span> <span class="n">yb</span><span class="p">,</span> <span class="n">yt</span> <span class="o">=</span> <span class="n">TRENCH</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">DX</span><span class="p">,</span> <span class="n">TRENCH</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">DX</span><span class="p">,</span> <span class="n">BOTTOM</span> <span class="o">*</span> <span class="n">DX</span><span class="p">,</span> <span class="n">LAYER</span> <span class="o">*</span> <span class="n">DX</span>
+
+<span class="n">grid</span> <span class="o">=</span> <span class="n">picmi</span><span class="o">.</span><span class="n">Cartesian2DGrid</span><span class="p">(</span><span class="n">number_of_cells</span><span class="o">=</span><span class="p">[</span><span class="n">NX</span><span class="p">,</span> <span class="n">NY</span><span class="p">],</span> <span class="n">lower_bound</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">upper_bound</span><span class="o">=</span><span class="p">[</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">],</span>
+                             <span class="n">lower_boundary_conditions</span><span class="o">=</span><span class="p">[</span><span class="s2">"periodic"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">upper_boundary_conditions</span><span class="o">=</span><span class="p">[</span><span class="s2">"periodic"</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">picmi</span><span class="o">.</span><span class="n">Simulation</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="n">picmi</span><span class="o">.</span><span class="n">ElectrostaticSolver</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">),</span> <span class="n">time_step_size</span><span class="o">=</span><span class="n">DT</span><span class="p">,</span> <span class="n">max_steps</span><span class="o">=</span><span class="n">STEPS</span><span class="p">,</span>
+                       <span class="n">hexapic_run</span><span class="o">=</span><span class="kc">None</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">seed</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{</span><span class="s2">"seed"</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">seed</span><span class="p">},</span>
+                       <span class="n">hexapic_output</span><span class="o">=</span><span class="p">{</span><span class="s2">"phase_space"</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span> <span class="o">|</span> <span class="p">({</span><span class="s2">"live"</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">live</span> <span class="k">else</span> <span class="p">{}),</span>
+                       <span class="n">hexapic_smoothing</span><span class="o">=</span><span class="p">{</span><span class="s2">"x_passes"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"y_passes"</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>   <span class="c1"># a comparison: no charge smoothing</span>
+                       <span class="n">hexapic_title</span><span class="o">=</span><span class="s2">"deposition"</span><span class="p">,</span>
+                       <span class="n">hexapic_description</span><span class="o">=</span><span class="p">(</span><span class="s2">"Ions fall through 100 V onto a substrate under a dielectric layer with a "</span>
+                                            <span class="s2">"trench. Periodic in x; the top wall emits the ions and the electrons of a "</span>
+                                            <span class="s2">"sheath edge. After XOOPIC's input/deposition.inp, with 32 x 64 cells of "</span>
+                                            <span class="s2">"50 nm (30 x 100 there) and a tenth of its weight."</span><span class="p">))</span>
+
+<span class="n">electrons</span> <span class="o">=</span> <span class="n">picmi</span><span class="o">.</span><span class="n">Species</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"electrons"</span><span class="p">,</span> <span class="n">mass</span><span class="o">=</span><span class="n">ME</span><span class="p">,</span> <span class="n">charge</span><span class="o">=-</span><span class="n">QE</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_species</span><span class="p">(</span><span class="n">electrons</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">ions</span> <span class="o">=</span> <span class="n">picmi</span><span class="o">.</span><span class="n">Species</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"ions"</span><span class="p">,</span> <span class="n">mass</span><span class="o">=</span><span class="n">ME</span> <span class="o">*</span> <span class="n">MASS_RATIO</span><span class="p">,</span> <span class="n">charge</span><span class="o">=</span><span class="n">QE</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_species</span><span class="p">(</span><span class="n">ions</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># the trench's surfaces (xoopic_normal: the side the particles are on), the substrate, the layer's three parts</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_boundary</span><span class="p">(</span><span class="n">picmi</span><span class="o">.</span><span class="n">Boundary</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">"dielectric"</span><span class="p">,</span> <span class="n">segment</span><span class="o">=</span><span class="p">{</span><span class="s2">"from"</span><span class="p">:</span> <span class="p">[</span><span class="n">TRENCH</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">LAYER</span><span class="p">],</span> <span class="s2">"to"</span><span class="p">:</span> <span class="p">[</span><span class="n">TRENCH</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">]},</span>
+                                <span class="n">name</span><span class="o">=</span><span class="s2">"trenchLeft"</span><span class="p">,</span> <span class="n">permittivity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">xoopic_normal</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_boundary</span><span class="p">(</span><span class="n">picmi</span><span class="o">.</span><span class="n">Boundary</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">"dielectric"</span><span class="p">,</span> <span class="n">segment</span><span class="o">=</span><span class="p">{</span><span class="s2">"from"</span><span class="p">:</span> <span class="p">[</span><span class="n">TRENCH</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">BOTTOM</span><span class="p">],</span> <span class="s2">"to"</span><span class="p">:</span> <span class="p">[</span><span class="n">TRENCH</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">BOTTOM</span><span class="p">]},</span>
+                                <span class="n">name</span><span class="o">=</span><span class="s2">"trenchBottom"</span><span class="p">,</span> <span class="n">permittivity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">xoopic_normal</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_boundary</span><span class="p">(</span><span class="n">picmi</span><span class="o">.</span><span class="n">Boundary</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">"dielectric"</span><span class="p">,</span> <span class="n">segment</span><span class="o">=</span><span class="p">{</span><span class="s2">"from"</span><span class="p">:</span> <span class="p">[</span><span class="n">TRENCH</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">],</span> <span class="s2">"to"</span><span class="p">:</span> <span class="p">[</span><span class="n">TRENCH</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">LAYER</span><span class="p">]},</span>
+                                <span class="n">name</span><span class="o">=</span><span class="s2">"trenchRight"</span><span class="p">,</span> <span class="n">permittivity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">xoopic_normal</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_boundary</span><span class="p">(</span><span class="n">picmi</span><span class="o">.</span><span class="n">Boundary</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">"biased"</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s2">"y_lo"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"substrate"</span><span class="p">,</span> <span class="n">voltage</span><span class="o">=-</span><span class="n">V_SHEATH</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="ow">in</span> <span class="p">((</span><span class="s2">"leftSlab"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">xl</span><span class="p">,</span> <span class="n">yt</span><span class="p">),</span> <span class="p">(</span><span class="s2">"bottomSlab"</span><span class="p">,</span> <span class="n">xl</span><span class="p">,</span> <span class="n">xr</span><span class="p">,</span> <span class="n">yb</span><span class="p">),</span> <span class="p">(</span><span class="s2">"rightSlab"</span><span class="p">,</span> <span class="n">xr</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">yt</span><span class="p">)):</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_region</span><span class="p">(</span><span class="n">picmi</span><span class="o">.</span><span class="n">Region</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">"dielectric"</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="p">{</span><span class="s2">"lower"</span><span class="p">:</span> <span class="p">[</span><span class="n">x0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="s2">"upper"</span><span class="p">:</span> <span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">]},</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                                <span class="n">permittivity</span><span class="o">=</span><span class="n">EPS_R</span><span class="p">,</span> <span class="n">charge_accumulating</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">top</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"lower"</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">h</span><span class="p">],</span> <span class="s2">"upper"</span><span class="p">:</span> <span class="p">[</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">]}</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_beam</span><span class="p">(</span><span class="n">picmi</span><span class="o">.</span><span class="n">Beam</span><span class="p">(</span><span class="n">species</span><span class="o">=</span><span class="s2">"electrons"</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="n">top</span><span class="p">,</span> <span class="n">current</span><span class="o">=</span><span class="n">J_ELECTRON</span> <span class="o">*</span> <span class="n">w</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">WEIGHT</span><span class="p">,</span> <span class="n">temperature_eV</span><span class="o">=</span><span class="n">T_ELECTRON</span><span class="p">,</span> <span class="n">normal</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_beam</span><span class="p">(</span><span class="n">picmi</span><span class="o">.</span><span class="n">Beam</span><span class="p">(</span><span class="n">species</span><span class="o">=</span><span class="s2">"ions"</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="n">top</span><span class="p">,</span> <span class="n">current</span><span class="o">=</span><span class="n">J_ION</span> <span class="o">*</span> <span class="n">w</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">WEIGHT</span><span class="p">,</span> <span class="n">temperature_eV</span><span class="o">=</span><span class="n">T_ION</span><span class="p">,</span> <span class="n">normal</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_interaction</span><span class="p">(</span><span class="n">picmi</span><span class="o">.</span><span class="n">MCCCollisions</span><span class="p">(</span><span class="n">gas</span><span class="o">=</span><span class="s2">"Ar"</span><span class="p">,</span> <span class="n">pressure_Torr</span><span class="o">=</span><span class="n">PRESSURE</span><span class="p">,</span> <span class="n">electron</span><span class="o">=</span><span class="s2">"electrons"</span><span class="p">,</span> <span class="n">ion</span><span class="o">=</span><span class="s2">"ions"</span><span class="p">,</span>
+                                        <span class="n">scale_electron</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">MASS_RATIO</span><span class="p">),</span> <span class="n">scale_ion</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">MASS_RATIO</span><span class="p">)))</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_diagnostic</span><span class="p">(</span><span class="n">picmi</span><span class="o">.</span><span class="n">FieldDiagnostic</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="n">EVERY</span><span class="p">))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">mesh_diagnostic</span><span class="p">(</span><span class="n">deck</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Adds the Diagnostic block that makes XOOPIC write a mesh (phi, rho, ...) beside its phase files."""</span>
+    <span class="n">block</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Diagnostic"</span><span class="p">,</span> <span class="s2">"{"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"  VarName = </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"  directory = output"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"  file = </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_%04d.dat"</span><span class="p">,</span>
+             <span class="s2">"  append = 0"</span><span class="p">,</span> <span class="s2">"  n_start = 0"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"  n_step = </span><span class="si">{</span><span class="n">EVERY</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"  n_end = 0"</span><span class="p">,</span> <span class="s2">"}"</span><span class="p">,</span> <span class="s2">"}"</span><span class="p">]</span>
+    <span class="n">deck</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">deck</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">block</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>     <span class="c1"># before the Region's closing brace</span>
+
+
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">run</span> <span class="ow">and</span> <span class="n">args</span><span class="o">.</span><span class="n">dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">ap</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"--run needs a directory for the run"</span><span class="p">)</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">dir</span> <span class="ow">or</span> <span class="p">(</span><span class="n">HERE</span> <span class="o">/</span> <span class="s2">"reference/xoopic"</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">xoopic</span> <span class="k">else</span> <span class="n">HERE</span><span class="p">)</span>
+<span class="n">case</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_input_file</span><span class="p">(</span><span class="n">out</span> <span class="o">/</span> <span class="p">(</span><span class="s2">"case.inp"</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">xoopic</span> <span class="k">else</span> <span class="s2">"case.toml"</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">xoopic</span><span class="p">:</span>
+    <span class="n">mesh_diagnostic</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="s2">"phi"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="p">(</span><span class="n">out</span> <span class="o">/</span> <span class="s2">"output"</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>       <span class="c1"># XOOPIC does not make its Diagnostic files' directory</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">case</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">run</span><span class="p">:</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">**</span><span class="p">({}</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">xoopic</span> <span class="ow">or</span> <span class="n">args</span><span class="o">.</span><span class="n">hexapic</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{</span><span class="s2">"hexapic"</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">hexapic</span><span class="o">.</span><span class="n">resolve</span><span class="p">()}))</span>
+</pre></div>
+</div>
+</div>
+</details></section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>The case follows XOOPIC’s deck <code class="docutils literal notranslate"><span class="pre">input/deposition.inp</span></code>
+<span class="bibtex-citation" id="id1">[<a class="reference internal" href="../../docs/references.html#id10" title="J. P. Verboncoeur, A. B. Langdon, and N. T. Gladd. An object-oriented electromagnetic PIC code. Computer Physics Communications, 87:199–211, 1995.">Verboncoeur <em>et al.</em>, 1995</a>]</span>. That deck has a domain of 1.5 µm × 5 µm with
+30 × 100 cells, a time step of <span class="math notranslate nohighlight">\(10^{-13}\)</span> s and <span class="math notranslate nohighlight">\(10^{4}\)</span> particles per
+macroparticle. Here the domain is 1.6 µm × 3.2 µm with 32 × 64 cells of the
+same size, the time step is <span class="math notranslate nohighlight">\(5\times10^{-14}\)</span> s and a macroparticle holds
+<span class="math notranslate nohighlight">\(10^{3}\)</span> particles. The trench, the layer, the voltage, the emitted currents
+and the gas are those of the deck. There is no theory in this example.</p>
+<section id="xoopic-s-run-xoopic">
+<h3>XOOPIC’s run (<code class="docutils literal notranslate"><span class="pre">xoopic/</span></code>)<a class="headerlink" href="#xoopic-s-run-xoopic" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">case.inp</span></code>: the deck XOOPIC ran, as <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">case.py</span> <span class="pre">--xoopic</span></code> writes it.
+Besides the case it has three <code class="docutils literal notranslate"><span class="pre">Diagnostic</span></code> blocks, which make XOOPIC write
+the phase space of both species and the potential every 10 steps. Its
+first lines note that XOOPIC’s <code class="docutils literal notranslate"><span class="pre">DielectricRegion</span></code> stops the particles.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">history.csv</span></code>: at every 10th of 1000 steps, XOOPIC’s field and kinetic
+energy (J/m) and its numbers of ions and electrons from the <code class="docutils literal notranslate"><span class="pre">ENERGY_CSV</span></code>
+lines it prints (which list the species in the reverse order of the
+deck), and the ions above the layer from the phase-space files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ions.csv</span></code>: the steady state, the mean over the steps 300 to 990, by row
+of cells: the ion density above the layer, and in the trench the ion
+current, the mean ion energy and the number of ions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">potential.csv</span></code>: the mean potential over the same steps along <span class="math notranslate nohighlight">\(x = 0\)</span> and
+along the axis of the trench.</p></li>
+</ul>
+<p>XOOPIC 2.70 (github.com/rinku-mishra/xoopic, commit 3fa6670) with the
+<code class="docutils literal notranslate"><span class="pre">ENERGY_CSV</span></code> lines added to <code class="docutils literal notranslate"><span class="pre">otools/diagn.cpp</span></code>
+(<a class="reference internal" href="../../docs/verification/codes.html#running-xoopic"><span class="std std-ref">Running XOOPIC</span></a> gives the patch and the build), run on
+2026-11-17 as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>runs/deposition_xoopic
+python<span class="w"> </span>examples/walls/deposition/case.py<span class="w"> </span>runs/deposition_xoopic<span class="w"> </span>--xoopic<span class="w"> </span>--run<span class="w"> </span>&gt;<span class="w"> </span>runs/deposition_xoopic/xoopic.log
+</pre></div>
+</div>
+<p>which is <code class="docutils literal notranslate"><span class="pre">xoopic</span> <span class="pre">-nox</span> <span class="pre">-i</span> <span class="pre">case.inp</span> <span class="pre">-s</span> <span class="pre">1000</span> <span class="pre">-exit</span></code> in that directory, about
+3 s on one CPU core. The three CSV files were then written by</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>examples/walls/deposition/analyze.py<span class="w"> </span>runs/deposition_?<span class="w"> </span>--xoopic<span class="w"> </span>runs/deposition_xoopic<span class="w"> </span>--store
+</pre></div>
+</div>
+<p>XOOPIC draws the same random numbers in each run. The number in the README
+for XOOPIC without collisions is from the same deck without its <code class="docutils literal notranslate"><span class="pre">MCC</span></code> block
+and without the <code class="docutils literal notranslate"><span class="pre">collisionModel</span></code> lines of the two species; that run is not
+stored.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="child_langmuir.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Space-charge-limited diode</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="floating_wall.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Floating wall</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running">Running</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ion-flow-and-potential-against-xoopic">Ion flow and potential against XOOPIC</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-not-compared">What is not compared</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#files">Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-script">The script</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#xoopic-s-run-xoopic">XOOPIC’s run (<code class="docutils literal notranslate"><span class="pre">xoopic/</span></code>)</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, LECAD-PEG, University of Ljubljana.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

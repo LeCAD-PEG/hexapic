@@ -1,0 +1,83 @@
+# Other codes
+
+HEXAPIC and another code run the same case. The other code's input and its
+results are stored with the example, in its `reference/` directory. Where a
+result depends on the random load of the particles, the other code's run is
+set against several seeds of HEXAPIC.
+
+:::{hexapic-comparisons} code
+:::
+
+## XOOPIC
+
+[XOOPIC](https://github.com/rinku-mishra/xoopic) is a 2-D electrostatic and
+electromagnetic PIC code {cite:p}`verboncoeur1995`. The cases are modified
+decks from its own library. Each case is a PICMI script that writes the
+input of both codes, so the two inputs cannot drift apart. See
+[XOOPIC as a target](../user-guide/picmi.md#xoopic-as-a-target).
+
+### Running XOOPIC
+
+An example that is compared with XOOPIC has the option `--xoopic`:
+`case.py DIR --xoopic` writes the XOOPIC deck `DIR/case.inp`, and with
+`--run` it runs XOOPIC on it. The example's `reference/xoopic/` holds the
+deck and XOOPIC's numbers, so the comparison needs no XOOPIC installation.
+
+To repeat XOOPIC's runs, XOOPIC must print its energies after each history
+update, as lines of the form `ENERGY_CSV,t,Ue,Uk,...`. Stock XOOPIC 2.7 does
+not print them. Add two lines to `otools/diagn.cpp`, after the call
+`energy_all.add()`, that write the line in one `printf`. Build xgrafix with
+`--with-SCALAR=double` and then XOOPIC with `--disable-fftw`, both with
+`CC="gcc -fcommon" CXX="g++ -fcommon"`.
+
+### Differences between the models
+
+The two codes model some things differently, and the comparisons show it:
+
+- A beam starts on the wall in XOOPIC, and each particle is moved by a
+  fraction of a step. In HEXAPIC all particles of a step start half a cell
+  inside the domain.
+- A dielectric region stops the particles in XOOPIC. In HEXAPIC the
+  particles pass through it.
+- HEXAPIC stores the permittivity at the nodes, so a dielectric region acts
+  half a cell larger on each side than its nodes say.
+
+## BIT1
+
+BIT1 is a 1D3V PIC code for the plasma edge of fusion devices. This
+comparison is not an example yet. It runs the BIT1 weak-scaling case from
+LUMI on both codes. The case is a deuterium plasma between two walls with
+Coulomb collisions, MCC with kinetic neutrals, recycling and collisional
+heating.
+
+### The case
+
+| | |
+|---|---|
+| Grid | 800000 cells of $10^{-7}$ m along x ($L_x$ = 0.08 m), and 8 periodic cells along y |
+| Species | Electrons, D⁺ and D |
+| Walls | As in the BIT1 deck, the left wall floats on an open circuit and the right wall is grounded. A second variant grounds both walls. |
+| Physics | As in BIT1: its cross sections (`set = "bit1"`), heating, Coulomb logarithm and collision cadence |
+
+The script `verification/vs_bit1/make_deck.py` writes the HEXAPIC case, and
+`make_bit1_deck.sh` writes the BIT1 deck. The first command below writes the
+floating variant and the second the grounded one:
+
+```bash
+python verification/vs_bit1/make_deck.py > runs/bit1/case.toml
+python verification/vs_bit1/make_deck.py --walls grounded > runs/bit1g/case.toml
+```
+
+### Comparing
+
+The script `compare.py` compares the profiles of the two runs and the
+particle losses. The profiles are the densities, the temperatures, the
+potential and the sheaths at the walls.
+
+```bash
+python verification/vs_bit1/compare.py --hexapic RUN --bit1 RUN --out DIR
+```
+
+The runs and their results are in `verification/vs_bit1/`. The directory
+holds the LUMI job scripts, `run_lumi.slurm` and `run_bit1_lumi.slurm`, and
+the results of each campaign with a README.

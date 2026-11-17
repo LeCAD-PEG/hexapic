@@ -1,0 +1,192 @@
+/* Copyright 2026 David Lajevec — HEXAPIC
+ *
+ * The documentation in the viewer's style (tools/viz/web/index.html): IBM
+ * Plex, square corners, one-pixel rules, small uppercase labels; black and
+ * white, with one accent (--hx-accent: set it to var(--hx-strong) for none).
+ * The navbar's HEXAPIC in Sora.  Fonts: fonts/OFL-*.txt.  The website
+ * (hexapic-website) uses this file too. */
+
+@font-face { font-family: "IBM Plex Sans"; font-weight: 400; font-display: swap; src: url(fonts/ibm-plex-sans-400.woff2) format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-weight: 500; font-display: swap; src: url(fonts/ibm-plex-sans-500.woff2) format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-weight: 600; font-display: swap; src: url(fonts/ibm-plex-sans-600.woff2) format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 400; font-display: swap; src: url(fonts/ibm-plex-mono-400.woff2) format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 500; font-display: swap; src: url(fonts/ibm-plex-mono-500.woff2) format("woff2"); }
+@font-face { font-family: "Sora"; font-weight: 600; font-display: swap; src: url(fonts/sora-latin-600.woff2) format("woff2"); }
+
+/* ── the colours: black and white, violet as the one accent (the viewer's too) ── */
+html[data-theme="dark"] {
+  --hx-bg: #0a0a0a; --hx-panel: #111111; --hx-head: #0a0a0a; --hx-line: #1f1f1f; --hx-line2: #333333;
+  --hx-text: #cfcfcf; --hx-strong: #ffffff; --hx-dim: #8c8c8c; --hx-hover: #171717;
+  --hx-accent: #9085e9; --hx-s1: #cfcfcf; --hx-s2: #ec7a5c;
+}
+html[data-theme="light"] {
+  --hx-bg: #ffffff; --hx-panel: #f7f7f7; --hx-head: #ffffff; --hx-line: #e8e8e8; --hx-line2: #cfcfcf;
+  --hx-text: #1c1c1c; --hx-strong: #000000; --hx-dim: #6b6b6b; --hx-hover: #f2f2f2;
+  --hx-accent: #6250d6; --hx-s1: #1c1c1c; --hx-s2: #c2492b;
+}
+html[data-theme="dark"], html[data-theme="light"] {
+  --pst-color-background: var(--hx-bg);
+  --pst-color-on-background: var(--hx-head);
+  --pst-color-surface: var(--hx-panel);
+  --pst-color-on-surface: var(--hx-head);
+  --pst-color-border: var(--hx-line2);
+  --pst-color-border-muted: var(--hx-line);
+  --pst-color-text-base: var(--hx-text);
+  --pst-color-text-muted: var(--hx-dim);
+  --pst-color-heading: var(--hx-strong);
+  --pst-color-primary: var(--hx-strong);
+  --pst-color-secondary: var(--hx-strong);
+  --pst-color-accent: var(--hx-accent);
+  --pst-color-link: var(--hx-strong);
+  --pst-color-link-hover: var(--hx-accent);
+  --pst-color-inline-code: var(--hx-strong);
+  --pst-color-target: var(--hx-hover);
+  --pst-color-info: var(--hx-s1);
+  --pst-color-warning: var(--hx-accent);
+  --pst-color-danger: var(--hx-s2);
+  --pst-color-shadow: transparent;
+  --pst-color-info-bg: transparent;
+  --pst-color-warning-bg: transparent;
+  --pst-color-danger-bg: transparent;
+  --pst-color-success-bg: transparent;
+  --pst-color-blockquote-notch: var(--hx-line2);
+
+  --pst-font-family-base: "IBM Plex Sans", sans-serif;
+  --pst-font-family-heading: "IBM Plex Sans", sans-serif;
+  --pst-font-family-monospace: "IBM Plex Mono", monospace;
+  --pst-font-size-h1: 2rem;
+  --pst-font-size-h2: 1.5rem;
+  --pst-font-size-h3: 1.2rem;
+  --pst-font-size-h4: 1.05rem;
+  --pst-header-height: 3rem;
+}
+
+/* ── the header: flat, one rule under it ──────────────────────────────── */
+.bd-header { border-bottom: 1px solid var(--hx-line); box-shadow: none; }
+.navbar-brand .logo__image { height: 1.6rem; }
+.navbar-brand .logo__title {
+  font: 600 1rem "Sora", var(--pst-font-family-base);
+  letter-spacing: 0.14em; color: var(--hx-strong);
+}
+.navbar-brand .logo__title i { font-style: normal; color: var(--hx-accent); padding: 0 0.1em; }
+.navbar-brand .logo__title i + span { color: var(--hx-dim); }
+.bd-header .navbar-nav .nav-link { font-weight: 500; font-size: 0.95rem; }
+.bd-header .navbar-nav li a.nav-link:hover { text-decoration: none; color: var(--hx-strong); }
+.bd-header .navbar-nav > .current > .nav-link { color: var(--hx-strong); border-bottom: none;
+  box-shadow: inset 0 -2px 0 var(--hx-accent); }
+.search-button-field { border: 1px solid var(--hx-line2); border-radius: 2px; background: var(--hx-panel); font-size: 0.9rem; }
+.search-button-field:hover { border-color: var(--hx-strong); box-shadow: none; }
+.search-button__kbd-shortcut kbd, kbd.kbd-shortcut__modifier { border-radius: 2px; box-shadow: none; }
+
+/* ── the page: wider than the theme's 88rem, with narrower side bars, so the
+ * text's column is a third wider (49rem -> 66rem between the two bars) ──── */
+:root { --pst-sidebar-secondary: 16rem; }
+.bd-page-width { max-width: 100rem; }
+.bd-main .bd-content .bd-article-container { max-width: 80em; }
+@media (min-width: 960px) {
+  .bd-sidebar-primary:not(.pst-squeeze) { --pst-sidebar-primary-width: min(25%, 18rem); }
+}
+
+/* ── the side bars' labels: small, uppercase, spaced (the viewer's) ────── */
+.bd-sidebar-primary .sidebar-header-items__title,
+nav.bd-links p.bd-links__title, nav.bd-links p.caption, .page-toc.onthispage,
+.prev-next-area .prev-next-subtitle {
+  font: 500 0.72rem "IBM Plex Sans", sans-serif; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--hx-dim);
+}
+.bd-sidebar-primary { border-right: 1px solid var(--hx-line); }
+.bd-sidebar-secondary { border-left: 1px solid var(--hx-line); }
+.page-toc.onthispage { margin-bottom: 0.4rem; }
+.page-toc.onthispage i { display: none; }
+/* the left bar only where a section has pages to list; its collapse button quiet */
+.bd-sidebar-primary:not(:has(nav.bd-links li)) { display: none; }
+.bd-sidebar-primary #pst-collapse-sidebar-button .pst-collapse-sidebar-label { color: var(--hx-dim); text-decoration: none; font-size: 0.85rem; }
+.bd-sidebar-primary #pst-collapse-sidebar-button:hover .pst-collapse-sidebar-label { color: var(--hx-strong); text-decoration: none; }
+.toc-entry a.nav-link.active, .bd-sidebar .nav li > a.active, nav.bd-links .current > a {
+  border-left-color: var(--hx-accent); color: var(--hx-strong); font-weight: 600; background: none;
+}
+.bd-sidebar .nav li > a:hover, .toc-entry a.nav-link:hover { color: var(--hx-strong); text-decoration: none; background: var(--hx-hover); }
+
+/* ── the text ─────────────────────────────────────────────────────────── */
+.bd-article h1, .bd-article h2, .bd-article h3 { letter-spacing: -0.01em; }
+.bd-article h1 { margin-bottom: 1.2rem; }
+.bd-article h2 { margin-top: 2.6rem; padding-bottom: 0.35rem; border-bottom: 1px solid var(--hx-line); }
+.bd-article a { text-decoration: underline; text-decoration-color: var(--hx-line2);
+  text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.bd-article a:hover { text-decoration-color: var(--hx-accent); color: var(--hx-strong); }
+.bd-article a.headerlink, .bd-article .sd-card a, .bd-article a.sd-btn { text-decoration: none; }
+a.headerlink { color: var(--hx-dim); }
+
+/* the code: square, flat, a rule round it */
+div.highlight, pre { border-radius: 2px; box-shadow: none; }
+div.highlight pre, .bd-content pre { border: 1px solid var(--hx-line); background: var(--hx-panel); }
+code.literal { border: 1px solid var(--hx-line); border-radius: 2px; background: var(--hx-panel); padding: 0.05em 0.3em; }
+/* in a heading, the bars and the breadcrumbs: the font alone, no box */
+:is(h1, h2, h3, h4, nav, .breadcrumb-item, .prev-next-title) code.literal {
+  border: 0; background: none; padding: 0; color: inherit; font-size: 0.95em;
+}
+
+/* the notes: flat, a rule round them, the colour on the left only */
+html .bd-article .admonition {
+  border-radius: 2px; box-shadow: none; border: 1px solid var(--hx-line); border-left: 2px solid var(--pst-color-info);
+  background: var(--hx-panel);
+}
+html .bd-article .admonition:is(.warning, .caution, .attention) { border-left-color: var(--pst-color-warning); }
+html .bd-article .admonition:is(.danger, .error) { border-left-color: var(--pst-color-danger); }
+.admonition > .admonition-title, div.admonition > .admonition-title {
+  background: none; font: 600 0.78rem "IBM Plex Sans", sans-serif; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.admonition > .admonition-title::after, div.admonition > .admonition-title::after { opacity: 1; }
+
+/* the equations' numbers and the figures' captions: quieter */
+.math .eqno, span.eqno { color: var(--hx-dim); font-family: "IBM Plex Mono", monospace; font-size: 0.9rem; }
+figure figcaption, .figure .caption { color: var(--hx-dim); font-size: 0.9rem; }
+figure figcaption .caption-number { font: 500 0.78rem "IBM Plex Mono", monospace; font-style: normal;
+  letter-spacing: 0.06em; color: var(--hx-strong); }
+figure img { border: 1px solid var(--hx-line); background: #fff; padding: 0.5rem; }
+
+/* the previous / next links and the footer: plain */
+.prev-next-area a p.prev-next-title { color: var(--hx-strong); text-decoration: none; font-weight: 600; }
+.prev-next-area a:hover p.prev-next-title { color: var(--hx-accent); }
+.bd-footer { border-top: 1px solid var(--hx-line); font-size: 0.85rem; color: var(--hx-dim); }
+.bd-footer .footer-items__start, .bd-footer .footer-items__end { color: var(--hx-dim); }
+
+/* ── sphinx-design in the viewer's style: cards, badges, buttons ───────── */
+html[data-theme="dark"], html[data-theme="light"] {
+  --sd-color-primary: var(--hx-strong);
+  --sd-color-primary-highlight: var(--hx-text);
+  --sd-color-primary-text: var(--hx-bg);
+  --sd-color-card-border: var(--hx-line);
+  --sd-color-card-background: var(--hx-panel);
+  --sd-color-shadow: transparent;
+}
+.sd-card { border: 1px solid var(--hx-line); border-radius: 2px; background: var(--hx-panel); box-shadow: none !important; }
+.sd-card.sd-card-hover:hover, .sd-card:has(a.sd-stretched-link):hover { border-color: var(--hx-strong); transform: none; }
+.sd-card .sd-card-title { font-weight: 600; color: var(--hx-strong); font-size: 1.02rem; }
+.sd-card .sd-card-body { font-size: 0.93rem; }
+.sd-card .sd-card-footer { border-top: 1px solid var(--hx-line); background: none; padding: 0.45rem 1rem; }
+.sd-card .sd-card-img-top { border-bottom: 1px solid var(--hx-line); aspect-ratio: 2 / 1; object-fit: cover;
+  object-position: center; background: #000; border-radius: 0; }
+.sd-badge { border-radius: 2px; font: 500 0.68rem "IBM Plex Mono", monospace; letter-spacing: 0.04em;
+  text-transform: uppercase; padding: 0.2em 0.5em; }
+.sd-btn { border-radius: 2px; font-weight: 500; padding: 0.35rem 1.1rem; box-shadow: none !important; }
+.sd-tab-set > label { font-weight: 500; border-radius: 0; }
+.sd-tab-set > input:checked + label { border-color: var(--hx-strong); color: var(--hx-strong); }
+
+/* ── the home page ────────────────────────────────────────────────────── */
+.hx-lead + p, p.hx-lead { font-size: 1.15rem; color: var(--hx-strong); max-width: 46rem; }
+.hx-cards .sd-card-body { color: var(--hx-text); }
+.hx-features .sd-col > * { font-size: 0.93rem; }
+.hx-features strong { color: var(--hx-strong); display: block; margin-bottom: 0.2rem; }
+
+/* ── videos and the viewer's screenshots: dark, framed, no white mat ───── */
+video.hx-video { display: block; width: 100%; height: auto; border: 1px solid var(--hx-line); border-radius: 2px;
+  background: #000; margin: 0.4rem 0 0.4rem; }
+video.hx-video + p, video.hx-video + p em { color: var(--hx-dim); font-size: 0.9rem; }
+figure.hx-shot img { background: #000; padding: 0; }
+
+/* ── an example's facts: a compact two-column table ───────────────────── */
+table.hx-facts { width: 100%; font-size: 0.92rem; }
+table.hx-facts td:first-child { color: var(--hx-dim); font-weight: 500; white-space: nowrap; }
+.hx-buttons { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0.4rem 0 1.4rem; }
+.hx-buttons p { margin: 0; }

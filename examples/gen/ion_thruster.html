@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Example: Ion optics of a gridded ion thruster</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/hexapic.css?v=e5596fca" />
+    <link rel="stylesheet" type="text/css" href="../../_static/site.css?v=370520c7" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=18bd87630a240e9c25be"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be" />
+
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/gen/ion_thruster';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script defer="defer" src="../../_static/hero.js?v=8e2d957d"></script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="LANDMARK: axial-azimuthal Hall thruster" href="landmark.html" />
+    <link rel="prev" title="Hall thruster in 3-D" href="hall_thruster_3d.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo-dark-ink.png" class="logo__image only-light" alt="HEXAPIC"/>
+    <img src="../../_static/logo-light-ink.png" class="logo__image only-dark pst-js-only" alt="HEXAPIC"/>
+  
+  
+    <p class="title logo__title">HEXAPIC</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../docs/index.html">
+    Documentation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../about/index.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/LeCAD-PEG/hexapic" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../docs/index.html">
+    Documentation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../about/index.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/LeCAD-PEG/hexapic" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button type="button" id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic plasma</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="landau_damping.html">Landau damping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="two_stream.html">Two-stream instability</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Discharges</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ccp_helium.html">Capacitive discharge in helium (Turner benchmark)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Thrusters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="hall_thruster_3d.html">Hall thruster in 3-D</a></li>
+<li class="toctree-l1 current active"><a aria-current="page" class="current reference internal" href="#">Ion optics of a gridded ion thruster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="landmark.html">LANDMARK: axial-azimuthal Hall thruster</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Walls</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="child_langmuir.html">Space-charge-limited diode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deposition.html">Ion deposition in a trench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="floating_wall.html">Floating wall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wall_types.html">Wall types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xybeam.html">Electron beam between grounded plates</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Examples</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Ion optics of a gridded ion thruster</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="ion-optics-of-a-gridded-ion-thruster">
+<h1>Ion optics of a gridded ion thruster<a class="headerlink" href="#ion-optics-of-a-gridded-ion-thruster" title="Link to this heading">#</a></h1>
+<p><video class="hx-video" controls loop muted playsinline preload="metadata" poster="../../_static/videos/ion_thruster.jpg" src="../../_static/videos/ion_thruster.mp4"></video></p>
+<p>A gridded ion thruster draws ions out of a discharge plasma through the
+holes of two grids. The screen grid is at the high potential of the plasma.
+The accel grid behind it is negative: the field between the two grids
+accelerates the ions and focuses them into one beamlet per hole, and the
+negative potential keeps the electrons that neutralize the beam from
+streaming back into the discharge. This case simulates one periodic cell of
+such grids in 3-D, with the plasma, two beamlets and the neutralizing
+electrons. It has no theory and no other code to compare with, so the
+results below describe what the run gives.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<p>The beam goes along <span class="math notranslate nohighlight">\(x\)</span>. The holes sit on a hexagonal lattice with a pitch
+of 2.24 mm from hole to hole. The cell is one pitch along <span class="math notranslate nohighlight">\(y\)</span> and
+<span class="math notranslate nohighlight">\(\sqrt{3}\)</span> pitches along <span class="math notranslate nohighlight">\(z\)</span>, with a hole at its corners and one at its
+centre, so it holds two beamlets.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Domain</p></td>
+<td><p>9.56 mm × 2.24 mm × 3.88 mm, periodic in <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Grid</p></td>
+<td><p>256 × 60 × 104 cells of 37.3 µm (1.26 Debye lengths of the discharge plasma)</p></td>
+</tr>
+<tr class="row-even"><td><p>Wall at <span class="math notranslate nohighlight">\(x = 0\)</span></p></td>
+<td><p>reflective: the middle of the discharge chamber</p></td>
+</tr>
+<tr class="row-odd"><td><p>Discharge plasma</p></td>
+<td><p>electrons (4 eV) and Ar⁺ (0.1 eV), <span class="math notranslate nohighlight">\(2.5\times10^{17}\ \mathrm{m^{-3}}\)</span>, loaded from <span class="math notranslate nohighlight">\(x = 0\)</span> to 1.2 mm. Between <span class="math notranslate nohighlight">\(x = 0\)</span> and 0.8 mm both are created at the rate that replaces a Bohm flux to the plane of the screen grid, and the electrons are redrawn at 4 eV.</p></td>
+</tr>
+<tr class="row-even"><td><p>Screen grid</p></td>
+<td><p>from <span class="math notranslate nohighlight">\(x = 1.2\)</span> to 1.6 mm, at +1100 V, with holes of 1.91 mm diameter</p></td>
+</tr>
+<tr class="row-odd"><td><p>Accel grid</p></td>
+<td><p>from <span class="math notranslate nohighlight">\(x = 2.2\)</span> to 2.72 mm, at −180 V, with holes of 1.14 mm diameter; the gap between the grids is 0.6 mm</p></td>
+</tr>
+<tr class="row-even"><td><p>Grids as objects</p></td>
+<td><p>conductor boxes, 144 in all: a node is solid where it is farther than the radius of the hole from the axis of every hole</p></td>
+</tr>
+<tr class="row-odd"><td><p>Wall at <span class="math notranslate nohighlight">\(x = 9.56\)</span> mm</p></td>
+<td><p>grounded and absorbing. It emits the neutralizing electrons (2 eV) at 0.87 mA, twice the ion current that a Bohm flux carries through the two screen holes.</p></td>
+</tr>
+<tr class="row-even"><td><p>Collisions</p></td>
+<td><p>Monte Carlo collisions of the electrons and the ions with a background of argon, <span class="math notranslate nohighlight">\(3\times10^{18}\ \mathrm{m^{-3}}\)</span> at 300 K. They include the charge exchange of the beam ions.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Particles</p></td>
+<td><p>100 per cell and species in the discharge plasma at the start, <span class="math notranslate nohighlight">\(2\times10^{7}\)</span> per species. The ions are moved every 10th step.</p></td>
+</tr>
+<tr class="row-even"><td><p>Time step</p></td>
+<td><p><span class="math notranslate nohighlight">\(7.09\times10^{-12}\)</span> s (<span class="math notranslate nohighlight">\(\omega_{pe}\,\Delta t = 0.2\)</span>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Run</p></td>
+<td><p>150 000 steps (1.06 µs), output every 2000 steps</p></td>
+</tr>
+<tr class="row-even"><td><p>Field solver</p></td>
+<td><p><a class="reference internal" href="../../docs/solvers/gmg3d.html"><span class="std std-doc">GMG3D</span></a>, the 3-D multigrid; relative tolerance <span class="math notranslate nohighlight">\(10^{-5}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Build</p></td>
+<td><p>the default build (quadratic particle shape, single precision)</p></td>
+</tr>
+<tr class="row-even"><td><p>Cost</p></td>
+<td><p>about 70 min on one NVIDIA A100</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="running">
+<h2>Running<a class="headerlink" href="#running" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>examples/thrusters/ion_thruster/case.py<span class="w"> </span>runs/ion_thruster
+build/HEXAPIC<span class="w"> </span>runs/ion_thruster/case.toml<span class="w"> </span>&gt;<span class="w"> </span>runs/ion_thruster/run.log
+python<span class="w"> </span>examples/thrusters/ion_thruster/analyze.py<span class="w"> </span>runs/ion_thruster
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">case.py</span></code> writes <code class="docutils literal notranslate"><span class="pre">runs/ion_thruster/case.toml</span></code>. <code class="docutils literal notranslate"><span class="pre">analyze.py</span></code> reads the
+series and the log of the run, <code class="docutils literal notranslate"><span class="pre">run.log</span></code>, which has the currents that the
+grids collect. It prints the numbers below and writes <code class="docutils literal notranslate"><span class="pre">results.json</span></code> and
+the three figures into the run’s directory.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option of <code class="docutils literal notranslate"><span class="pre">case.py</span></code></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--ny</span> <span class="pre">N</span></code></p></td>
+<td><p>cells across a pitch, a multiple of 4 (default 60). It sets the cell size, and with it the cells along <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(z\)</span>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--steps</span> <span class="pre">N</span></code></p></td>
+<td><p>the number of steps</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--every</span> <span class="pre">N</span></code></p></td>
+<td><p>an output every <code class="docutils literal notranslate"><span class="pre">N</span></code> steps</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--live</span></code></p></td>
+<td><p>write the frames that HEXAPIC / VIZ shows during the run</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option of <code class="docutils literal notranslate"><span class="pre">analyze.py</span></code></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--last</span> <span class="pre">N</span></code></p></td>
+<td><p>take the means of the currents over the last <code class="docutils literal notranslate"><span class="pre">N</span></code> outputs (default: the last third)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--log</span> <span class="pre">FILE</span></code></p></td>
+<td><p>the log of the run (default <code class="docutils literal notranslate"><span class="pre">run.log</span></code> in the run’s directory)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="results">
+<h2>Results<a class="headerlink" href="#results" title="Link to this heading">#</a></h2>
+<p>The beam reaches the far wall after about 100 ns, and the currents settle
+over the next 600 ns. The maps and the profiles are from the last output,
+at 1.06 µs. The currents are means over the last third of the outputs, from
+0.72 to 1.06 µs, with the standard error of the outputs.</p>
+<section id="potential-and-beamlets">
+<h3>Potential and beamlets<a class="headerlink" href="#potential-and-beamlets" title="Link to this heading">#</a></h3>
+<p><img alt="The potential and the ion density in a plane through a hole of both grids" src="../../_images/maps1.png" /></p>
+<p><em>The potential (top) and the density of the ions (bottom) at 1.06 µs in the
+plane through the centre hole, <span class="math notranslate nohighlight">\(y\)</span> at half a pitch. The grids are grey: the
+screen grid on the left, the accel grid on the right. The black line is the
+contour of 0 V.</em></p>
+<p>The discharge plasma is at 1116 V, 16 V above the screen grid. A sheath
+separates it from the grid, and its edge bulges into each screen hole. The
+ions that cross this edge are accelerated towards the accel grid and
+focused into a beamlet, which is narrower than the accel hole and widens
+behind it. On the axis of a hole the potential falls to −52 V at
+<span class="math notranslate nohighlight">\(x = 2.8\)</span> mm, just behind the accel grid. This negative barrier stops the
+neutralizing electrons: their density falls to zero near <span class="math notranslate nohighlight">\(x = 3.4\)</span> mm, and
+the electrons of the discharge end at the screen grid. Further downstream
+the electrons balance the charge of the ions, both at
+<span class="math notranslate nohighlight">\(5\times10^{15}\ \mathrm{m^{-3}}\)</span> in the mean over the cross-section, and
+the potential stays below 50 V.</p>
+<p><img alt="Profiles along x of the potential, of the densities of the three species and of the ion current" src="../../_images/profiles1.png" /></p>
+<p><em>Along <span class="math notranslate nohighlight">\(x\)</span>: the potential on the axis of a hole and its mean over <span class="math notranslate nohighlight">\(y\)</span> and
+<span class="math notranslate nohighlight">\(z\)</span>, the mean densities of the three species at 1.06 µs, and the net ion
+current through the planes of cells as the mean over the window. The grey
+bands are the two grids.</em></p>
+</section>
+<section id="currents-and-perveance">
+<h3>Currents and perveance<a class="headerlink" href="#currents-and-perveance" title="Link to this heading">#</a></h3>
+<p><img alt="The ion currents arriving at the screen grid, in the beam and collected by the two grids over time" src="../../_images/currents1.png" /></p>
+<p><em>The ion current that arrives at the screen grid, the beam current 1 mm
+before the far wall, and the ion currents that the screen grid and the
+accel grid collect.</em></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Mean over 0.72 to 1.06 µs</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Ions arriving at the screen grid [mA]</p></td>
+<td><p><span class="math notranslate nohighlight">\(0.700 \pm 0.002\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Ions collected by the screen grid [mA]</p></td>
+<td><p><span class="math notranslate nohighlight">\(0.174 \pm 0.001\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Beam current, 1 mm before the far wall [mA]</p></td>
+<td><p><span class="math notranslate nohighlight">\(0.541 \pm 0.003\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Beam current per hole [mA]</p></td>
+<td><p>0.270</p></td>
+</tr>
+<tr class="row-even"><td><p>Ion transparency of the screen grid</p></td>
+<td><p>0.77</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ions collected by the accel grid [mA]</p></td>
+<td><p><span class="math notranslate nohighlight">\(1.8\times10^{-5}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Of the ions that arrive at the screen grid, 77 % leave as the beam. The
+open area of the screen grid is 66 % of its plane: the sheath edge that
+bulges into the holes also draws in ions that started in front of the solid
+part. The accel grid collects <span class="math notranslate nohighlight">\(3\times10^{-5}\)</span> of the beam current, so the
+beamlets pass it without touching it, and the slow ions of the charge
+exchange add little at this gas density. The beam current still falls
+slowly over the window, from 0.57 to 0.52 mA.</p>
+<p>The perveance of a hole is <span class="math notranslate nohighlight">\(P = I / V^{3/2}\)</span>, with the beam current <span class="math notranslate nohighlight">\(I\)</span> of
+the hole and the voltage <span class="math notranslate nohighlight">\(V\)</span> from the plasma to the accel grid, 1296 V. The
+Child–Langmuir law limits it to</p>
+<div class="math notranslate nohighlight">
+\[
+P_\mathrm{max} = \frac{4 \varepsilon_0}{9} \sqrt{\frac{2e}{M}}\, \frac{\pi r_s^2}{l_e^2} ,
+\qquad l_e^2 = (l_g + t_s)^2 + r_s^2 ,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(r_s\)</span> is the radius of the screen hole, <span class="math notranslate nohighlight">\(t_s\)</span> the thickness of the
+screen grid, <span class="math notranslate nohighlight">\(l_g\)</span> the gap and <span class="math notranslate nohighlight">\(M\)</span> the mass of the ion. The run gives
+<span class="math notranslate nohighlight">\(P = 5.79\times10^{-9}\ \mathrm{A/V^{3/2}}\)</span>, which is 0.45 of
+<span class="math notranslate nohighlight">\(P_\mathrm{max} = 1.28\times10^{-8}\ \mathrm{A/V^{3/2}}\)</span>: the grids work
+below their space-charge limit, as the focused beamlets show.</p>
+</section>
+<section id="the-beam">
+<h3>The beam<a class="headerlink" href="#the-beam" title="Link to this heading">#</a></h3>
+<p>The energy and the angles are those of the beam ions between 0.5 and
+1.5 mm before the far wall at the last step, <span class="math notranslate nohighlight">\(3.5\times10^{5}\)</span>
+macroparticles.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Mean energy [eV]</p></td>
+<td><p>1111.6, standard deviation 3.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Divergence, rms angle to <span class="math notranslate nohighlight">\(x\)</span> [°]</p></td>
+<td><p>8.8</p></td>
+</tr>
+<tr class="row-even"><td><p>Angle that holds 95 % of the ions [°]</p></td>
+<td><p>16.7</p></td>
+</tr>
+<tr class="row-odd"><td><p>Slow ions among them</p></td>
+<td><p>0.06 %</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The ions arrive with the energy of the fall from the plasma at 1116 V to
+the beam, which is a few volts above the grounded wall. The slow ions are
+those of the charge exchange.</p>
+</section>
+</section>
+<section id="files">
+<h2>Files<a class="headerlink" href="#files" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">case.py</span></code></p></td>
+<td><p>the case as a PICMI script</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">case.toml</span></code></p></td>
+<td><p>the case as <code class="docutils literal notranslate"><span class="pre">case.py</span></code> writes it</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">analyze.py</span></code></p></td>
+<td><p>the potential, the beamlets and the currents, from a run and its log</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">figures/</span></code></p></td>
+<td><p>the figures above, as <code class="docutils literal notranslate"><span class="pre">analyze.py</span></code> writes them</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">reference/SOURCE.md</span></code></p></td>
+<td><p>the origin of the geometry and of the formulas</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="the-script">
+<h2>The script<a class="headerlink" href="#the-script" title="Link to this heading">#</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text"><code class="docutils literal notranslate"><span class="pre">case.py</span></code></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="sd">"""ion_thruster: the ion optics of a gridded ion thruster in 3-D.</span>
+
+<span class="sd">    python case.py DIR              # DIR/case.toml</span>
+<span class="sd">    python case.py DIR --run        # and HEXAPIC on it (build/HEXAPIC; --hexapic: another), into DIR/output</span>
+<span class="sd">    python case.py                  # the case.toml beside this script</span>
+
+<span class="sd">A cell of the two grids of an ion engine.  The holes and their spacing are</span>
+<span class="sd">those of the NSTAR 30 cm thruster's grids; the gas is argon.  The beam goes</span>
+<span class="sd">along x:</span>
+
+<span class="sd">    x = 0        reflective: the middle of the discharge chamber</span>
+<span class="sd">    0 - 0.8 mm   the discharge plasma is kept up: Ar+ and electrons are</span>
+<span class="sd">                 created at the rate that replaces a Bohm flux to the screen</span>
+<span class="sd">                 grid, and the electrons are redrawn at Te</span>
+<span class="sd">    1.2 mm       the screen grid, +1100 V, 0.40 mm thick, holes of 1.91 mm</span>
+<span class="sd">    2.2 mm       the accel grid, -180 V, 0.52 mm thick, holes of 1.14 mm; its</span>
+<span class="sd">                 negative potential keeps the neutraliser's electrons out</span>
+<span class="sd">    beyond       the Ar+ beamlets, neutralised by electrons from the far wall</span>
+<span class="sd">    x = 9.6 mm   grounded: it emits the neutraliser's electrons (2 eV)</span>
+
+<span class="sd">y and z are periodic.  The holes sit on a hexagonal lattice: the cell is one</span>
+<span class="sd">pitch along y and sqrt(3) pitches along z, with a hole at its corners and</span>
+<span class="sd">one at its centre, so it holds two beamlets.  A grid is made of conductor</span>
+<span class="sd">boxes: a node is solid where it is farther than the hole's radius from every</span>
+<span class="sd">hole's axis.  The beam ions exchange charge with a background of argon</span>
+<span class="sd">(MCC): the slow ions born behind the accel grid fall back onto it.</span>
+
+<span class="sd">--ny sets the cells across a pitch (the resolution); --steps and --every</span>
+<span class="sd">shorten the run and set its output; --live writes the frames HEXAPIC / VIZ</span>
+<span class="sd">shows during the run.</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">hexapic</span><span class="w"> </span><span class="kn">import</span> <span class="n">picmi</span>
+
+<span class="n">ap</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"the ion optics of a gridded ion thruster: case.toml"</span><span class="p">)</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"dir"</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s2">"?"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">Path</span><span class="p">)</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--ny"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"cells across a pitch, a multiple of 4 (default 60: 37 um)"</span><span class="p">)</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--steps"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">150000</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"1.06 us"</span><span class="p">)</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--every"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"an output every this many steps"</span><span class="p">)</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--live"</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">"store_true"</span><span class="p">)</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--run"</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">"store_true"</span><span class="p">)</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--hexapic"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">Path</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"the binary --run runs (default build/HEXAPIC)"</span><span class="p">)</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">ap</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="n">HERE</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span>
+
+<span class="c1"># the grids [m], [V]</span>
+<span class="n">PITCH</span> <span class="o">=</span> <span class="mf">2.24e-3</span>                         <span class="c1"># from hole to hole</span>
+<span class="n">R_SCREEN</span><span class="p">,</span> <span class="n">R_ACCEL</span> <span class="o">=</span> <span class="mf">0.955e-3</span><span class="p">,</span> <span class="mf">0.57e-3</span>   <span class="c1"># the holes' radii</span>
+<span class="n">T_SCREEN</span><span class="p">,</span> <span class="n">GAP</span><span class="p">,</span> <span class="n">T_ACCEL</span> <span class="o">=</span> <span class="mf">0.40e-3</span><span class="p">,</span> <span class="mf">0.60e-3</span><span class="p">,</span> <span class="mf">0.52e-3</span>
+<span class="n">X_SCREEN</span> <span class="o">=</span> <span class="mf">1.20e-3</span>                      <span class="c1"># the screen grid's upstream face</span>
+<span class="n">V_SCREEN</span><span class="p">,</span> <span class="n">V_ACCEL</span> <span class="o">=</span> <span class="mf">1100.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">180.0</span>
+<span class="n">LENGTH</span> <span class="o">=</span> <span class="mf">9.6e-3</span>                         <span class="c1"># the box along x</span>
+<span class="c1"># the discharge plasma</span>
+<span class="n">N0</span><span class="p">,</span> <span class="n">TE</span><span class="p">,</span> <span class="n">TI</span> <span class="o">=</span> <span class="mf">2.5e17</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">0.1</span>           <span class="c1"># [m^-3], [eV], [eV]</span>
+<span class="n">X_SOURCE</span> <span class="o">=</span> <span class="mf">0.8e-3</span>                       <span class="c1"># the source and the heating in x &lt; X_SOURCE</span>
+<span class="n">PPC</span> <span class="o">=</span> <span class="mi">100</span>                               <span class="c1"># macroparticles per cell and species in the discharge plasma</span>
+<span class="n">BOHM</span> <span class="o">=</span> <span class="mf">0.61</span>                             <span class="c1"># the density at the sheath edge over N0</span>
+<span class="c1"># the neutraliser and the gas</span>
+<span class="n">NEUTRALISER</span><span class="p">,</span> <span class="n">T_NEUTRALISER</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span>   <span class="c1"># its current over the expected beam's, its electrons [eV]</span>
+<span class="n">N_GAS</span><span class="p">,</span> <span class="n">T_GAS</span> <span class="o">=</span> <span class="mf">3e18</span><span class="p">,</span> <span class="mf">300.0</span>              <span class="c1"># the argon background [m^-3], [K]</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">picmi</span><span class="o">.</span><span class="n">constants</span>
+<span class="n">m_ar</span> <span class="o">=</span> <span class="n">picmi</span><span class="o">.</span><span class="n">particle_mass_charge</span><span class="p">(</span><span class="s2">"Ar"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">cs</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">TE</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="n">q_e</span> <span class="o">/</span> <span class="n">m_ar</span><span class="p">)</span>       <span class="c1"># the ion sound speed</span>
+<span class="n">rate</span> <span class="o">=</span> <span class="n">BOHM</span> <span class="o">*</span> <span class="n">N0</span> <span class="o">*</span> <span class="n">cs</span> <span class="o">/</span> <span class="n">X_SOURCE</span>        <span class="c1"># the source replaces a Bohm flux through the screen's plane</span>
+<span class="n">w_pe</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N0</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="n">q_e</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">ep0</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="n">m_e</span><span class="p">))</span>
+
+<span class="c1"># the mesh: cubic cells, a multiple of 4 along each axis; y one pitch, z sqrt(3) pitches</span>
+<span class="n">ny</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="nb">round</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">ny</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">nz</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="nb">round</span><span class="p">(</span><span class="n">ny</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">dx</span> <span class="o">=</span> <span class="n">PITCH</span> <span class="o">/</span> <span class="n">ny</span>
+<span class="n">nx</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="nb">round</span><span class="p">(</span><span class="n">LENGTH</span> <span class="o">/</span> <span class="n">dx</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">ly</span><span class="p">,</span> <span class="n">lz</span> <span class="o">=</span> <span class="n">ny</span> <span class="o">*</span> <span class="n">dx</span><span class="p">,</span> <span class="n">nz</span> <span class="o">*</span> <span class="n">dx</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.2</span> <span class="o">/</span> <span class="n">w_pe</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="n">N0</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">**</span> <span class="mi">3</span> <span class="o">/</span> <span class="n">PPC</span>
+<span class="n">i_beam</span> <span class="o">=</span> <span class="n">BOHM</span> <span class="o">*</span> <span class="n">N0</span> <span class="o">*</span> <span class="n">cs</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="n">q_e</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">R_SCREEN</span> <span class="o">**</span> <span class="mi">2</span>      <span class="c1"># a Bohm flux through the two screen holes [A]</span>
+
+<span class="n">grid</span> <span class="o">=</span> <span class="n">picmi</span><span class="o">.</span><span class="n">Cartesian3DGrid</span><span class="p">(</span><span class="n">number_of_cells</span><span class="o">=</span><span class="p">[</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">],</span> <span class="n">lower_bound</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">upper_bound</span><span class="o">=</span><span class="p">[</span><span class="n">nx</span> <span class="o">*</span> <span class="n">dx</span><span class="p">,</span> <span class="n">ly</span><span class="p">,</span> <span class="n">lz</span><span class="p">],</span>
+                             <span class="n">lower_boundary_conditions</span><span class="o">=</span><span class="p">[</span><span class="s2">"neumann"</span><span class="p">,</span> <span class="s2">"periodic"</span><span class="p">,</span> <span class="s2">"periodic"</span><span class="p">],</span>
+                             <span class="n">upper_boundary_conditions</span><span class="o">=</span><span class="p">[</span><span class="s2">"dirichlet"</span><span class="p">,</span> <span class="s2">"periodic"</span><span class="p">,</span> <span class="s2">"periodic"</span><span class="p">],</span>
+                             <span class="n">lower_boundary_conditions_particles</span><span class="o">=</span><span class="p">[</span><span class="s2">"reflecting"</span><span class="p">,</span> <span class="s2">"periodic"</span><span class="p">,</span> <span class="s2">"periodic"</span><span class="p">],</span>
+                             <span class="n">upper_boundary_conditions_particles</span><span class="o">=</span><span class="p">[</span><span class="s2">"absorbing"</span><span class="p">,</span> <span class="s2">"periodic"</span><span class="p">,</span> <span class="s2">"periodic"</span><span class="p">])</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">picmi</span><span class="o">.</span><span class="n">Simulation</span><span class="p">(</span>
+    <span class="n">solver</span><span class="o">=</span><span class="n">picmi</span><span class="o">.</span><span class="n">ElectrostaticSolver</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">),</span> <span class="n">time_step_size</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">max_steps</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">steps</span><span class="p">,</span>
+    <span class="n">hexapic_title</span><span class="o">=</span><span class="s2">"ion_thruster"</span><span class="p">,</span>
+    <span class="n">hexapic_description</span><span class="o">=</span><span class="s2">"The ion optics of a two-grid ion thruster in 3-D: a periodic cell of the grids with two "</span>
+                        <span class="s2">"beamlets, the discharge plasma behind the screen grid and the neutralised beam."</span><span class="p">,</span>
+    <span class="n">hexapic_output</span><span class="o">=</span><span class="p">{</span><span class="s2">"x_profiles"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">"wall_flux"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">"counts_every"</span><span class="p">:</span> <span class="mi">100</span><span class="p">}</span> <span class="o">|</span> <span class="p">({</span><span class="s2">"live"</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">live</span> <span class="k">else</span> <span class="p">{}),</span>
+    <span class="n">hexapic_tuning</span><span class="o">=</span><span class="p">{</span><span class="s2">"store_slack"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">})</span>            <span class="c1"># the plasma fills an eighth of the box: more room in its bins</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_diagnostic</span><span class="p">(</span><span class="n">picmi</span><span class="o">.</span><span class="n">FieldDiagnostic</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">every</span><span class="p">))</span>
+
+<span class="c1"># the species and the discharge plasma at the start</span>
+<span class="n">vte</span><span class="p">,</span> <span class="n">vti</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">TE</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="n">q_e</span> <span class="o">/</span> <span class="n">c</span><span class="o">.</span><span class="n">m_e</span><span class="p">),</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">TI</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="n">q_e</span> <span class="o">/</span> <span class="n">m_ar</span><span class="p">)</span>
+<span class="n">plasma</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">density</span><span class="o">=</span><span class="n">N0</span><span class="p">,</span> <span class="n">lower_bound</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">upper_bound</span><span class="o">=</span><span class="p">[</span><span class="n">X_SCREEN</span><span class="p">,</span> <span class="n">ly</span><span class="p">,</span> <span class="n">lz</span><span class="p">],</span> <span class="n">hexapic_weight</span><span class="o">=</span><span class="n">weight</span><span class="p">)</span>
+<span class="n">electrons</span> <span class="o">=</span> <span class="n">picmi</span><span class="o">.</span><span class="n">Species</span><span class="p">(</span><span class="n">particle_type</span><span class="o">=</span><span class="s2">"electron"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"electrons"</span><span class="p">,</span>
+                          <span class="n">initial_distribution</span><span class="o">=</span><span class="n">picmi</span><span class="o">.</span><span class="n">UniformDistribution</span><span class="p">(</span><span class="n">rms_velocity</span><span class="o">=</span><span class="p">[</span><span class="n">vte</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="o">**</span><span class="n">plasma</span><span class="p">))</span>
+<span class="n">ions</span> <span class="o">=</span> <span class="n">picmi</span><span class="o">.</span><span class="n">Species</span><span class="p">(</span><span class="n">particle_type</span><span class="o">=</span><span class="s2">"Ar"</span><span class="p">,</span> <span class="n">charge_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"Arplus"</span><span class="p">,</span> <span class="n">hexapic_subcycle</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                     <span class="n">initial_distribution</span><span class="o">=</span><span class="n">picmi</span><span class="o">.</span><span class="n">UniformDistribution</span><span class="p">(</span><span class="n">rms_velocity</span><span class="o">=</span><span class="p">[</span><span class="n">vti</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="o">**</span><span class="n">plasma</span><span class="p">))</span>
+<span class="n">neutraliser</span> <span class="o">=</span> <span class="n">picmi</span><span class="o">.</span><span class="n">Species</span><span class="p">(</span><span class="n">particle_type</span><span class="o">=</span><span class="s2">"electron"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"neutraliser"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">sp</span> <span class="ow">in</span> <span class="p">(</span><span class="n">electrons</span><span class="p">,</span> <span class="n">ions</span><span class="p">,</span> <span class="n">neutraliser</span><span class="p">):</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_species</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+<span class="n">src</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"lower"</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="s2">"upper"</span><span class="p">:</span> <span class="p">[</span><span class="n">X_SOURCE</span><span class="p">,</span> <span class="n">ly</span><span class="p">,</span> <span class="n">lz</span><span class="p">]}</span>
+<span class="k">for</span> <span class="n">sp</span><span class="p">,</span> <span class="n">T</span> <span class="ow">in</span> <span class="p">((</span><span class="s2">"electrons"</span><span class="p">,</span> <span class="n">TE</span><span class="p">),</span> <span class="p">(</span><span class="s2">"Arplus"</span><span class="p">,</span> <span class="n">TI</span><span class="p">)):</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_source</span><span class="p">(</span><span class="n">picmi</span><span class="o">.</span><span class="n">Source</span><span class="p">(</span><span class="n">species</span><span class="o">=</span><span class="n">sp</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="n">rate</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="n">src</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">weight</span><span class="p">,</span> <span class="n">temperature_eV</span><span class="o">=</span><span class="n">T</span><span class="p">))</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_heating</span><span class="p">(</span><span class="n">picmi</span><span class="o">.</span><span class="n">Heating</span><span class="p">(</span><span class="n">species</span><span class="o">=</span><span class="s2">"electrons"</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">"resample"</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="n">src</span><span class="p">,</span> <span class="n">temperature_eV</span><span class="o">=</span><span class="n">TE</span><span class="p">,</span>
+                              <span class="n">interval</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">probability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">))</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_beam</span><span class="p">(</span><span class="n">picmi</span><span class="o">.</span><span class="n">Beam</span><span class="p">(</span><span class="n">species</span><span class="o">=</span><span class="s2">"neutraliser"</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="p">{</span><span class="s2">"from"</span><span class="p">:</span> <span class="p">[</span><span class="n">nx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s2">"to"</span><span class="p">:</span> <span class="p">[</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">]},</span>
+                        <span class="n">current</span><span class="o">=</span><span class="n">NEUTRALISER</span> <span class="o">*</span> <span class="n">i_beam</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">weight</span><span class="p">,</span> <span class="n">temperature_eV</span><span class="o">=</span><span class="n">T_NEUTRALISER</span><span class="p">))</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_interaction</span><span class="p">(</span><span class="n">picmi</span><span class="o">.</span><span class="n">MCCCollisions</span><span class="p">(</span><span class="n">gas</span><span class="o">=</span><span class="s2">"Ar"</span><span class="p">,</span> <span class="n">pressure</span><span class="o">=</span><span class="n">N_GAS</span> <span class="o">*</span> <span class="mf">1.380649e-23</span> <span class="o">*</span> <span class="n">T_GAS</span><span class="p">,</span> <span class="n">temperature_eV</span><span class="o">=</span><span class="mf">0.02585</span><span class="p">,</span>
+                                        <span class="n">electron</span><span class="o">=</span><span class="s2">"electrons"</span><span class="p">,</span> <span class="n">ion</span><span class="o">=</span><span class="s2">"Arplus"</span><span class="p">))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">solid_boxes</span><span class="p">(</span><span class="n">radius</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""The node boxes (k1, k2, l1, l2) of a plate with holes of `radius` on the lattice: the runs of solid nodes</span>
+<span class="sd">    along z in each row of y, and equal runs of neighbouring rows merged.  The nodes are 0 to N - 1 along an axis</span>
+<span class="sd">    (node N of a periodic axis is its node 0)."""</span>
+    <span class="n">holes</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="p">(</span><span class="n">ly</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">lz</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">solid</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
+        <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">dx</span><span class="p">,</span> <span class="n">l</span> <span class="o">*</span> <span class="n">dx</span>
+        <span class="k">for</span> <span class="n">hy</span><span class="p">,</span> <span class="n">hz</span> <span class="ow">in</span> <span class="n">holes</span><span class="p">:</span>
+            <span class="n">dy</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">hy</span><span class="p">),</span> <span class="n">ly</span> <span class="o">-</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">hy</span><span class="p">))</span>
+            <span class="n">dz</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">z</span> <span class="o">-</span> <span class="n">hz</span><span class="p">),</span> <span class="n">lz</span> <span class="o">-</span> <span class="nb">abs</span><span class="p">(</span><span class="n">z</span> <span class="o">-</span> <span class="n">hz</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">dy</span> <span class="o">+</span> <span class="n">dz</span> <span class="o">*</span> <span class="n">dz</span> <span class="o">&lt;=</span> <span class="n">radius</span> <span class="o">*</span> <span class="n">radius</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ny</span><span class="p">):</span>
+        <span class="n">runs</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="p">[],</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">nz</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">solid</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
+                <span class="n">l0</span> <span class="o">=</span> <span class="n">l</span>
+                <span class="k">while</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">nz</span> <span class="ow">and</span> <span class="n">solid</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
+                    <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">runs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">l0</span><span class="p">,</span> <span class="n">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">runs</span><span class="p">)</span>
+    <span class="n">boxes</span><span class="p">,</span> <span class="n">started</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ny</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">runs</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">ny</span> <span class="k">else</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">started</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">run</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">runs</span><span class="p">:</span>
+                <span class="n">boxes</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">started</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">run</span><span class="p">),</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="n">run</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="n">runs</span><span class="p">:</span>
+            <span class="n">started</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">boxes</span>
+
+
+<span class="n">j_screen</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">X_SCREEN</span> <span class="o">/</span> <span class="n">dx</span><span class="p">)</span>
+<span class="n">plates</span> <span class="o">=</span> <span class="p">((</span><span class="s2">"screen"</span><span class="p">,</span> <span class="n">j_screen</span><span class="p">,</span> <span class="n">j_screen</span> <span class="o">+</span> <span class="nb">round</span><span class="p">(</span><span class="n">T_SCREEN</span> <span class="o">/</span> <span class="n">dx</span><span class="p">),</span> <span class="n">R_SCREEN</span><span class="p">,</span> <span class="n">V_SCREEN</span><span class="p">),</span>
+          <span class="p">(</span><span class="s2">"accel"</span><span class="p">,</span> <span class="n">j_screen</span> <span class="o">+</span> <span class="nb">round</span><span class="p">((</span><span class="n">T_SCREEN</span> <span class="o">+</span> <span class="n">GAP</span><span class="p">)</span> <span class="o">/</span> <span class="n">dx</span><span class="p">),</span> <span class="n">j_screen</span> <span class="o">+</span> <span class="nb">round</span><span class="p">((</span><span class="n">T_SCREEN</span> <span class="o">+</span> <span class="n">GAP</span> <span class="o">+</span> <span class="n">T_ACCEL</span><span class="p">)</span> <span class="o">/</span> <span class="n">dx</span><span class="p">),</span>
+           <span class="n">R_ACCEL</span><span class="p">,</span> <span class="n">V_ACCEL</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">j1</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">voltage</span> <span class="ow">in</span> <span class="n">plates</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span> <span class="ow">in</span> <span class="n">solid_boxes</span><span class="p">(</span><span class="n">radius</span><span class="p">):</span>
+        <span class="n">sim</span><span class="o">.</span><span class="n">add_region</span><span class="p">(</span><span class="n">picmi</span><span class="o">.</span><span class="n">Region</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">"conductor"</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="p">{</span><span class="s2">"from"</span><span class="p">:</span> <span class="p">[</span><span class="n">j1</span><span class="p">,</span> <span class="n">k1</span><span class="p">,</span> <span class="n">l1</span><span class="p">],</span> <span class="s2">"to"</span><span class="p">:</span> <span class="p">[</span><span class="n">j2</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">l2</span><span class="p">]},</span>
+                                    <span class="n">voltage</span><span class="o">=</span><span class="n">voltage</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">run</span> <span class="ow">and</span> <span class="n">args</span><span class="o">.</span><span class="n">dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">ap</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"--run needs a directory for the run"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">write_input_file</span><span class="p">((</span><span class="n">args</span><span class="o">.</span><span class="n">dir</span> <span class="ow">or</span> <span class="n">HERE</span><span class="p">)</span> <span class="o">/</span> <span class="s2">"case.toml"</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">run</span><span class="p">:</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">**</span><span class="p">({}</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">hexapic</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{</span><span class="s2">"hexapic"</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">hexapic</span><span class="o">.</span><span class="n">resolve</span><span class="p">()}))</span>
+</pre></div>
+</div>
+</div>
+</details></section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>The case has no data from other codes to compare with.</p>
+<p>The grids have the dimensions of the script’s header: screen holes of
+1.91 mm, accel holes of 1.14 mm, a pitch of 2.24 mm, a gap of 0.60 mm, and
+grids of 0.40 and 0.52 mm. They are rounded values in the range of the
+grids of the NSTAR 30 cm ion thruster and are not taken from a table of a
+paper. The gas is argon and the plasma density is chosen for the cell size,
+so the case does not model that thruster.</p>
+<p>The Child–Langmuir law of the space-charge-limited current, to which
+<code class="docutils literal notranslate"><span class="pre">analyze.py</span></code> compares the perveance of a hole: <span class="bibtex-citation" id="id1">Child [<a class="reference internal" href="../../docs/references.html#id14" title="C. D. Child. Discharge from hot CaO. Physical Review (Series I), 1911.">1911</a>]</span>,
+<span class="bibtex-citation" id="id2">Langmuir [<a class="reference internal" href="../../docs/references.html#id15" title="I. Langmuir. The effect of space charge and residual gases on thermionic currents in high vacuum. Physical Review, 1913.">1913</a>]</span>. The Bohm flux that sets the rate of the plasma
+source: <span class="bibtex-citation" id="id3">Riemann [<a class="reference internal" href="../../docs/references.html#id17" title="K.-U. Riemann. The Bohm criterion and sheath formation. Journal of Physics D: Applied Physics, 1991.">1991</a>]</span>. The collisions with the argon background:
+<a class="reference internal" href="../../docs/implementation/collisions.html"><span class="std std-doc">Collisions</span></a>.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="hall_thruster_3d.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Hall thruster in 3-D</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="landmark.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">LANDMARK: axial-azimuthal Hall thruster</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running">Running</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#potential-and-beamlets">Potential and beamlets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#currents-and-perveance">Currents and perveance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-beam">The beam</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#files">Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-script">The script</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, LECAD-PEG, University of Ljubljana.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

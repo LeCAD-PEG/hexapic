@@ -1,0 +1,159 @@
+# This documentation
+
+These pages are built with [Sphinx](https://www.sphinx-doc.org) and written
+in [MyST Markdown](https://myst-parser.readthedocs.io). They use the
+[PyData theme](https://pydata-sphinx-theme.readthedocs.io) with the colours
+and fonts of the [viewer](../visualization/index.md).
+
+## The website and these pages
+
+The HEXAPIC website is one site built from two repositories:
+
+| Repository | Contents | Reason |
+|---|---|---|
+| `hexapic`, directory `docs/` | Get started, the user guide, visualization, implementation, verification, performance and development | These pages describe one version of the code. A change to a key and the change to its page go into the same commit. |
+| `hexapic-website` | The home page, the examples with their videos, and About | These pages change on their own schedule and carry the large media files. |
+
+The website includes this directory as its `docs/` and builds both parts in
+one Sphinx run. It uses the style of this directory, `_static/hexapic.css`.
+
+To link from here to a page of the website, use the `{site}` role:
+
+```markdown
+See the {site}`two-stream example <examples/gen/two_stream>`.
+```
+
+Inside the website this is an ordinary link that Sphinx checks. When these
+pages are built alone, the link points to the published site, or to
+`$HEXAPIC_SITE_URL` if that variable is set.
+
+The directory is laid out as follows:
+
+```text
+docs/
+├── conf.py              # the configuration
+├── requirements.txt     # the pinned build dependencies
+├── index.md             # the front page of the documentation
+├── references.md        # the bibliography (references.bib)
+├── <section>/           # one directory per section, with index.md and its pages
+├── _ext/                # hexapic_site.py, the {site} role; hexapic_examples.py, the examples' pages
+├── _static/             # the style (hexapic.css), fonts and images
+└── _templates/          # the title of the browser tab
+```
+
+The website also copies `examples/`. Its extension `hexapic_examples.py`
+makes a page of each example's `README.md` (with its `figures/`) and
+`reference/SOURCE.md`, with `case.py` in a dropdown. The examples' gallery
+has a section per group, from the `## <Group>` headings of
+`examples/README.md`, and a card per example, from the front matter of its
+README (`summary`, `tags`). The website adds only the media, by the
+example's name: `_static/videos/<name>.mp4`, `<name>.jpg` and
+`_static/images/examples/<name>_thumb.png`. `examples/video.py` makes all
+three from a run of the example, with the panels of the `video` entry of the
+README's front matter:
+
+```bash
+python examples/video.py examples/basic_plasma/two_stream runs/two_stream --out ../hexapic-website/_static
+```
+
+A change to an example's README therefore needs no commit in the website.
+
+The front matter of an example's README also lists its `comparisons`: the
+kind of each (`theory`, `code` or `benchmark`), the quantity, the two
+numbers and the README's section that has the comparison. The directive
+`{hexapic-comparisons} <kind>` makes a table of them, with a link to that
+section in each row. The pages of [Verification](../verification/index.md)
+are made of these tables, one page per kind, so a comparison in an example
+needs no second description there.
+
+## Building
+
+To build these pages alone and serve them at `http://localhost:8010`:
+
+```bash
+python3 -m venv docs/.venv && docs/.venv/bin/pip install -r docs/requirements.txt
+docs/.venv/bin/sphinx-build -W -b html docs docs/_build/html
+python3 -m http.server 8010 -d docs/_build/html
+```
+
+The option `-W` turns every warning into an error. Warnings include a broken
+reference, a missing image and a page that is in no table of contents.
+Always build with `-W` before you commit.
+
+To build the whole website with these pages in it, follow
+`hexapic-website/README.md`.
+
+## Writing a page
+
+A page is a Markdown file. Add a new page to the table of contents in the
+`index.md` of its section:
+
+````markdown
+```{toctree}
+:maxdepth: 1
+
+running
+case-toml
+```
+````
+
+Links between pages are relative paths, for example
+`[Solvers](../solvers/index.md)`. A link can also point to
+a heading, as in `[[solver]](../user-guide/case-toml.md#solver)`. Put code
+into fenced blocks and name the language: `bash`, `toml`, `python` or `text`.
+
+Every command and example on these pages was run, or checked with `--check`.
+Please keep it that way.
+
+## Writing style
+
+Write in plain, complete sentences, one idea per sentence. Address the
+reader as "you" when you describe a task. Keep punctuation simple: avoid
+semicolons and dashes, and use parentheses sparingly. Write "the potential of
+the wall" instead of "the wall's potential". Use a table for reference data
+and a list for steps or parallel items, and put explanations into
+paragraphs.
+
+## Equations
+
+Equations are written in LaTeX and rendered by MathJax. Use `$...$` for
+inline math and `$$...$$` for a displayed equation. A label after the closing
+`$$` numbers the equation, and `` {eq}`label` `` refers to it:
+
+```markdown
+$$
+-\nabla\cdot\left(\varepsilon\,\nabla\phi\right) = \rho
+$$ (eq:poisson)
+
+The solver solves {eq}`eq:poisson`.
+```
+
+## Figures
+
+Images go into `docs/_static/images/`. A figure has a caption and a name. It
+is numbered, and `` {numref}`name` `` refers to it:
+
+````markdown
+```{figure} ../_static/images/scaling.svg
+:name: fig:scaling
+:width: 100%
+
+Strong and weak scaling of the field solver.
+```
+````
+
+The repository ignores `*.png` and `*.mp4` files everywhere except in
+`docs/_static/images/` and its subdirectories. Prefer SVG for plots. Videos
+and the screenshots of the examples belong to the website, in
+`hexapic-website/_static/`, and not to this repository.
+
+## Cards, badges and citations
+
+Cards and grids come from
+[sphinx-design](https://sphinx-design.readthedocs.io). The cards on the front
+page are `grid` and `grid-item-card` blocks. A tag on a card is a badge,
+written as `` {bdg-primary-line}`3-D` ``.
+
+To cite a work, add it to `docs/references.bib` and cite it with
+`` {cite:p}`charoy2019` ``. The [References](../references.md) page lists all
+entries.

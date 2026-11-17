@@ -1,0 +1,7 @@
+# Published benchmarks
+
+HEXAPIC runs a benchmark that a paper defines, and its result is set against
+the numbers and the figures of the paper.
+
+:::{hexapic-comparisons} benchmark
+:::

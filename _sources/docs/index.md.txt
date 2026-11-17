@@ -1,0 +1,89 @@
+---
+html_theme.sidebar_secondary.remove: true
+---
+
+# Documentation
+
+```{rst-class} hx-lead
+```
+
+HEXAPIC, the Heterogeneous Exascale Particle-In-Cell code, is an
+electrostatic particle-in-cell code with Monte Carlo collisions for bounded
+plasmas. It runs in 2-D and 3-D on NVIDIA and AMD GPUs from a
+single [alpaka3](https://github.com/alpaka-group/alpaka3) source.
+
+These pages are the reference. They explain how to build the code, how to
+describe a case, what a run writes and how the code computes. If you are new
+to HEXAPIC, start with [First run](get-started/first-run.md). For complete
+cases, see the {site}`examples <examples/index>`.
+
+::::{grid} 1 2 3 3
+:gutter: 3
+:class-container: hx-cards
+
+:::{grid-item-card} Get started
+:link: get-started/index
+:link-type: doc
+
+Build HEXAPIC and run your first case.
+:::
+
+:::{grid-item-card} User guide
+:link: user-guide/index
+:link-type: doc
+
+The command line, the `case.toml` reference, build options, PICMI and the
+output files.
+:::
+
+:::{grid-item-card} Visualization
+:link: visualization/index
+:link-type: doc
+
+HEXAPIC / VIZ shows a run in the browser, during the run or after it.
+:::
+
+:::{grid-item-card} Implementation
+:link: implementation/index
+:link-type: doc
+
+How a step runs on the GPU, collisions and walls.
+:::
+
+:::{grid-item-card} Solvers
+:link: solvers/index
+:link-type: doc
+
+The field solvers: the multigrids GMGa3 and GMG3D, and the direct strip solver.
+:::
+
+:::{grid-item-card} Verification
+:link: verification/index
+:link-type: doc
+
+Comparisons with theory, with other codes and with published benchmarks, and
+checks that 2-D, 3-D and multi-GPU runs agree.
+:::
+
+:::{grid-item-card} Performance
+:link: performance/index
+:link-type: doc
+
+Scaling of the field solver on up to 128 MI250X GCDs of LUMI-G.
+:::
+
+::::
+
+```{toctree}
+:hidden:
+
+get-started/index
+user-guide/index
+visualization/index
+implementation/index
+solvers/index
+verification/index
+performance/index
+development/index
+references
+```

@@ -1,0 +1,174 @@
+# Space-charge-limited diode
+
+<video class="hx-video" controls loop muted playsinline preload="metadata" poster="../../_static/videos/child_langmuir.jpg" src="../../_static/videos/child_langmuir.mp4"></video>
+
+A cathode emits electrons into a vacuum gap, and an anode at the voltage
+$+V$ collects them. The charge of the electrons in the gap lowers the
+potential in front of the cathode. When the cathode emits more than the gap
+can carry, a potential minimum forms there, the slower electrons return to
+the cathode, and the current at the anode no longer depends on the emission:
+it is limited by the space charge. The case tests the injection of a beam,
+the absorption at the walls and the field solve with a biased wall.
+
+## Setup
+
+| | |
+|---|---|
+| Domain | gap $d = 12.8$ mm along $x$, 0.4 mm along $y$ (periodic) |
+| Grid | 256 × 8 cells of $\Delta x = 50$ µm; the problem is 1-D along $x$ |
+| Walls | cathode at $x = 0$, grounded; anode at $x = d$, biased at $V = 100$ V (`--voltage`: 50 V and 200 V below) |
+| Emission | a `[[beam]]` of electrons from the cathode: the current density $J_s = 120\ \mathrm{A/m^2}$, a half-Maxwellian of the temperature $T = 0.5$ eV. The particles start at $x = \Delta x / 2$. |
+| Limit | Child–Langmuir current density $J_{CL} = 14.25\ \mathrm{A/m^2}$ at 100 V: the cathode emits 8.4 times as much |
+| Particles | weight 576: about $8\times10^{5}$ macro-particles in the steady state, 1755 injected per step |
+| Time step | $3.37\times10^{-12}$ s: the fastest electron crosses 0.4 cells per step |
+| Run | 28 800 steps, 15 transit times of an electron across the gap (6.5 ns each); output every 60 steps over the last 10, no charge smoothing |
+| Field solver | the direct [strip solver](../../docs/solvers/strip.md), as `type = "auto"` chooses for walls at both $x$ ends |
+| Cost | about 80 s on one NVIDIA A100 |
+
+## Running
+
+```bash
+python examples/walls/child_langmuir/case.py runs/child_langmuir
+build/HEXAPIC runs/child_langmuir/case.toml > runs/child_langmuir/run.log
+python examples/walls/child_langmuir/analyze.py runs/child_langmuir
+```
+
+`case.py` writes `runs/child_langmuir/case.toml`; with `--run` it also runs
+`build/HEXAPIC` on it (`--hexapic` names another binary). `case.toml` beside
+the script is the same case. `analyze.py` reads the series and the log of
+the run, `run.log`: its `[WallFlux]` line has the number of electrons that
+the anode absorbed. It prints the numbers below and writes `results.json`
+and the figure into the run's directory. Without a log it takes the current
+from the meshes.
+
+| Option of `case.py` | |
+|---|---|
+| `--voltage V` | the voltage of the anode [V]; the time step and the weight follow it |
+| `--run` | run HEXAPIC on the case |
+| `--live` | write the frames that HEXAPIC / VIZ shows during the run |
+
+## Results
+
+### Current against theory
+
+Electrons that leave the cathode at rest carry at most the Child–Langmuir
+current density
+
+$$
+J_{CL} = \frac{4\varepsilon_0}{9}\sqrt{\frac{2e}{m_e}}\,\frac{V^{3/2}}{d^2} .
+$$
+
+The electrons of this case leave the cathode with a half-Maxwellian of the
+temperature $T$, as those of a hot cathode do, and the limit is higher.
+Langmuir's theory gives it. The potential has a minimum $\phi_m < 0$ at
+$x_m$. Electrons with less energy than $-e\phi_m$ return to the cathode, and
+the current density $J = J_s \exp(e\phi_m/T)$ passes. With
+$\eta = e(\phi - \phi_m)/T$ and $\xi = (x - x_m)/\ell$, Poisson's equation is
+
+$$
+\frac{d^2\eta}{d\xi^2} = \frac{1}{2}\,e^{\eta}\left[1 \mp \mathrm{erf}\sqrt{\eta}\,\right],
+\qquad \ell^2 = \frac{\varepsilon_0 T}{2 e J}\sqrt{\frac{2T}{\pi m_e}} ,
+$$
+
+with the upper sign beyond the minimum and the lower sign before it, and
+$\eta = d\eta/d\xi = 0$ at the minimum. The solution must reach
+$\eta = \ln(J_s/J)$ at the cathode and $\eta = \ln(J_s/J) + eV/T$ at the
+anode, a distance $d$ apart. This condition gives $J$. `analyze.py`
+integrates the equation and solves for $J$; for $T \to 0$ the result is
+$J_{CL}$.
+
+The measured current density is the charge of the electrons that the anode
+absorbed over the last 10 transit times, per time and area. The runs at
+50 V and 200 V are the same case with `--voltage`:
+
+```bash
+for v in 50 100 200; do
+    python examples/walls/child_langmuir/case.py runs/child_langmuir_$v --voltage $v
+    build/HEXAPIC runs/child_langmuir_$v/case.toml > runs/child_langmuir_$v/run.log
+done
+python examples/walls/child_langmuir/analyze.py runs/child_langmuir_*
+```
+
+![The current density against the anode voltage: HEXAPIC's three points on the line of Langmuir's theory, above the Child-Langmuir law; and the potential across the gap at 100 V](../../_examples/walls/child_langmuir/figures/current.png)
+
+*Left: the current density at the anode against its voltage. Right: the
+potential across the gap at 100 V; HEXAPIC is the dashed line on that of
+Langmuir's theory.*
+
+| $V$ [V] | 50 | 100 | 200 |
+|---|---|---|---|
+| HEXAPIC, $J$ [A/m²] | $7.2553 \pm 0.0001$ | $18.028 \pm 0.001$ | $46.844 \pm 0.002$ |
+| Langmuir's theory, $J$ [A/m²] | 7.208 | 17.959 | 46.767 |
+| Langmuir's theory, emission at $\Delta x/2$ [A/m²] | 7.287 | 18.091 | 47.016 |
+| Child–Langmuir, $J_{CL}$ [A/m²] | 5.037 | 14.245 | 40.292 |
+| HEXAPIC over Langmuir's theory | 1.0066 | 1.0038 | 1.0017 |
+
+The uncertainty is the standard error of the mean over ten blocks of output
+steps. The current is steady: its scatter between the output steps is 0.1 %.
+
+HEXAPIC's current is 0.2 % to 0.7 % above Langmuir's theory. The difference
+comes from the beam, which starts its particles half a cell in front of the
+cathode. With the emission plane at $\Delta x/2$ the theory gives the third
+row, and HEXAPIC is 0.4 % below it. A run with 512 cells along $x$ at an
+emission of $3\,J_{CL}$ gave 0.21 % above the theory, where 256 cells gave
+0.33 %.
+
+Over the three voltages the current grows as $V^{1.345}$, and Langmuir's
+theory gives $V^{1.349}$. The exponent 3/2 of the Child–Langmuir law is the
+limit of a cold emission, $T \ll eV$. At $T = 0.5$ eV the current is 16 % to
+44 % above $J_{CL}$.
+
+The emission must have a thermal spread for this comparison. A beam of cold
+electrons with a drift of 1 eV and a current density of $3\,J_{CL}$, at
+100 V, did not reach a steady state: the potential minimum oscillated, the
+current at the anode varied by 13 % (standard deviation) between the output
+steps, and its mean was $1.15\,J_{CL}$.
+
+### Potential against theory
+
+For electrons that start at rest the potential is
+$\phi(x) = V (x/d)^{4/3}$. Langmuir's solution above gives the potential
+with the minimum in front of the cathode. The measured potential is the mean
+over $y$ and over the output steps.
+
+| At 100 V | HEXAPIC | Langmuir's theory | emission at $\Delta x/2$ |
+|---|---|---|---|
+| Potential minimum $\phi_m$ [V] | $-1.16$ | $-0.95$ | $-1.20$ |
+| Its position $x_m$ [mm] | 0.35 | 0.34 | 0.36 |
+| Largest $\lvert\phi - \phi_\mathrm{theory}\rvert / V$ | | 0.0025 | 0.0010 |
+
+The potential follows Langmuir's solution within 0.25 % of $V$. The largest
+difference is at the minimum, which is 0.2 V deeper than in the theory
+because the emission plane is half a cell inside the gap. The profile
+$V (x/d)^{4/3}$ differs from the measured one by up to 5 % of $V$.
+
+## Files
+
+| | |
+|---|---|
+| `case.py` | the case as a PICMI script |
+| `case.toml` | the case as `case.py` writes it, at 100 V |
+| `analyze.py` | Langmuir's theory, the current and the potential, from one or several runs |
+| `figures/` | the figure above, as `analyze.py` writes it |
+| `reference/SOURCE.md` | the sources of the theory |
+
+## The script
+
+:::{dropdown} `case.py`
+```{literalinclude} ../../_examples/walls/child_langmuir/case.py
+:language: python
+```
+:::
+
+## References
+
+The space-charge-limited current of a planar diode whose electrons leave the
+cathode at rest: {cite:t}`child1911` and {cite:t}`langmuir1913`.
+
+The diode whose cathode emits a half-Maxwellian, with the potential minimum
+in front of it: {cite:t}`langmuir1923`. The case takes no numbers from that
+paper. `analyze.py` integrates Poisson's equation for this electron
+distribution itself (its docstring gives the equations) and solves for the
+current; for a cold emission its result is the Child–Langmuir current.
+
+The case has no data from other codes.

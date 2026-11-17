@@ -1,0 +1,17 @@
+{#- Copyright 2026 David Lajevec — HEXAPIC
+    The tab's title: the site's alone on the home page, "Example: <title>" on an
+    example's page, after the page's elsewhere.  The home page opens with the hero (hero.html, hero.js). -#}
+{%- extends "pydata_sphinx_theme/layout.html" %}
+{%- block htmltitle %}
+  {%- if pagename == root_doc %}
+  <title>HEXAPIC — particle-in-cell plasma simulations</title>
+  {%- elif pagename.startswith("examples/gen/") %}
+  <title>Example: {{ title|striptags|e }}</title>
+  {%- else %}
+  <title>{{ title|striptags|e }} &#8212; {{ docstitle|striptags|e }}</title>
+  {%- endif %}
+{%- endblock %}
+{% block docs_navbar %}
+  {{ super() }}
+  {%- if pagename == root_doc %}{% include "hero.html" %}{% endif %}
+{% endblock docs_navbar %}

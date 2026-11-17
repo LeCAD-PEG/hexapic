@@ -1,0 +1,14 @@
+_build/
+.venv/
+.ipynb_checkpoints/
+__pycache__/
+# the code's docs/, copied in (README.md)
+/docs
+# the code's examples/ (their README, SOURCE and case.py), copied in, and the pages made of them
+/_examples
+/_tests
+/examples/gen
+*.log
+# kept here, not published: the pages and recordings that were replaced, the deploy's worktree
+/_old
+/_deploy

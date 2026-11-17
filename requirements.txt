@@ -1,0 +1,10 @@
+# Copyright 2026 David Lajevec — HEXAPIC
+# The website's build (README.md): the code's docs/requirements.txt, and the live preview.
+sphinx==9.1.1
+myst-parser==5.1.0
+myst-nb==1.4.0
+pydata-sphinx-theme==0.23.0
+sphinx-design==0.7.0
+sphinx-copybutton==0.5.2
+sphinxcontrib-bibtex==2.7.0
+sphinx-autobuild==2025.8.25

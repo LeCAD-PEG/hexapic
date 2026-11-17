@@ -1,7 +1,5 @@
 # Wall types
 
-<video class="hx-video" controls loop muted playsinline preload="metadata" poster="../../_static/videos/wall_types.jpg" src="../../_static/videos/wall_types.mp4"></video>
-
 A square box holds a uniform argon plasma, and eight variants of the case
 put different walls around it and different objects into it. A wall sets a
 condition for the potential and decides what happens to a particle that

@@ -1,7 +1,5 @@
 # Floating wall
 
-<video class="hx-video" controls loop muted playsinline preload="metadata" poster="../../_static/videos/floating_wall.jpg" src="../../_static/videos/floating_wall.mp4"></video>
-
 A wall that is not connected to anything collects the electrons and ions
 that reach it. The electrons are faster, so the wall charges negatively
 until it repels most of them, and the two fluxes are equal. The potential

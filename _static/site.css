@@ -60,7 +60,10 @@ body:has(.hx-hero) .bd-main .bd-content .bd-article-container { max-width: 76rem
 body:has(.hx-hero) .bd-sidebar-primary, body:has(.hx-hero) .prev-next-footer { display: none; }
 /* the home page is the hero alone: it fills the window, nothing under it */
 body:has(.hx-hero) .bd-main { display: none; }
-.bd-header ~ .hx-hero { min-height: calc(100svh - var(--pst-header-height) - 4rem); }
+.bd-header ~ .hx-hero { min-height: calc(100svh - var(--pst-header-height)); }
+@media (min-height: 520px) { html:has(.hx-hero), body:has(.hx-hero) { overflow: hidden; scrollbar-gutter: auto; } }
+/* no footer on any page: neither the copyright's line nor its rule */
+.bd-footer { display: none; }
 
 /* ── one frame on every page but the home page: two vertical rules at a
  * fixed distance, so that nothing moves from tab to tab.  The left bar keeps

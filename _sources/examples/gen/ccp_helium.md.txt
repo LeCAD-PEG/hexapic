@@ -1,7 +1,5 @@
 # Capacitive discharge in helium (Turner benchmark)
 
-<video class="hx-video" controls loop muted playsinline preload="metadata" poster="../../_static/videos/ccp_helium.jpg" src="../../_static/videos/ccp_helium.mp4"></video>
-
 Helium between two parallel plates, one grounded and one driven at
 13.56 MHz, forms a capacitively coupled discharge: the oscillating sheaths at
 the plates heat the electrons, the electrons ionise the gas, and the ions

@@ -1,7 +1,5 @@
 # Landau damping
 
-<video class="hx-video" controls loop muted playsinline preload="metadata" poster="../../_static/videos/landau_damping.jpg" src="../../_static/videos/landau_damping.mp4"></video>
-
 A Langmuir wave is an oscillation of the electrons of a warm plasma against
 the ions. Without any collisions it still damps: the electrons that move
 nearly as fast as the wave take energy from it {cite:p}`landau1946`. A fluid

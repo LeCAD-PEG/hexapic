@@ -1,7 +1,5 @@
 # Electron beam between grounded plates
 
-<video class="hx-video" controls loop muted playsinline preload="metadata" poster="../../_static/videos/xybeam.jpg" src="../../_static/videos/xybeam.mp4"></video>
-
 A cold electron beam enters an empty box through its left wall, crosses it
 between two grounded plates and leaves through the right wall. The charge of
 the beam lowers the potential on its axis and pushes the electrons apart, so

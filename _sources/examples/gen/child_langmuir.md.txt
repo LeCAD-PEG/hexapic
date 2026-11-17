@@ -1,7 +1,5 @@
 # Space-charge-limited diode
 
-<video class="hx-video" controls loop muted playsinline preload="metadata" poster="../../_static/videos/child_langmuir.jpg" src="../../_static/videos/child_langmuir.mp4"></video>
-
 A cathode emits electrons into a vacuum gap, and an anode at the voltage
 $+V$ collects them. The charge of the electrons in the gap lowers the
 potential in front of the cathode. When the cathode emits more than the gap

@@ -1,7 +1,5 @@
 # Ion deposition in a trench
 
-<video class="hx-video" controls loop muted playsinline preload="metadata" poster="../../_static/videos/deposition.jpg" src="../../_static/videos/deposition.mp4"></video>
-
 A substrate at $-100$ V is covered by a dielectric layer with a trench. The
 wall opposite to it stands for the edge of a plasma sheath: it emits ions
 and electrons. The ions fall through the 100 V onto the layer and into the

@@ -1,7 +1,5 @@
 # Ion optics of a gridded ion thruster
 
-<video class="hx-video" controls loop muted playsinline preload="metadata" poster="../../_static/videos/ion_thruster.jpg" src="../../_static/videos/ion_thruster.mp4"></video>
-
 A gridded ion thruster draws ions out of a discharge plasma through the
 holes of two grids. The screen grid is at the high potential of the plasma.
 The accel grid behind it is negative: the field between the two grids
